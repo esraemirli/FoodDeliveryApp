@@ -24,7 +24,7 @@
         android:layout_marginBottom="8dp"
         android:background="#EFEEEE"
         android:layerType="hardware"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -42,38 +42,41 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/foodTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Food"/>
+                android:text="Food"
+                android:clickable="true"
+                android:focusable="true" />
 
             <Space
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Food"/>
+                android:text="Food" />
 
             <Space
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Food"/>
+                android:text="Food" />
 
             <Space
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
-                android:text="Food"/>
+                android:text="Food" />
         </LinearLayout>
     </HorizontalScrollView>
 
