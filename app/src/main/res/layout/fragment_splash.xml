@@ -20,6 +20,6 @@
         app:lottie_rawRes="@raw/splash_animation"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_repeatCount="1"/>
+        app:lottie_repeatCount="0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
