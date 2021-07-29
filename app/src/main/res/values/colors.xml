@@ -7,7 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="nav_selected_color">#FA4A0C</color>
-    <color name="nav_unselected_color">#ADADAF</color>
-    <color name="app_background_color">#FFFFFFFF</color>
+    <color name="orange">#FA4A0C</color>
+    <color name="light_grey">#ADADAF</color>
+    <color name="app_background_color">#F4F2F2</color>
+    <color name="search_bar">#EFEEEE</color>
 </resources>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FoodDeliveryApp</string>
+    <string name="restautant_listing_title">Delicious\nfood for you</string>
+    <string name="search_view_text">Search</string>
 </resources>
