@@ -34,6 +34,8 @@ class RestaurantDetailsFragment : Fragment() {
         restaurantDetailTabLayout = view.findViewById(R.id.restaurantDetailTabLayout)
         restaurantDetailViewPager = view.findViewById(R.id.restaurantDetailViewPager)
         restaurantImageView = view.findViewById(R.id.restaurantImageView)
+        addButton = view.findViewById(R.id.addButton)
+
         /*TabLayoutMediator(restaurantDetailTabLayout, restaurantDetailViewPager) { tab, position ->
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()*/
@@ -43,7 +45,7 @@ class RestaurantDetailsFragment : Fragment() {
 
     private fun initListener() {
         addButton.setOnClickListener {
-            findNavController().navigate(R.id.action_restaurantDetailFragment_to_restaurantAddFragment)
+            findNavController().navigate(R.id.action_restaurantDetailFragment_to_foodAddFragment)
         }
     }
 

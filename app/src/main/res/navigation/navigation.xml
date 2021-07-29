@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_restaurantDetailFragment"
             app:destination="@id/restaurantDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_restaurantAddFragment"
+            app:destination="@id/restaurantAddFragment" />
     </fragment>
 
     <fragment
@@ -32,8 +35,8 @@
             android:id="@+id/action_restaurantDetailFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
         <action
-            android:id="@+id/action_restaurantDetailFragment_to_restaurantAddFragment"
-            app:destination="@id/restaurantAddFragment" />
+            android:id="@+id/action_restaurantDetailFragment_to_foodAddFragment"
+            app:destination="@id/foodAddFragment" />
     </fragment>
 
     <fragment
@@ -61,11 +64,25 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fooddeliveryapp.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/restaurantAddFragment"
         android:name="com.example.fooddeliveryapp.ui.restaurantadd.RestaurantAddFragment"
         android:label="RestaurantAddFragment" />
+
+    <fragment
+        android:id="@+id/foodAddFragment"
+        android:name="com.example.fooddeliveryapp.ui.foodadd.FoodAddFragment"
+        android:label="FoodAddFragment" />
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.fooddeliveryapp.ui.setting.SettingFragment"
+        android:label="SettingFragment" />
 
 </navigation>

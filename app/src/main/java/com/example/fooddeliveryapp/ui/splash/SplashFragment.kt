@@ -17,7 +17,7 @@ class SplashFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSplashBinding.inflate(inflater,container,false)
         val view = binding.root
         init()

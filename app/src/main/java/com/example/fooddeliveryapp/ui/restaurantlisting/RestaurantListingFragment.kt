@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,6 +20,7 @@ import com.google.android.material.button.MaterialButton
 
 class RestaurantListingFragment : Fragment() {
 
+    private lateinit var addRestaurant: AppCompatImageButton
     private lateinit var restaurantListRecyclerView: RecyclerView
     private lateinit var cuisineTypeLinearLayout: LinearLayout
     private var adapter = RestaurantListingAdapter()
@@ -36,6 +37,8 @@ class RestaurantListingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         restaurantListRecyclerView = view.findViewById(R.id.restaurantListRecyclerView)
         cuisineTypeLinearLayout = view.findViewById(R.id.cuisineTypeLinearLayout)
+        addRestaurant = view.findViewById(R.id.addRestaurant)
+
         restaurantListRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -46,12 +49,13 @@ class RestaurantListingFragment : Fragment() {
     }
 
     private fun addListener() {
+        addRestaurant.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_restaurantAddFragment)
+        }
         adapter.addListener(object : RestaurantListingAdapterListener {
-
             override fun onRestaurantClickListener(restaurant: Restaurant) {
                 findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
             }
-
         })
     }
 
