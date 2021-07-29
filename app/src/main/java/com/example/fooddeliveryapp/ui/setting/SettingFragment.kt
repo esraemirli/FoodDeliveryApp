@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp
+package com.example.fooddeliveryapp.ui.setting
 
 
 import android.app.AlertDialog
@@ -9,12 +9,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.example.fooddeliveryapp.databinding.ItemAvatarSelectBinding
 import com.example.fooddeliveryapp.utils.SharedPreferencesModule
@@ -48,18 +45,15 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         SharedPreferencesModule.initSharedPreferences(requireActivity().baseContext)
 
-        initviews()
+        initViews()
         addListeners()
-
-
     }
 
-
-    private fun initviews() {
+    private fun initViews() {
         val name = SharedPreferencesModule.getString("Name")
         val mail = SharedPreferencesModule.getString("Mail")
         val phone = SharedPreferencesModule.getString("Phone")
-        var address = SharedPreferencesModule.getString("Address")
+        val address = SharedPreferencesModule.getString("Address")
 
 
         binding?.editNameEditText?.setText(name)
@@ -79,18 +73,18 @@ class SettingFragment : Fragment() {
 
             val name = binding?.editNameEditText?.text.toString()
             val mail = binding?.editMailEditText?.text.toString()
-            var phone = binding?.editPhoneNumberEditText?.text.toString()
-            var address = binding?.editAddressEditText?.text.toString()
+            val phone = binding?.editPhoneNumberEditText?.text.toString()
+            val address = binding?.editAddressEditText?.text.toString()
 
-            SharedPreferencesModule.saveString("Name", "${name}")
-            SharedPreferencesModule.saveString("Mail", "${mail}")
-            SharedPreferencesModule.saveString("Phone", "${phone}")
-            SharedPreferencesModule.saveString("Address", "${address}")
+            SharedPreferencesModule.saveString("Name", name)
+            SharedPreferencesModule.saveString("Mail", mail)
+            SharedPreferencesModule.saveString("Phone", phone)
+            SharedPreferencesModule.saveString("Address", address)
 
         }
 
         binding?.settingsImageView?.setOnClickListener {
-            var design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
+            val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
             val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
 
             when (radioGroup.checkedRadioButtonId) {
@@ -132,7 +126,7 @@ class SettingFragment : Fragment() {
 
             builder.setPositiveButton("Save") { dialogInterface: DialogInterface, i: Int ->
                 System.out.println("basildi")
-                var design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
+                val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
                 val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
                 radioGroup.setOnCheckedChangeListener { group, checkedId ->
                     System.out.println(" furkan ${group} $checkedId")
@@ -178,7 +172,6 @@ class SettingFragment : Fragment() {
             builder.show()
 
         }
-
 
     }
 }

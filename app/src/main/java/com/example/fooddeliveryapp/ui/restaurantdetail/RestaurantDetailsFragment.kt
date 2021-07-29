@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.utils.RestaurantDetailViewPagerAdapter
@@ -18,6 +20,7 @@ class RestaurantDetailsFragment : Fragment() {
     lateinit var restaurantDetailTabLayout: TabLayout
     lateinit var restaurantDetailViewPager: ViewPager2
     lateinit var restaurantImageView: ImageView
+    lateinit var addButton: AppCompatImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,13 @@ class RestaurantDetailsFragment : Fragment() {
             tab.text = "OBJECT ${(position + 1)}"
         }.attach()*/
         initViewPager()
+        initListener()
+    }
+
+    private fun initListener() {
+        addButton.setOnClickListener {
+            findNavController().navigate(R.id.action_restaurantDetailFragment_to_restaurantAddFragment)
+        }
     }
 
 

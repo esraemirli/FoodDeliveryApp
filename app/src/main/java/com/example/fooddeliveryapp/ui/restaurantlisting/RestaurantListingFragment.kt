@@ -49,8 +49,6 @@ class RestaurantListingFragment : Fragment() {
         adapter.addListener(object : RestaurantListingAdapterListener {
 
             override fun onRestaurantClickListener(restaurant: Restaurant) {
-                Toast.makeText(context, "${restaurant.id} - ${restaurant.name}", Toast.LENGTH_SHORT)
-                    .show()
                 findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
             }
 
