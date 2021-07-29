@@ -2,4 +2,20 @@
     <string name="app_name">FoodDeliveryApp</string>
     <string name="restautant_listing_title">Delicious\nfood for you</string>
     <string name="search_view_text">Search</string>
+
+    <!--Add restaurant screen strings -->
+    <string name="restaurant_title">Restaurant</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="restaurant_address">Address</string>
+    <string name="restaurant_phone">Phone</string>
+    <string name="restaurant_website">Website</string>
+    <string name="add_restaurant">Add Restaurant</string>
+
+    <!--Add food screen strings -->
+    <string name="food_title">Food</string>
+    <string name="food_name">Food name</string>
+    <string name="add_food">Add Food</string>
+    <string name="food_price">Price</string>
+    <string name="food_ingredients">Ingredients</string>
+
 </resources>

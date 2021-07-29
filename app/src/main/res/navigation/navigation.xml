@@ -32,5 +32,9 @@
         android:id="@+id/profileFragment"
         android:name="com.example.fooddeliveryapp.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/restaurantAddFragment"
+        android:name="com.example.fooddeliveryapp.ui.restaurantadd.RestaurantAddFragment"
+        android:label="RestaurantAddFragment" />
 
 </navigation>

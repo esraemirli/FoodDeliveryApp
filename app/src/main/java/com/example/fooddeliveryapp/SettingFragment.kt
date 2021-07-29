@@ -20,16 +20,15 @@ import com.example.fooddeliveryapp.databinding.ItemAvatarSelectBinding
 import com.example.fooddeliveryapp.utils.SharedPreferencesModule
 
 
-
 class SettingFragment : Fragment() {
-    private var binding : FragmentSettingsBinding? = null
-    private var binding2 : ItemAvatarSelectBinding? = null
+    private var binding: FragmentSettingsBinding? = null
+    private var binding2: ItemAvatarSelectBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       binding = FragmentSettingsBinding.inflate(inflater,container,false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         return binding?.root
     }
@@ -38,6 +37,7 @@ class SettingFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
     override fun onDestroy() {
         super.onDestroy()
         SharedPreferencesModule.unRegister()
@@ -52,14 +52,13 @@ class SettingFragment : Fragment() {
         addListeners()
 
 
-
     }
 
 
     private fun initviews() {
-        var name = SharedPreferencesModule.getString("Name")
-        var mail = SharedPreferencesModule.getString("Mail")
-        var phone = SharedPreferencesModule.getString("Phone")
+        val name = SharedPreferencesModule.getString("Name")
+        val mail = SharedPreferencesModule.getString("Mail")
+        val phone = SharedPreferencesModule.getString("Phone")
         var address = SharedPreferencesModule.getString("Address")
 
 
@@ -78,60 +77,54 @@ class SettingFragment : Fragment() {
         binding?.settingsUpdateButton?.setOnClickListener {
 
 
+            val name = binding?.editNameEditText?.text.toString()
+            val mail = binding?.editMailEditText?.text.toString()
+            var phone = binding?.editPhoneNumberEditText?.text.toString()
+            var address = binding?.editAddressEditText?.text.toString()
 
-
-          var  name = binding?.editNameEditText?.text.toString()
-          var  mail = binding?.editMailEditText?.text.toString()
-          var  phone = binding?.editPhoneNumberEditText?.text.toString()
-          var  address = binding?.editAddressEditText?.text.toString()
-
-            SharedPreferencesModule.saveString("Name","${name}")
-            SharedPreferencesModule.saveString("Mail","${mail}")
-            SharedPreferencesModule.saveString("Phone","${phone}")
-            SharedPreferencesModule.saveString("Address","${address}")
-
-
-            navigateToProfile()
-
+            SharedPreferencesModule.saveString("Name", "${name}")
+            SharedPreferencesModule.saveString("Mail", "${mail}")
+            SharedPreferencesModule.saveString("Phone", "${phone}")
+            SharedPreferencesModule.saveString("Address", "${address}")
 
         }
+
         binding?.settingsImageView?.setOnClickListener {
-            var design : View = layoutInflater.inflate(R.layout.item_avatar_select,null)
+            var design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
             val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
 
-                when (radioGroup.checkedRadioButtonId) {
-                    R.id.avatarRadioButton1 -> {
-                        System.out.println("1")
-                    }
-                    R.id.avatarRadioButton2 -> {
-                        System.out.println("2")
-                    }
-                    R.id.avatarRadioButton3 -> {
-                        System.out.println("3")
-                    }
-                    R.id.avatarRadioButton4 -> {
-                        System.out.println("4")
-                    }
-                    R.id.avatarRadioButton5 -> {
-                        System.out.println("5")
-                    }
-                    R.id.avatarRadioButton6 -> {
-                        System.out.println("6")
-                    }
-                    R.id.avatarRadioButton7 -> {
-                        System.out.println("7")
-                    }
-                    R.id.avatarRadioButton8 -> {
-                        System.out.println("8")
-                    }
-                    R.id.avatarRadioButton9 -> {
-                        System.out.println("9")
-                    }
-                    else -> {
-                        System.out.println("0")
-                    }
+            when (radioGroup.checkedRadioButtonId) {
+                R.id.avatarRadioButton1 -> {
+                    System.out.println("1")
                 }
-
+                R.id.avatarRadioButton2 -> {
+                    System.out.println("2")
+                }
+                R.id.avatarRadioButton3 -> {
+                    System.out.println("3")
+                }
+                R.id.avatarRadioButton4 -> {
+                    System.out.println("4")
+                }
+                R.id.avatarRadioButton5 -> {
+                    System.out.println("5")
+                }
+                R.id.avatarRadioButton6 -> {
+                    System.out.println("6")
+                }
+                R.id.avatarRadioButton7 -> {
+                    System.out.println("7")
+                }
+                R.id.avatarRadioButton8 -> {
+                    System.out.println("8")
+                }
+                R.id.avatarRadioButton9 -> {
+                    System.out.println("9")
+                }
+                else -> {
+                    System.out.println("0")
+                }
+            }
 
 
             val builder = AlertDialog.Builder(it.context)
@@ -139,7 +132,7 @@ class SettingFragment : Fragment() {
 
             builder.setPositiveButton("Save") { dialogInterface: DialogInterface, i: Int ->
                 System.out.println("basildi")
-                var design : View = layoutInflater.inflate(R.layout.item_avatar_select,null)
+                var design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
                 val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
                 radioGroup.setOnCheckedChangeListener { group, checkedId ->
                     System.out.println(" furkan ${group} $checkedId")
@@ -184,18 +177,9 @@ class SettingFragment : Fragment() {
 
             builder.show()
 
-            }
-
-
         }
 
-    private fun navigateToProfile()
-    {
-        val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-        val fragment = ProfileFragment()
-        ft.replace(R.id.fragment_container_view, fragment, "ProfileFragment")
-        ft.commit()
-    }
 
+    }
 }
 

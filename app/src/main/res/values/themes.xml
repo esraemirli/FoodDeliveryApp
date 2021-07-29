@@ -30,4 +30,20 @@
 
 
 
+
+    <!-- Transparent actionbar style -->
+    <style name="Theme.FoodDeliveryApp.ActionBar.Transparent" parent="Theme.FoodDeliveryApp">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <!-- TimePickerDialog style -->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/orange</item>
+        <item name="colorOnPrimary">@color/orange</item>
+    </style>
+
 </resources>

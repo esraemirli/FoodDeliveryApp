@@ -49,15 +49,8 @@ class ProfileFragment : Fragment() {
 
     private fun addListeners() {
         binding?.leftOkImageView?.setOnClickListener {
-            navigateToSetting()
+            //navigateToSetting()
         }
-    }
-
-    private fun navigateToSetting() {
-        val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-        val fragment = SettingFragment()
-        ft.replace(R.id.fragment_container_view, fragment, "SettingFragment")
-        ft.commit()
     }
 
 }

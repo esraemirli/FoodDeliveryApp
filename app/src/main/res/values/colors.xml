@@ -12,4 +12,11 @@
     <color name="app_background_color">#F4F2F2</color>
     <color name="search_bar">#EFEEEE</color>
     <color name="profileButtonColor">#fa4a0c</color>
+    <color name="nav_selected_color">#FA4A0C</color>
+    <color name="nav_unselected_color">#ADADAF</color>
+
+    <!-- Add restaurant screen colors-->
+    <color name="gray_light">#F5F5F8</color>
+    <color name="gray">#808080</color>
+
 </resources>
