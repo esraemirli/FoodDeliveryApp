@@ -78,9 +78,10 @@
                 android:layout_weight="3">
 
                 <ImageView
+                    android:id="@+id/profilePhotoImageView"
                     android:layout_width="91dp"
                     android:layout_height="100dp"
-                    app:srcCompat="@mipmap/profile_photo_foreground"></ImageView>
+                    app:srcCompat="@mipmap/avatar_1_foreground"></ImageView>
             </LinearLayout>
 
             <LinearLayout
