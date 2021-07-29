@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
@@ -50,6 +51,7 @@ class RestaurantListingFragment : Fragment() {
             override fun onRestaurantClickListener(restaurant: Restaurant) {
                 Toast.makeText(context, "${restaurant.id} - ${restaurant.name}", Toast.LENGTH_SHORT)
                     .show()
+                findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
             }
 
         })
