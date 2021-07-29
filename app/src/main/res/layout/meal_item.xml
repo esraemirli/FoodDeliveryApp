@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.restaurantdetail.MealsListFragment"
+    tools:context=".ui.meal.MealsListFragment"
     android:id="@+id/mealCardView"
     android:layout_marginVertical="4dp"
     android:layout_marginHorizontal="8dp"

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.utils.RestaurantDetailViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -38,7 +39,7 @@ class RestaurantDetailsFragment : Fragment() {
 
 
     private fun initViewPager() {
-        val adapter = ViewPagerAdapter(requireActivity())
+        val adapter = RestaurantDetailViewPagerAdapter(requireActivity())
         restaurantDetailViewPager.adapter = adapter
         TabLayoutMediator(restaurantDetailTabLayout, restaurantDetailViewPager) { tab, position ->
             if (position == 0) {
