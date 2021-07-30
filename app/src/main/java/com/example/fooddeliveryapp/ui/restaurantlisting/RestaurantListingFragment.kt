@@ -9,16 +9,20 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.databinding.FragmentRestaurantListingBinding
 import com.example.fooddeliveryapp.model.Restaurant
-import com.example.fooddeliveryapp.utils.RestaurantListingAdapter
+import com.example.fooddeliveryapp.utils.adapter.RestaurantListingAdapter
 import com.example.fooddeliveryapp.utils.RestaurantListingAdapterListener
 import com.google.android.material.button.MaterialButton
 
 class RestaurantListingFragment : Fragment() {
+    private lateinit var binding: FragmentRestaurantListingBinding
+    private lateinit var viewModel: RestaurantListingViewModel
 
     private lateinit var addRestaurant: AppCompatImageButton
     private lateinit var restaurantListRecyclerView: RecyclerView
@@ -31,6 +35,7 @@ class RestaurantListingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(this).get(RestaurantListingViewModel::class.java)
         return inflater.inflate(R.layout.fragment_restaurant_listing, container, false)
     }
 
@@ -43,9 +48,21 @@ class RestaurantListingFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         initViews()
+        initObserver()
         addListener()
         addCuisineTypes()
         addCuisineTypesListener()
+    }
+
+    private fun initViews() {
+        viewModel.getResponse()
+    }
+
+    private fun initObserver() {
+        viewModel.restaurantList.observe(viewLifecycleOwner, { restaurantList ->
+            adapter.setData(restaurantList)
+            restaurantListRecyclerView.adapter = adapter
+        })
     }
 
     private fun addListener() {
@@ -54,6 +71,7 @@ class RestaurantListingFragment : Fragment() {
         }
         adapter.addListener(object : RestaurantListingAdapterListener {
             override fun onRestaurantClickListener(restaurant: Restaurant) {
+                //TODO bundle ile gönder..
                 findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
             }
         })
@@ -91,14 +109,4 @@ class RestaurantListingFragment : Fragment() {
         }
     }
 
-    private fun initViews() {
-        val list = listOf(
-            Restaurant(1, "Ali Usta'nın Yeri", "Kadıköy"),
-            Restaurant(2, "KFC", "Tuzla"),
-            Restaurant(3, "Tavuk Dünyası", "Kadıköy"),
-            Restaurant(4, "Deli Kasap", "Maltepe")
-        )
-        adapter.setData(list)
-        restaurantListRecyclerView.adapter = adapter
-    }
 }

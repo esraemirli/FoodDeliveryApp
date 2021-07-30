@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.utils
+package com.example.fooddeliveryapp.utils.adapter
 
 
 import androidx.fragment.app.Fragment

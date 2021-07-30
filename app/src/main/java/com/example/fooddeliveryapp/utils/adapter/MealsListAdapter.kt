@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.utils
+package com.example.fooddeliveryapp.utils.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.model.Meal
+import com.example.fooddeliveryapp.utils.IMealOnClick
 
 class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHolder>() {
 
@@ -26,7 +27,7 @@ class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHold
 
         fun setMeal(meal: Meal, listener: IMealOnClick?) {
             // mealImageView.setImageURI(meal.imageUrl.toUri())
-            mealTitleTextView.text = meal.title
+            mealTitleTextView.text = meal.name
             mealDescriptionTextView.text = meal.description
             mealPriceTextView.text = meal.price.toString() + " $"
             mealCardView.setOnClickListener {

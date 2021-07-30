@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.utils
+package com.example.fooddeliveryapp.utils.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.model.Restaurant
+import com.example.fooddeliveryapp.utils.RestaurantListingAdapterListener
 
 class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.ViewHolder>() {
 
@@ -23,7 +24,7 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
 
         fun bind(restaurant: Restaurant, listener: RestaurantListingAdapterListener?) {
             nameTextView.text = restaurant.name
-            locationTextView.text = restaurant.location
+            locationTextView.text = restaurant.district
 //            Glide.with(imageView.context)
 //                .load(item.image).into(imageView);
 

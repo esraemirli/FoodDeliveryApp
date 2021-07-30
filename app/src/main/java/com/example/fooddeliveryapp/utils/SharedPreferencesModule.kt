@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 
 object SharedPreferencesModule {
+    const val TOKEN = "com.example.fooddeliveryapp.utils.TOKEN"
     private var sharedPreferences : SharedPreferences? = null
     fun initSharedPreferences(context: Context)
     {

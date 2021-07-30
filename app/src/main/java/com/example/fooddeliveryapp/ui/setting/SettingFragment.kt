@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.example.fooddeliveryapp.databinding.ItemAvatarSelectBinding
@@ -19,14 +20,13 @@ import com.example.fooddeliveryapp.utils.SharedPreferencesModule
 
 class SettingFragment : Fragment() {
     private var binding: FragmentSettingsBinding? = null
-    private var binding2: ItemAvatarSelectBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
-
         return binding?.root
     }
 
@@ -38,7 +38,6 @@ class SettingFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         SharedPreferencesModule.unRegister()
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

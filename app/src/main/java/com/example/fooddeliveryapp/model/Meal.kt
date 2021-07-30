@@ -1,8 +1,17 @@
 package com.example.fooddeliveryapp.model
 
-data class Meal(
-    var imageUrl: String,
-    var title: String,
-    var description: String,
-    var price: Double,
+import com.google.gson.annotations.SerializedName
+
+data class Meal (
+
+	@SerializedName("description")
+	val description : String,
+	@SerializedName("image")
+	val image : String,
+	@SerializedName("ingredients")
+	val ingredients : List<Ingredient>,
+	@SerializedName("name")
+	val name : String,
+	@SerializedName("price")
+	val price : Double
 )

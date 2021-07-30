@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.utils.RestaurantDetailViewPagerAdapter
+import com.example.fooddeliveryapp.utils.adapter.RestaurantDetailViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

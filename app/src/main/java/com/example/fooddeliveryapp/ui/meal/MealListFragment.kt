@@ -9,12 +9,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.model.Ingredient
 import com.example.fooddeliveryapp.model.Meal
 import com.example.fooddeliveryapp.utils.IMealOnClick
-import com.example.fooddeliveryapp.utils.MealsListAdapter
+import com.example.fooddeliveryapp.utils.adapter.MealsListAdapter
 
 
-class MealsListFragment : Fragment(), IMealOnClick {
+class MealListFragment : Fragment(), IMealOnClick {
     private lateinit var mealsListRecyclerView: RecyclerView
     private var adapter: MealsListAdapter = MealsListAdapter()
     override fun onCreateView(
@@ -38,14 +39,17 @@ class MealsListFragment : Fragment(), IMealOnClick {
     private fun setData() {
         val data = ArrayList<Meal>()
         for (i in 0..10) {
-            data.add(
-                Meal(
-                    "https://via.placeholder.com/150",
-                    "Title - $i",
-                    "Tomato, Pepper, Onion, $i",
-                    i.toDouble()
-                )
-            )
+//            data.add(
+//                Meal(
+//                    "https://via.placeholder.com/150",
+//                    "Title - $i",
+//                    listOf(
+//                        Ingredient("Tomato", true),
+//                        Ingredient("Pepper",true),
+//                        Ingredient("Onion", true),
+//                    )
+//                )
+//            )
         }
         adapter.setMealList(data)
     }

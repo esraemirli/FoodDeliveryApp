@@ -52,6 +52,7 @@ class RestaurantAddFragment : Fragment(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startForResult.launch(intent)
+
     }
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
