@@ -48,10 +48,11 @@ class ProfileFragment : Fragment(){
         binding?.phoneNumberTextView?.text = phone
         binding?.addressTextView?.text = address
 
+        avatarChange()
     }
 
     private fun addListeners() {
-     binding?.leftOkImageView?.setOnClickListener {
+     binding?.profileChange?.setOnClickListener {
          navigateToSetting()
      }
     }
@@ -64,4 +65,44 @@ class ProfileFragment : Fragment(){
         ft.replace(R.id.fragment_container_view, fragment, "SettingFragment")
         ft.commit()
     }
+
+    private fun avatarChange()
+    {
+        var avatar = SharedPreferencesModule.getString("Avatar")
+        System.out.println("id ---- $avatar")
+        when (avatar) {
+            "1" -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_1_foreground)
+            }
+            "2" -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_2_foreground)
+            }
+            "3" -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_3_foreground)
+            }
+            "4" ->{
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_4_foreground)
+            }
+            "5" ->{
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_5_foreground)
+            }
+            "6" -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_6_foreground)
+            }
+            "7" -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_7_foreground)
+            }
+            "8" ->{
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_8_foreground)
+            }
+            "9" -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_9_foreground)
+            }
+            else -> {
+                binding?.profilePhotoImageView?.setImageResource(R.mipmap.avatar_1_foreground)
+            }
+        }
+    }
+
+
 }
