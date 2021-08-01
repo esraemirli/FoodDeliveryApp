@@ -60,7 +60,7 @@ class RestaurantListingFragment : Fragment() {
 
     private fun initObserver() {
         viewModel.restaurantList.observe(viewLifecycleOwner, { restaurantList ->
-            adapter.setData(restaurantList)
+            //adapter.setData(restaurantList)
             restaurantListRecyclerView.adapter = adapter
         })
     }

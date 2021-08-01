@@ -50,7 +50,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/settingsAvatarImageView"
                 android:layout_width="91dp"
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
@@ -61,13 +61,13 @@
                 app:srcCompat="@mipmap/avatar_1_foreground"></ImageView>
 
             <ImageView
-                android:id="@+id/settingsImageView"
+                android:id="@+id/settingsAddImageView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginBottom="68dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintStart_toStartOf="@+id/imageView2"
+                app:layout_constraintBottom_toBottomOf="@+id/settingsAvatarImageView"
+                app:layout_constraintStart_toStartOf="@+id/settingsAvatarImageView"
                 app:srcCompat="@mipmap/edit_image_foreground"></ImageView>
 
             <EditText
@@ -80,7 +80,7 @@
                 android:text="Marvis Ighedosa"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -93,7 +93,7 @@
                 android:layout_weight="1"
                 android:text="Dosamarvis@gmail.com"
                 android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
                 app:layout_constraintTop_toBottomOf="@+id/editNameEditText" />
 
             <EditText
@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:text="+234 9011039271"
                 android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
                 app:layout_constraintTop_toBottomOf="@+id/editMailEditText" />
 
             <EditText
@@ -117,7 +117,7 @@
                 android:layout_weight="1"
                 android:text="No 15 uti street off ovie palace road effurun delta state"
                 android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
                 app:layout_constraintTop_toBottomOf="@+id/editPhoneNumberEditText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

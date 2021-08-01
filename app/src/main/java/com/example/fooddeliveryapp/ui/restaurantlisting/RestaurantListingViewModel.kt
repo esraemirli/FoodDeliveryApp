@@ -12,12 +12,11 @@ class RestaurantListingViewModel : ViewModel() {
     private val apiRepository: ApiRepository = ApiRepository()
 
     fun getResponse() {
-        try {
+       /* try {
             restaurantList = apiRepository.getRestaurant()
-            println("ESRAAA $restaurantList")
-        } catch (e: Exception) {
+-        } catch (e: Exception) {
             Log.v("LoginViewModel", e.toString())
-        }
+        } */
     }
 
 }
