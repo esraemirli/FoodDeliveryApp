@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
+import com.example.fooddeliveryapp.ui.profile.ProfileFragment
 import com.example.fooddeliveryapp.utils.SharedPreferencesModule
 
 
 class SettingFragment : Fragment() {
     private var binding: FragmentSettingsBinding? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +46,7 @@ class SettingFragment : Fragment() {
         addListeners()
     }
 
+
     private fun initViews() {
         val name = SharedPreferencesModule.getString("Name")
         val mail = SharedPreferencesModule.getString("Mail")
@@ -56,15 +59,16 @@ class SettingFragment : Fragment() {
         binding?.editPhoneNumberEditText?.setText(phone)
         binding?.editAddressEditText?.setText(address)
 
-        System.out.println("Name = ${name}")
-        System.out.println("Mail = ${mail}")
-        System.out.println("Phone = ${phone}")
-        System.out.println("Address = ${address}")
+        println("Name = $name")
+        println("Mail = $mail")
+        println("Phone = $phone")
+        println("Address = $address")
+        avatarChange()
     }
 
     private fun addListeners() {
+        avatarChange()
         binding?.settingsUpdateButton?.setOnClickListener {
-
 
             val name = binding?.editNameEditText?.text.toString()
             val mail = binding?.editMailEditText?.text.toString()
@@ -76,98 +80,109 @@ class SettingFragment : Fragment() {
             SharedPreferencesModule.saveString("Phone", phone)
             SharedPreferencesModule.saveString("Address", address)
 
+            navigateToProfile()
         }
+        binding?.settingsAddImageView?.setOnClickListener {
 
-        binding?.settingsImageView?.setOnClickListener {
             val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
             val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
-
-            when (radioGroup.checkedRadioButtonId) {
-                R.id.avatarRadioButton1 -> {
-                    System.out.println("1")
-                }
-                R.id.avatarRadioButton2 -> {
-                    System.out.println("2")
-                }
-                R.id.avatarRadioButton3 -> {
-                    System.out.println("3")
-                }
-                R.id.avatarRadioButton4 -> {
-                    System.out.println("4")
-                }
-                R.id.avatarRadioButton5 -> {
-                    System.out.println("5")
-                }
-                R.id.avatarRadioButton6 -> {
-                    System.out.println("6")
-                }
-                R.id.avatarRadioButton7 -> {
-                    System.out.println("7")
-                }
-                R.id.avatarRadioButton8 -> {
-                    System.out.println("8")
-                }
-                R.id.avatarRadioButton9 -> {
-                    System.out.println("9")
-                }
-                else -> {
-                    System.out.println("0")
-                }
-            }
-
-
+            var avatarStatus: String = SharedPreferencesModule.getString("Avatar")
             val builder = AlertDialog.Builder(it.context)
-            builder.setView(R.layout.item_avatar_select)
+            builder.setView(design)
 
-            builder.setPositiveButton("Save") { dialogInterface: DialogInterface, i: Int ->
-                System.out.println("basildi")
-                val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
-                val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
-                radioGroup.setOnCheckedChangeListener { group, checkedId ->
-                    System.out.println(" furkan ${group} $checkedId")
-                }
-
+            radioGroup.setOnCheckedChangeListener { _, _ ->
                 when (radioGroup.checkedRadioButtonId) {
-                    2131362294 -> {
-                        System.out.println("1")
+                    R.id.avatarRadioButton1 -> {
+                        avatarStatus = "1"
                     }
                     R.id.avatarRadioButton2 -> {
-                        System.out.println("2")
+                        avatarStatus = "2"
                     }
                     R.id.avatarRadioButton3 -> {
-                        System.out.println("3")
+                        avatarStatus = "3"
                     }
                     R.id.avatarRadioButton4 -> {
-                        System.out.println("4")
+                        avatarStatus = "4"
                     }
                     R.id.avatarRadioButton5 -> {
-                        System.out.println("5")
+                        avatarStatus = "5"
                     }
                     R.id.avatarRadioButton6 -> {
-                        System.out.println("6")
+                        avatarStatus = "6"
                     }
                     R.id.avatarRadioButton7 -> {
-                        System.out.println("7")
+                        avatarStatus = "7"
                     }
                     R.id.avatarRadioButton8 -> {
-                        System.out.println("8")
+                        avatarStatus = "8"
                     }
                     R.id.avatarRadioButton9 -> {
-                        System.out.println("9")
+                        avatarStatus = "9"
                     }
                     else -> {
-                        System.out.println("0")
+                        println("-1")
                     }
+
                 }
             }
-            builder.setNegativeButton("Cancel") { dialogInterface: DialogInterface, i: Int ->
-                System.out.println("ddddds")
+
+            builder.setPositiveButton("Save") { _: DialogInterface, _: Int ->
+
+                SharedPreferencesModule.saveString("Avatar", avatarStatus)
+                avatarChange()
+            }
+            builder.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
             }
 
             builder.show()
 
         }
 
+
     }
+
+    private fun navigateToProfile() {
+//        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+//        val fragment = ProfileFragment()
+//        ft.replace(R.id.nav_host_fragment_container, fragment, "ProfileFragment")
+//        ft.commit()
+        findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
+    }
+
+    private fun avatarChange() {
+        when (SharedPreferencesModule.getString("Avatar")) {
+            "1" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
+            }
+            "2" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_2_foreground)
+            }
+            "3" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_3_foreground)
+            }
+            "4" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_4_foreground)
+            }
+            "5" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_5_foreground)
+            }
+            "6" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_6_foreground)
+            }
+            "7" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_7_foreground)
+            }
+            "8" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_8_foreground)
+            }
+            "9" -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_9_foreground)
+            }
+            else -> {
+                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
+            }
+        }
+    }
+
 }
 

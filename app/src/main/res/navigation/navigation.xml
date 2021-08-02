@@ -87,6 +87,10 @@
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.example.fooddeliveryapp.ui.setting.SettingFragment"
-        android:label="SettingFragment" />
+        android:label="SettingFragment">
+        <action
+            android:id="@+id/action_settingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 </navigation>
