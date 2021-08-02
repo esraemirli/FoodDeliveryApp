@@ -59,7 +59,11 @@
         android:id="@+id/loginAndSignupFragment"
         android:name="com.example.fooddeliveryapp.ui.login.LoginAndSignupFragment"
         android:label="LoginAndSignupFragment"
-        tools:layout="@layout/fragment_login_and_signup" />
+        tools:layout="@layout/fragment_login_and_signup" >
+        <action
+            android:id="@+id/action_loginAndSignupFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"

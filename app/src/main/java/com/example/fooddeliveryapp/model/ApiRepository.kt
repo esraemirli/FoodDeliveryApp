@@ -1,32 +1,33 @@
 package com.example.fooddeliveryapp.model
 
-import androidx.lifecycle.MutableLiveData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.fooddeliveryapp.model.entity.login.LoginRequest
+import com.example.fooddeliveryapp.model.local.LocalDataSource
+import com.example.fooddeliveryapp.model.remote.RemoteDataSource
+import com.example.fooddeliveryapp.utils.performAuthTokenNetworkOperation
+import com.example.fooddeliveryapp.utils.performNetworkOperation
+import javax.inject.Inject
 
-class ApiRepository {
+class ApiRepository @Inject constructor(
+    private var remoteDataSource: RemoteDataSource,
+    private var localDataSource: LocalDataSource
+) {
 
-    val remoteDataSource = RemoteDataSource()
+    fun login(request: LoginRequest) = performAuthTokenNetworkOperation(
+        call = {
+            remoteDataSource.postLogin(request)
+        },
+        saveToken = {
+            localDataSource.saveToken(it)
+        }
+    )
 
-    fun getRestaurant(): MutableLiveData<List<Restaurant>> {
-        val restaurantLiveData = MutableLiveData<List<Restaurant>>()
-        remoteDataSource.getRestaurants(callback = object :
-            Callback<List<Restaurant>> {
-            override fun onResponse(call: Call<List<Restaurant>>, response: Response<List<Restaurant>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        restaurantLiveData.value = response.body()
-                    }
-                } else {
-                    throw Exception("Wrong Credentials")
-                }
-            }
+//    fun register(registerRequest: RegisterRequest) =
+//        performNetworkOperation {
+//            remoteDataSource.postRegister(request = registerRequest)
+//        }
 
-            override fun onFailure(call: Call<List<Restaurant>>, t: Throwable) {
-                throw Exception("Service Error ${t.message}")
-            }
-        })
-        return restaurantLiveData
-    }
+    fun getRestaurant() =
+        performNetworkOperation {
+            remoteDataSource.getRestaurants()
+        }
 }

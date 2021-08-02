@@ -17,13 +17,9 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        binding = FragmentProfileBinding.inflate(inflater, container, false)
-//        return binding?.root
-        return inflater.inflate(
-            R.layout.fragment_profile,
-            container,
-            false
-        )
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding?.root
+
     }
 
     override fun onDestroyView() {
@@ -54,8 +50,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun addListeners() {
-        binding?.leftOkImageView?.setOnClickListener {
-            //navigateToSetting()
+        binding?.profileChange?.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
         }
     }
 

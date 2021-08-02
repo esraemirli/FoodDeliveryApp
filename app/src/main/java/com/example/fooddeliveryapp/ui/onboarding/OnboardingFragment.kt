@@ -9,8 +9,6 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentOnboardingBinding
-import com.example.fooddeliveryapp.utils.DepthTransformation
-import com.example.fooddeliveryapp.utils.adapter.ViewPagerAdapter
 
 class OnboardingFragment : Fragment() {
     private lateinit var binding: FragmentOnboardingBinding

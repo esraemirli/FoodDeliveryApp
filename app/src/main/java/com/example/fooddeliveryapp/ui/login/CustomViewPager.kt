@@ -1,12 +1,13 @@
-package com.example.fooddeliveryapp.utils
+package com.example.fooddeliveryapp.ui.login
 
-import androidx.fragment.app.*
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.fooddeliveryapp.ui.login.LoginFragment
-import com.example.fooddeliveryapp.ui.login.SignupFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 
-class CustomViewPager(manager :FragmentManager): FragmentStatePagerAdapter(manager,
-    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class CustomViewPager(manager: FragmentManager) : FragmentStatePagerAdapter(
+    manager,
+    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+) {
 
     var fragmentList: ArrayList<Fragment> = ArrayList()
     var titleList: ArrayList<String> = ArrayList()
@@ -23,7 +24,7 @@ class CustomViewPager(manager :FragmentManager): FragmentStatePagerAdapter(manag
         return titleList[position]
     }
 
-    fun addFragment(fragment: Fragment,title: String){
+    fun addFragment(fragment: Fragment, title: String) {
         fragmentList.add(fragment)
         titleList.add(title)
     }

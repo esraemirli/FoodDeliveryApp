@@ -10,7 +10,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSplashBinding
 
-class SplashFragment: Fragment() {
+class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding
 
     override fun onCreateView(
@@ -18,14 +18,14 @@ class SplashFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSplashBinding.inflate(inflater,container,false)
+        binding = FragmentSplashBinding.inflate(inflater, container, false)
         val view = binding.root
         init()
         return view
     }
 
     private fun init() {
-        binding.splashAnimation.addAnimatorListener(object: Animator.AnimatorListener{
+        binding.splashAnimation.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {
 
             }

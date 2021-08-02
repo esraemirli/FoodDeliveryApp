@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.utils.adapter
+package com.example.fooddeliveryapp.ui.meal
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.model.Meal
-import com.example.fooddeliveryapp.utils.IMealOnClick
+import com.example.fooddeliveryapp.model.entity.Meal
 
 class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHolder>() {
 

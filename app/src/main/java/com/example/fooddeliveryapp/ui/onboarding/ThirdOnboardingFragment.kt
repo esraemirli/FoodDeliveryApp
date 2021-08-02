@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.fooddeliveryapp.R
 
-class ThirdOnboardingFragment: Fragment() {
+class ThirdOnboardingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_third_onboarding,container,false)
+        return inflater.inflate(R.layout.fragment_third_onboarding, container, false)
     }
 
 }

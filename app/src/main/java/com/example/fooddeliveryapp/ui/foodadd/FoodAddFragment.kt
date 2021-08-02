@@ -17,7 +17,7 @@ import com.example.fooddeliveryapp.R
 
 class FoodAddFragment : Fragment() {
 
-    private lateinit var addFoodImageView : ImageView
+    private lateinit var addFoodImageView: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +26,7 @@ class FoodAddFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_food_add, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,14 +46,14 @@ class FoodAddFragment : Fragment() {
         startForResult.launch(intent)
     }
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val selectedImage : Uri = result.data?.data!!
-            // TODO : Picasso kütüphanesi eklenecek
-            //Picasso.get().load(selectedImage).fit().centerCrop().into(img)
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val selectedImage: Uri = result.data?.data!!
+                // TODO : Picasso kütüphanesi eklenecek
+                //Picasso.get().load(selectedImage).fit().centerCrop().into(img)
+            }
         }
-    }
 
     fun addFoodIngredient(view: View) {
         // TODO : ingredientList'e ingredientEditText değeri alınıp eklenecek

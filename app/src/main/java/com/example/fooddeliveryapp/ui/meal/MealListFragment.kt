@@ -9,10 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.model.Ingredient
-import com.example.fooddeliveryapp.model.Meal
-import com.example.fooddeliveryapp.utils.IMealOnClick
-import com.example.fooddeliveryapp.utils.adapter.MealsListAdapter
+import com.example.fooddeliveryapp.model.entity.Meal
 
 
 class MealListFragment : Fragment(), IMealOnClick {

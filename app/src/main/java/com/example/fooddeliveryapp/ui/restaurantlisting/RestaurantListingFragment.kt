@@ -9,20 +9,21 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantListingBinding
-import com.example.fooddeliveryapp.model.Restaurant
-import com.example.fooddeliveryapp.utils.adapter.RestaurantListingAdapter
-import com.example.fooddeliveryapp.utils.RestaurantListingAdapterListener
+import com.example.fooddeliveryapp.model.entity.Restaurant
 import com.google.android.material.button.MaterialButton
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RestaurantListingFragment : Fragment() {
     private lateinit var binding: FragmentRestaurantListingBinding
-    private lateinit var viewModel: RestaurantListingViewModel
+    private val viewModel: RestaurantListingViewModel by viewModels()
 
     private lateinit var addRestaurant: AppCompatImageButton
     private lateinit var restaurantListRecyclerView: RecyclerView
@@ -35,7 +36,6 @@ class RestaurantListingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(RestaurantListingViewModel::class.java)
         return inflater.inflate(R.layout.fragment_restaurant_listing, container, false)
     }
 
@@ -59,10 +59,10 @@ class RestaurantListingFragment : Fragment() {
     }
 
     private fun initObserver() {
-        viewModel.restaurantList.observe(viewLifecycleOwner, { restaurantList ->
-            adapter.setData(restaurantList)
-            restaurantListRecyclerView.adapter = adapter
-        })
+//        viewModel.restaurantList.observe(viewLifecycleOwner, { restaurantList ->
+//            adapter.setData(restaurantList)
+//            restaurantListRecyclerView.adapter = adapter
+//        })
     }
 
     private fun addListener() {

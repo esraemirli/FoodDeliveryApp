@@ -1,4 +1,4 @@
-package com.example.fooddeliveryapp.utils
+package com.example.fooddeliveryapp.ui.onboarding
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

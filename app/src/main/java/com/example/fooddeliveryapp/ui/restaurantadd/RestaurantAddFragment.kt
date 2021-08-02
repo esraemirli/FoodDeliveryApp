@@ -19,11 +19,11 @@ import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RestaurantAddFragment : Fragment(){
+class RestaurantAddFragment : Fragment() {
 
-    private lateinit var addRestaurantImageView : ImageView
-    private lateinit var openTxt : TextInputEditText
-    private lateinit var closeTxt : TextInputEditText
+    private lateinit var addRestaurantImageView: ImageView
+    private lateinit var openTxt: TextInputEditText
+    private lateinit var closeTxt: TextInputEditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,14 +55,14 @@ class RestaurantAddFragment : Fragment(){
 
     }
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val selectedImage : Uri = result.data?.data!!
-            // TODO : Picasso kütüphanesi eklenecek
-            //Picasso.get().load(selectedImage).fit().centerCrop().into(img)
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val selectedImage: Uri = result.data?.data!!
+                // TODO : Picasso kütüphanesi eklenecek
+                //Picasso.get().load(selectedImage).fit().centerCrop().into(img)
+            }
         }
-    }
 
     /*
     //TODO : Boşluğa tıklandığında klavyeyi saklamak için
@@ -82,7 +82,14 @@ class RestaurantAddFragment : Fragment(){
             cal.set(Calendar.MINUTE, minute)
             openTxt.setText(SimpleDateFormat("HH:mm", Locale.US).format(cal.time))
         }
-        TimePickerDialog(activity, R.style.DialogTheme, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        TimePickerDialog(
+            activity,
+            R.style.DialogTheme,
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
         //TimePickerDialog(this, R.style.DialogTheme, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
     }
 
@@ -93,7 +100,14 @@ class RestaurantAddFragment : Fragment(){
             cal.set(Calendar.MINUTE, minute)
             closeTxt.setText(SimpleDateFormat("HH:mm", Locale.US).format(cal.time))
         }
-        TimePickerDialog(activity, R.style.DialogTheme, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        TimePickerDialog(
+            activity,
+            R.style.DialogTheme,
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            true
+        ).show()
         //TimePickerDialog(this, R.style.DialogTheme, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
     }
 
