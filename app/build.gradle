@@ -88,5 +88,10 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Flexbox
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
 }

@@ -81,7 +81,7 @@
 
     <fragment
         android:id="@+id/foodAddFragment"
-        android:name="com.example.fooddeliveryapp.ui.foodadd.FoodAddFragment"
+        android:name="com.example.fooddeliveryapp.ui.mealadd.MealAddFragment"
         android:label="FoodAddFragment" />
 
     <fragment
