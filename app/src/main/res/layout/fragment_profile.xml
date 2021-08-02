@@ -281,17 +281,6 @@
         </androidx.cardview.widget.CardView>
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/profileUpdateButton"
-            android:layout_width="314dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/profile_button_background"
-            android:text="Update"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"></androidx.appcompat.widget.AppCompatButton>
 
 
     </LinearLayout>

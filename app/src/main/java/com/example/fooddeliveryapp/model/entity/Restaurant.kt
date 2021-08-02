@@ -17,8 +17,8 @@ data class Restaurant(
     val district: String,
     @SerializedName("meals")
     val meals: List<Meal>,
-    @SerializedName("minimunDeliveryFee")
-    val minimunDeliveryFee: Int,
+    @SerializedName("minimumDeliveryFee")
+    val minimumDeliveryFee: Double,
     @SerializedName("name")
     val name: String,
     @SerializedName("paymentMethods")
@@ -28,3 +28,4 @@ data class Restaurant(
     @SerializedName("website")
     val website: String
 )
+
