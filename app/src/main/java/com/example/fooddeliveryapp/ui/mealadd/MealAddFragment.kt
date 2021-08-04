@@ -7,27 +7,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.databinding.FragmentMealAddBinding
 import com.example.fooddeliveryapp.model.entity.Ingredient
 import com.google.android.flexbox.*
-import com.google.android.material.textfield.TextInputEditText
 import com.squareup.picasso.Picasso
 
 class MealAddFragment : Fragment() {
 
-    private lateinit var addMealImageView: ImageView
-    private lateinit var addIngredientImageView: ImageView
-    private lateinit var ingredientText: TextInputEditText
-    private lateinit var addMealButton : Button
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var _binding : FragmentMealAddBinding
+
     private lateinit var ingredientsList: MutableList<Ingredient>
     private lateinit var ingredientAdapter: IngredientRecyclerViewAdapter
     private lateinit var layoutManager: FlexboxLayoutManager
@@ -36,8 +30,9 @@ class MealAddFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_meal_add, container, false)
+    ): View {
+        _binding = FragmentMealAddBinding.inflate(inflater, container, false)
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,17 +45,8 @@ class MealAddFragment : Fragment() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        addViews(view)
         initializeRecyclerView()
         addListeners()
-    }
-
-    private fun addViews(view : View) {
-        addMealImageView = view.findViewById(R.id.addMealLogo)
-        addIngredientImageView = view.findViewById(R.id.addMealIngredientLogo)
-        ingredientText = view.findViewById(R.id.mealIngredientsEditText)
-        addMealButton = view.findViewById(R.id.addMealButton)
-        recyclerView = view.findViewById(R.id.recyclerView)
     }
 
     private fun initializeRecyclerView() {
@@ -80,20 +66,20 @@ class MealAddFragment : Fragment() {
             }
         })
 
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = ingredientAdapter
+        _binding.recyclerView.layoutManager = layoutManager
+        _binding.recyclerView.adapter = ingredientAdapter
     }
 
     private fun addListeners(){
-        addMealImageView.setOnClickListener {
+        _binding.addMealLogo.setOnClickListener {
             addFoodLogo()
         }
 
-        addIngredientImageView.setOnClickListener {
+        _binding.addMealIngredientLogo.setOnClickListener {
             addFoodIngredient()
         }
 
-        addMealButton.setOnClickListener {
+        _binding.addMealButton.setOnClickListener {
             addMeal()
         }
     }
@@ -105,7 +91,7 @@ class MealAddFragment : Fragment() {
     }
 
     private fun addFoodIngredient() {
-        ingredientsList.add(Ingredient(ingredientText.text.toString(), true))
+        ingredientsList.add(Ingredient(_binding.mealIngredientsEditText.text.toString(), true))
         ingredientAdapter.notifyDataSetChanged()
     }
 
@@ -117,7 +103,7 @@ class MealAddFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImage: Uri = result.data?.data!!
-                Picasso.get().load(selectedImage).fit().centerCrop().into(addMealImageView)
+                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addMealLogo)
             }
         }
 }
