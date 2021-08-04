@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">FoodDeliveryApp</string>
-    <string name="finish">Finish</string>
-    <string name="next">Next</string>
     <string name="restautant_listing_title">Delicious\nfood for you</string>
     <string name="search_view_text">Search</string>
 
@@ -20,4 +18,22 @@
     <string name="food_price">Price</string>
     <string name="food_ingredients">Ingredients</string>
 
+    <!--Splash and login-signup screens strings -->
+    <string name="finish">Finish</string>
+    <string name="choose_your_order">CHOOSE YOUR ORDER</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">Login</string>
+    <string name="next">Next</string>
+    <string name="prev">Prev</string>
+    <string name="delivery_image">Delivery Image</string>
+    <string name="order_image">Order Image</string>
+    <string name="logo_image">Logo Image</string>
+    <string name="fast_delivery">FAST DELIVERY</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign-up</string>
+    <string name="enjoy_your_meal">ENJOY YOUR MEAL</string>
+    <string name="enjoy_image">Enjoy Image</string>
 </resources>
