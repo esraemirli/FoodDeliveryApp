@@ -71,7 +71,7 @@ class MealAddFragment : Fragment() {
     }
 
     private fun addListeners(){
-        _binding.addMealLogo.setOnClickListener {
+        _binding.addMealImageView.setOnClickListener {
             addFoodLogo()
         }
 
@@ -103,7 +103,7 @@ class MealAddFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImage: Uri = result.data?.data!!
-                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addMealLogo)
+                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addMealImageView)
             }
         }
 }

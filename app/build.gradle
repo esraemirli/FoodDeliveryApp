@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.fooddeliveryapp"
-        minSdk 21
+        minSdk 23
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -93,5 +93,8 @@ dependencies {
 
     //Flexbox
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
+    //Multiselect Spinner
+    implementation 'com.github.zeeshan5422:Material-MultiSelection-Spinner:1.0'
 
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
@@ -19,6 +20,7 @@ import com.example.fooddeliveryapp.databinding.FragmentRestaurantAddBinding
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
+import com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner
 
 class RestaurantAddFragment : Fragment() {
 
@@ -44,11 +46,12 @@ class RestaurantAddFragment : Fragment() {
         }
 
         addListeners()
-        initializeSpinner()
+        initializeCitySpinner()
+        initializePaymentMethodsSpinner()
     }
 
     private fun addListeners() {
-        _binding.addRestaurantLogo.setOnClickListener {
+        _binding.addRestaurantImageView.setOnClickListener {
             addRestaurantImage()
         }
 
@@ -65,7 +68,7 @@ class RestaurantAddFragment : Fragment() {
         }
     }
 
-    private fun initializeSpinner() {
+    private fun initializeCitySpinner() {
         val cities = resources.getStringArray(R.array.Cities)
         val adapter = ArrayAdapter(
             activity as AppCompatActivity,
@@ -73,6 +76,22 @@ class RestaurantAddFragment : Fragment() {
             cities
         )
         _binding.citySpinner.adapter = adapter
+    }
+
+    private fun initializePaymentMethodsSpinner() {
+       val paymentMethods = resources.getStringArray(R.array.RestaurantPaymentMethods).toList()
+        _binding.multiSelectionSpinner.items = paymentMethods
+
+        _binding.multiSelectionSpinner.setOnItemSelectedListener(object : MultiSelectionSpinner.OnItemSelectedListener {
+            override fun onItemSelected(view: View, isSelected: Boolean, position: Int) {
+                Toast.makeText(activity, "Selected item : " + paymentMethods[position], Toast.LENGTH_SHORT).show()
+                //TODO : add it to restaurant's payment methods
+            }
+            override fun onSelectionCleared() {
+                Toast.makeText(activity, "Selection cleared!", Toast.LENGTH_SHORT).show()
+                //TODO : delete it from restaurant's payment methods
+            }
+        })
     }
 
     private fun addRestaurantImage() {
@@ -116,6 +135,7 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun addRestaurant(){
+        //_binding.multiSelectionSpinner.selectedItems
         // TODO : POST Restaurant and return homePage
     }
 
@@ -123,7 +143,7 @@ class RestaurantAddFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImage: Uri = result.data?.data!!
-                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addRestaurantLogo)
+                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addRestaurantImageView)
             }
         }
 

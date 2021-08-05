@@ -14,9 +14,10 @@
     <string name="add_restaurant">Add Restaurant</string>
     <string name="restaurant_open_hour">Open</string>
     <string name="restaurant_close_hour">Close</string>
-    <string name="restaurant_delivery_time">Time</string>
+    <string name="restaurant__min_delivery_time">Min</string>
     <string name="restaurant_delivery_fee">Fee</string>
     <string name="restaurant_city">City :</string>
+    <string name="select_payment_methods">Select Payment Methods</string>
 
     <!--Add food screen strings -->
     <string name="food_title">Food</string>
@@ -109,6 +110,16 @@
         <item>Kilis</item>
         <item>Osmaniye</item>
         <item>Düzce</item>
+    </string-array>
+
+    <string-array name="RestaurantPaymentMethods">
+        <item>Online Kredi/Banka Kartı</item>
+        <item>Kredi Kartı</item>
+        <item>Nakit</item>
+        <item>Ticket Restaurant</item>
+        <item>Sodexo Restaurant Pass</item>
+        <item>Multinet</item>
+        <item>SetCard</item>
     </string-array>
 
 </resources>

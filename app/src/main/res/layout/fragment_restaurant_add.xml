@@ -245,15 +245,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="@string/restaurant_delivery_time"
+                    android:hint="@string/restaurant__min_delivery_time"
                     app:boxBackgroundColor="@color/gray_light"
-                    app:startIconDrawable="@drawable/ic_restaurant_open_hours">
+                    app:startIconDrawable="@drawable/ic_restaurant_open_hours"
+                    android:paddingEnd="5dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/restaurantDeliveryTimeEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -264,13 +266,14 @@
                     android:layout_weight="1"
                     android:hint="@string/restaurant_delivery_fee"
                     app:boxBackgroundColor="@color/gray_light"
-                    app:startIconDrawable="@drawable/ic_restaurant_delivery_fee">
+                    app:startIconDrawable="@drawable/ic_restaurant_delivery_fee"
+                    android:paddingStart="5dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/restaurantDeliveryFeeEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textWebEditText"
+                        android:inputType="number"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -282,16 +285,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:weightSum="2"
                 app:boxBackgroundColor="@color/gray_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantDeliveryLayout"
-                app:layout_constraintWidth_percent="0.75">
-                <!--android:hint="Select Multiple Items" -->
+                app:layout_constraintWidth_percent="0.75"
+                android:hint="@string/select_payment_methods">
 
-                <!-- Spinner with multiple selection will be added -->
+                <com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner
+                    android:id="@+id/multi_SelectionSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false"
+                    android:importantForAutofill="no"
+                    app:sort="true"
+                    android:focusable="true" />
+                <!-- app:showSearch="true" => To add search bar -->
 
             </com.google.android.material.textfield.TextInputLayout>
 
