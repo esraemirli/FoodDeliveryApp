@@ -8,42 +8,38 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RestaurantDetailsFragment : Fragment() {
-    lateinit var restaurantDetailTabLayout: TabLayout
-    lateinit var restaurantDetailViewPager: ViewPager2
-    lateinit var restaurantImageView: ImageView
-    lateinit var addButton: AppCompatImageButton
+    private lateinit var _binding: FragmentRestaurantDetailBinding
+    private val viewModel: RestaurantDetailsViewModel by viewModels()
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_restaurant_detail, container, false)
+    ): View {
+        _binding = FragmentRestaurantDetailBinding.inflate(inflater, container, false)
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        restaurantDetailTabLayout = view.findViewById(R.id.restaurantDetailTabLayout)
-        restaurantDetailViewPager = view.findViewById(R.id.restaurantDetailViewPager)
-        restaurantImageView = view.findViewById(R.id.restaurantImageView)
-        addButton = view.findViewById(R.id.addButton)
-
-        /*TabLayoutMediator(restaurantDetailTabLayout, restaurantDetailViewPager) { tab, position ->
-            tab.text = "OBJECT ${(position + 1)}"
-        }.attach()*/
         initViewPager()
         initListener()
     }
 
     private fun initListener() {
-        addButton.setOnClickListener {
+        _binding.addButton.setOnClickListener {
             findNavController().navigate(R.id.action_restaurantDetailFragment_to_foodAddFragment)
         }
     }
@@ -51,8 +47,8 @@ class RestaurantDetailsFragment : Fragment() {
 
     private fun initViewPager() {
         val adapter = RestaurantDetailViewPagerAdapter(requireActivity())
-        restaurantDetailViewPager.adapter = adapter
-        TabLayoutMediator(restaurantDetailTabLayout, restaurantDetailViewPager) { tab, position ->
+            _binding.restaurantDetailViewPager.adapter = adapter
+        TabLayoutMediator(_binding.restaurantDetailTabLayout, _binding.restaurantDetailViewPager) { tab, position ->
             if (position == 0) {
                 tab.text = "Details"
             }
@@ -61,7 +57,7 @@ class RestaurantDetailsFragment : Fragment() {
             }
         }.attach()
 
-        restaurantDetailTabLayout.addOnTabSelectedListener(object :
+        _binding.restaurantDetailTabLayout.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //TODO Bug! When back button pressed image visibility is gone but in screen it is not gone
@@ -82,8 +78,8 @@ class RestaurantDetailsFragment : Fragment() {
     }
 
     private fun changeImageVisibility(visible: Boolean) {
-        if (visible) restaurantImageView.visibility =
-            View.VISIBLE else restaurantImageView.visibility = View.GONE
+        if (visible) _binding.restaurantImageView.visibility =
+            View.VISIBLE else _binding.restaurantImageView.visibility = View.GONE
     }
 
 

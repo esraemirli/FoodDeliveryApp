@@ -51,11 +51,12 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="28sp"
+        android:fontFamily="@font/montserrat"
         android:layout_marginVertical="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/restaurantImageView"
-        android:text="Ali Usta'nın Yeri" />
+        tools:text="Ali Usta'nın Yeri" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/restaurantDetailTabLayout"
@@ -63,7 +64,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/restaurantNameTextView"
         app:tabIndicatorColor="#FA4A0C"
-
         app:tabIndicatorFullWidth="false"
         app:tabSelectedTextColor="#FA4A0C"
         app:tabTextAppearance="@style/tab_text">
