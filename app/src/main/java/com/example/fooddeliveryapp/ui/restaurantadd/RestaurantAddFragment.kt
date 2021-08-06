@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,16 +16,23 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantAddBinding
+import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 import com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RestaurantAddFragment : Fragment() {
 
     private lateinit var _binding : FragmentRestaurantAddBinding
+    private val viewModel : RestaurantAddViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +55,7 @@ class RestaurantAddFragment : Fragment() {
 
         addListeners()
         initializeCitySpinner()
+        initializeCuisineSpinner()
         initializePaymentMethodsSpinner()
     }
 
@@ -78,6 +87,16 @@ class RestaurantAddFragment : Fragment() {
         _binding.citySpinner.adapter = adapter
     }
 
+    private fun initializeCuisineSpinner() {
+        val cities = resources.getStringArray(R.array.Cuisines)
+        val adapter = ArrayAdapter(
+            activity as AppCompatActivity,
+            android.R.layout.simple_spinner_dropdown_item,
+            cities
+        )
+        _binding.cuisineSpinner.adapter = adapter
+    }
+
     private fun initializePaymentMethodsSpinner() {
        val paymentMethods = resources.getStringArray(R.array.RestaurantPaymentMethods).toList()
         _binding.multiSelectionSpinner.items = paymentMethods
@@ -85,11 +104,9 @@ class RestaurantAddFragment : Fragment() {
         _binding.multiSelectionSpinner.setOnItemSelectedListener(object : MultiSelectionSpinner.OnItemSelectedListener {
             override fun onItemSelected(view: View, isSelected: Boolean, position: Int) {
                 Toast.makeText(activity, "Selected item : " + paymentMethods[position], Toast.LENGTH_SHORT).show()
-                //TODO : add it to restaurant's payment methods
             }
             override fun onSelectionCleared() {
                 Toast.makeText(activity, "Selection cleared!", Toast.LENGTH_SHORT).show()
-                //TODO : delete it from restaurant's payment methods
             }
         })
     }
@@ -135,8 +152,47 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun addRestaurant(){
-        //_binding.multiSelectionSpinner.selectedItems
-        // TODO : POST Restaurant and return homePage
+        val name = _binding.restaurantNameEditText.editText?.text.toString()
+        val cuisine = _binding.cuisineSpinner.selectedItem.toString()
+        val deliveryInfo = _binding.restaurantDeliveryInfoEditText.editText?.text.toString()
+        val deliveryTime = _binding.restaurantDeliveryTimeEditText.text.toString()
+        val address = _binding.restaurantAddressEditText.editText?.text.toString()
+        val district = _binding.citySpinner.selectedItem.toString()
+        val minDeliveryFee = _binding.restaurantDeliveryFeeEditText.text.toString()
+        val paymentMethods = _binding.multiSelectionSpinner.selectedItems
+        val phone = _binding.restaurantPhoneEditText.editText?.text.toString()
+        val website = _binding.restaurantWebsiteEditText.editText?.text.toString()
+        val imageUrl = "Image URL :)"
+        //val imageUrl = _binding.addRestaurantImageView
+
+        Log.i(RestaurantAddFragment::class.java.name, "Restaurant: \n" + name + "\n"
+                                                                         + cuisine + "\n"
+                                                                         + deliveryInfo + "\n"
+                                                                         + deliveryTime + "\n"
+                                                                         + address + "\n"
+                                                                         + district + "\n"
+                                                                         + minDeliveryFee + "\n"
+                                                                         + paymentMethods + "\n"
+                                                                         + phone + "\n"
+                                                                         + website)
+
+        viewModel.addRestaurant(name, cuisine,deliveryInfo, deliveryTime,
+            imageUrl,address, district, minDeliveryFee, paymentMethods, phone, website)
+            .observe(viewLifecycleOwner, {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        _binding.progressBar.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        _binding.progressBar.gone()
+                        //TODO : navigate to restaurant detail screen?
+                    }
+                    Resource.Status.ERROR -> {
+                        _binding.progressBar.gone()
+                        //TODO : navigate where?
+                    }
+                }
+            })
     }
 
     private val startForResult =
