@@ -1,31 +1,28 @@
-package com.example.fooddeliveryapp.model.entity
+package com.example.fooddeliveryapp.model.entity.restaurantadd
 
 import com.google.gson.annotations.SerializedName
 
-data class Restaurant(
-    @SerializedName("id")
-    val id: Int,
+data class RestaurantAddRequest(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("cuisine")
+    val cuisine: String,
     @SerializedName("deliveryInfo")
     val deliveryInfo: String,
     @SerializedName("deliveryTime")
     val deliveryTime: String,
-    @SerializedName("image")
-    val image: String,
+    @SerializedName("imageUrl")
+    val imageUrl: String,
     @SerializedName("address")
     val address: String,
     @SerializedName("district")
     val district: String,
-    @SerializedName("meals")
-    val meals: List<Meal>,
-    @SerializedName("minimumDeliveryFee")
-    val minimumDeliveryFee: Double,
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("minDeliveryFee")
+    val minDeliveryFee: String,
     @SerializedName("paymentMethods")
-    val paymentMethods: String,
+    val paymentMethods: MutableList<Any>,
     @SerializedName("phone")
     val phone: String,
     @SerializedName("website")
     val website: String
 )
-

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_light"
@@ -21,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/addFoodTitle"
+                android:id="@+id/addMealTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -34,18 +35,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/addFoodLogo"
+                android:id="@+id/addMealImageView"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="40dp"
-                android:onClick="addFoodLogo"
                 android:src="@drawable/ic_add_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addFoodTitle" />
+                app:layout_constraintTop_toBottomOf="@id/addMealTitle"
+                tools:ignore="ContentDescription" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/foodNameEditText"
+                android:id="@+id/mealNameEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -54,7 +55,7 @@
                 app:expandedHintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addFoodLogo"
+                app:layout_constraintTop_toBottomOf="@id/addMealImageView"
                 app:layout_constraintWidth_percent="0.75"
                 app:startIconDrawable="@drawable/ic_food_name">
 
@@ -66,7 +67,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/foodPriceEditText"
+                android:id="@+id/mealPriceEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -74,7 +75,7 @@
                 app:boxBackgroundColor="@color/gray_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/foodNameEditText"
+                app:layout_constraintTop_toBottomOf="@id/mealNameEditText"
                 app:layout_constraintWidth_percent="0.75"
                 app:startIconDrawable="@drawable/ic_food_price">
 
@@ -86,8 +87,32 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mealDescriptionLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="@string/food_description"
+                app:boxBackgroundColor="@color/gray_light"
+                app:counterEnabled="true"
+                app:counterMaxLength="100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mealPriceEditText"
+                app:layout_constraintWidth_percent="0.75"
+                app:startIconDrawable="@drawable/ic_restaurant_address">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
-                android:id="@+id/foodIngredientsLayout"
+                android:id="@+id/mealIngredientsLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -95,11 +120,11 @@
                 android:weightSum="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/foodPriceEditText"
+                app:layout_constraintTop_toBottomOf="@id/mealDescriptionLayout"
                 app:layout_constraintWidth_percent="0.75">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/foodIngredientsEditText"
+                    android:id="@+id/mealIngredientsEditTextLayout"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="95"
@@ -108,6 +133,7 @@
                     app:startIconDrawable="@drawable/ic_food_ingredients">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/mealIngredientsEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textWebEditText"
@@ -116,18 +142,29 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
-                    android:id="@+id/addFoodIngredientLogo"
+                    android:id="@+id/addMealIngredientLogo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="5"
-                    android:onClick="addFoodIngredient"
-                    android:src="@drawable/ic_add" />
+                    android:src="@drawable/ic_add"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mealIngredientsLayout"
+                app:layout_constraintWidth_percent="0.75" />
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addFoodButton"
+                android:id="@+id/addMealButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -139,10 +176,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerView"
                 app:layout_constraintWidth_percent="0.75" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

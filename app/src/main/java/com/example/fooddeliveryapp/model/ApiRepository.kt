@@ -1,7 +1,10 @@
 package com.example.fooddeliveryapp.model
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
+import com.example.fooddeliveryapp.model.entity.mealadd.MealAddRequest
+import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddRequest
 import com.example.fooddeliveryapp.model.local.LocalDataSource
+import com.example.fooddeliveryapp.model.remote.AuthRemoteDataSource
 import com.example.fooddeliveryapp.model.remote.RemoteDataSource
 import com.example.fooddeliveryapp.utils.performAuthTokenNetworkOperation
 import com.example.fooddeliveryapp.utils.performNetworkOperation
@@ -9,6 +12,7 @@ import javax.inject.Inject
 
 class ApiRepository @Inject constructor(
     private var remoteDataSource: RemoteDataSource,
+    private var authRemoteDataSource: AuthRemoteDataSource,
     private var localDataSource: LocalDataSource
 ) {
 
@@ -21,13 +25,18 @@ class ApiRepository @Inject constructor(
         }
     )
 
-//    fun register(registerRequest: RegisterRequest) =
-//        performNetworkOperation {
-//            remoteDataSource.postRegister(request = registerRequest)
-//        }
-
     fun getRestaurant() =
         performNetworkOperation {
             remoteDataSource.getRestaurants()
+        }
+
+    fun postRestaurant(restaurantAddRequest: RestaurantAddRequest) =
+        performNetworkOperation {
+            authRemoteDataSource.postRestaurant(request = restaurantAddRequest)
+        }
+
+    fun postMeal(restaurantId : String, mealAddRequest: MealAddRequest) =
+        performNetworkOperation {
+            authRemoteDataSource.postMeal(restaurantId, request = mealAddRequest)
         }
 }
