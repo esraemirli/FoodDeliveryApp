@@ -18,8 +18,8 @@ interface APIService {
     @GET("a/restaurant")
     suspend fun getRestaurants(): Response<RestaurantListResponse>
 
-    @GET("a/restaurant")
-    suspend fun getRestaurantsByCuisine(@Query("cuisineName") cuisine : String): Response<RestaurantListResponse>
+    @GET("a/restaurant/cuisine/{cuisineName}")
+    suspend fun getRestaurantsByCuisine(@Path("cuisineName") cuisine : String): Response<RestaurantListResponse>
 
     @GET("a/restaurant/{id}")
     suspend fun getRestaurantById(@Path("id") id: String): Response<RestaurantResponse>
