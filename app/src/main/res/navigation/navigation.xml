@@ -3,17 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@id/splashFragment">
-
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.fooddeliveryapp.ui.splash.SplashFragment"
-        android:label="SplashFragment"
-        tools:layout="@layout/fragment_splash">
-        <action
-            android:id="@+id/action_splashFragment_to_onboardingFragment"
-            app:destination="@id/onboardingFragment" />
-    </fragment>
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -46,26 +36,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/onboardingFragment"
-        android:name="com.example.fooddeliveryapp.ui.onboarding.OnboardingFragment"
-        android:label="OnboardingFragment"
-        tools:layout="@layout/fragment_onboarding">
-        <action
-            android:id="@+id/action_onboardingFragment_to_loginAndSignupFragment"
-            app:destination="@id/loginAndSignupFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/loginAndSignupFragment"
-        android:name="com.example.fooddeliveryapp.ui.login.LoginAndSignupFragment"
-        android:label="LoginAndSignupFragment"
-        tools:layout="@layout/fragment_login_and_signup" >
-        <action
-            android:id="@+id/action_loginAndSignupFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fooddeliveryapp.ui.profile.ProfileFragment"
         android:label="ProfileFragment" >
@@ -81,7 +51,7 @@
 
     <fragment
         android:id="@+id/foodAddFragment"
-        android:name="com.example.fooddeliveryapp.ui.foodadd.FoodAddFragment"
+        android:name="com.example.fooddeliveryapp.ui.mealadd.MealAddFragment"
         android:label="FoodAddFragment" />
 
     <fragment

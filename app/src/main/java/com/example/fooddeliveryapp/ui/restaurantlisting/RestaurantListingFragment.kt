@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantListingBinding
-import com.example.fooddeliveryapp.model.entity.Restaurant
+import com.example.fooddeliveryapp.model.entity.restaurant.Restaurant
 import com.example.fooddeliveryapp.utils.Resource
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +52,7 @@ class RestaurantListingFragment : Fragment() {
                     Log.v("RestaurantListing Load", response.message.toString())
                 }
                 Resource.Status.SUCCESS -> {
-                    response.data?.data?.let { restaurantList ->
+                    response.data?.restaurantList?.let { restaurantList ->
                         setRestaurants(restaurantList)
                         setCuisineList(restaurantList.map { it.cuisine }.toList())
                     }
@@ -92,6 +92,7 @@ class RestaurantListingFragment : Fragment() {
         adapter.addListener(object : IRestaurantOnClick {
             override fun onClick(restaurant: Restaurant) {
                 //TODO bundle ile gönder..
+//                val action = RestaurantlistingFragmentDirections.acti
                 findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
             }
         })
@@ -123,7 +124,7 @@ class RestaurantListingFragment : Fragment() {
                     Log.v("RestaurantListing Load", response.message.toString())
                 }
                 Resource.Status.SUCCESS -> {
-                    response.data?.data?.let { restaurantList ->
+                    response.data?.restaurantList?.let { restaurantList ->
                         setRestaurants(restaurantList)
                     }
                 }

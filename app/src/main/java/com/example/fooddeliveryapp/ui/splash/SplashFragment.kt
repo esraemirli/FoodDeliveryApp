@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSplashBinding
 
@@ -31,7 +31,7 @@ class SplashFragment : Fragment() {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                findNavController(requireParentFragment()).navigate(R.id.action_splashFragment_to_onboardingFragment)
+                findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
             }
 
             override fun onAnimationCancel(animation: Animator?) {

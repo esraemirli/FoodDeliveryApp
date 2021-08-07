@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_nav"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_splash"
+        android:id="@+id/splashFragment"
+        android:name="com.example.fooddeliveryapp.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_onboarding"
+        android:id="@+id/onboardingFragment"
+        android:name="com.example.fooddeliveryapp.ui.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginAndSignupFragment"
+            app:destination="@id/loginAndSignupFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_login_and_signup"
+        android:id="@+id/loginAndSignupFragment"
+        android:name="com.example.fooddeliveryapp.ui.login.LoginAndSignupFragment"
+        android:label="LoginAndSignupFragment" />
+</navigation>

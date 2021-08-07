@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.ui.login
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentLoginBinding
+import com.example.fooddeliveryapp.ui.MainActivity
 import com.example.fooddeliveryapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +44,10 @@ class LoginFragment : Fragment() {
                         }
                         Resource.Status.SUCCESS -> {
                             //_binding.progressBar.gone()
-                            findNavController().navigate(R.id.action_loginAndSignupFragment_to_homeFragment)
+
+                            val intent = Intent(context,MainActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
                         }
                         Resource.Status.ERROR -> {
                             //_binding.progressBar.gone()
@@ -53,6 +58,8 @@ class LoginFragment : Fragment() {
                                     dialog.dismiss()
                                 }
                             dialog.show()
+
+
                         }
                     }
                 })
