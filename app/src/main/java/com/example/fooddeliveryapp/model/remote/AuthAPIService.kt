@@ -13,9 +13,9 @@ import retrofit2.http.Path
 
 interface AuthAPIService {
 
-    @POST("/a/api/restaurant")
+    @POST("a/restaurant")
     suspend fun postRestaurant(@Body request: RestaurantAddRequest) : Response<RestaurantAddResponse>
 
-    @POST("/a/api/restaurant/{restaurantId}/meal")
+    @POST("a/restaurant/{restaurantId}/meal")
     suspend fun postMeal(@Path("restaurantId") restaurantId : String, @Body request: MealAddRequest) : Response<MealAddResponse>
 }

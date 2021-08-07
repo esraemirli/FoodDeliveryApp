@@ -10,10 +10,10 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface APIService {
-    @GET("/a/api/restaurant")
+    @GET("a/restaurant")
     suspend fun getRestaurants(): Response<RestaurantListResponse>
 
-    @POST("api/auth/login")
+    @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
 
