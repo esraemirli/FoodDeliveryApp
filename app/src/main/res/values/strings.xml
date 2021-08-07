@@ -24,6 +24,11 @@
     <string name="add_food">Add Food</string>
     <string name="food_price">Price</string>
     <string name="food_ingredients">Ingredients</string>
+    <string name="delivery_info">Delivery Info</string>
+    <string name="delivery_time">Delivery Time</string>
+    <string name="minimum_delivery_fee">Minimum Delivery Fee</string>
+    <string name="payment">Payment</string>
+    <string name="order_now_button">Order Now</string>
     <string name="food_description">Description</string>
     <string name="restaurant_delivery_info">Delivery Info</string>
 

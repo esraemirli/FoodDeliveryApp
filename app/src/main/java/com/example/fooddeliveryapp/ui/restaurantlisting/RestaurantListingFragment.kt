@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RestaurantListingFragment : Fragment() {
-    private var binding: FragmentRestaurantListingBinding? = null
+    private lateinit var _binding : FragmentRestaurantListingBinding
     private val viewModel: RestaurantListingViewModel by viewModels()
 
     private var adapter = RestaurantListingAdapter()
@@ -31,13 +31,13 @@ class RestaurantListingFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRestaurantListingBinding.inflate(inflater, container,false)
-        return binding?.root
+    ): View {
+        _binding= FragmentRestaurantListingBinding.inflate(inflater, container,false)
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding?.restaurantListRecyclerView?.layoutManager =
+        _binding.restaurantListRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         getRestaurants()
@@ -64,7 +64,7 @@ class RestaurantListingFragment : Fragment() {
 
     private fun setRestaurants(restaurantList: List<Restaurant>) {
         adapter.setData(restaurantList)
-        binding?.restaurantListRecyclerView?.adapter = adapter
+        _binding.restaurantListRecyclerView.adapter = adapter
     }
 
     private fun setCuisineList(list: List<String>) {
@@ -78,7 +78,7 @@ class RestaurantListingFragment : Fragment() {
             button.isAllCaps = false
             if(index == 0)
                button.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
-            binding?.cuisineTypeLinearLayout?.addView(button)
+            _binding.cuisineTypeLinearLayout.addView(button)
             cuisineList[item] = button
         }
         addCuisineTypesListener()
@@ -86,14 +86,13 @@ class RestaurantListingFragment : Fragment() {
 
 
     private fun addListener() {
-        binding?.addRestaurant?.setOnClickListener {
+        _binding.addRestaurant.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_restaurantAddFragment)
         }
         adapter.addListener(object : IRestaurantOnClick {
             override fun onClick(restaurant: Restaurant) {
-                //TODO bundle ile gönder..
-//                val action = RestaurantlistingFragmentDirections.acti
-                findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
+                val action = RestaurantListingFragmentDirections.actionHomeFragmentToRestaurantDetailFragment(restaurant.id)
+                findNavController().navigate(action)
             }
         })
     }

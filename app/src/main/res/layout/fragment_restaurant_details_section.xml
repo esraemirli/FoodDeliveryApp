@@ -16,66 +16,78 @@
             android:paddingHorizontal="16dp"
             android:paddingTop="8dp"
             android:paddingBottom="4dp"
-            android:text="Delivery Info"
+            android:text="@string/delivery_info"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:fontFamily="@font/montserrat"/>
 
         <TextView
+            android:id="@+id/deliveryInfoTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingBottom="16dp"
-            android:text="Delivered between monday and thursday from 11am to 11 pm"
-            android:textSize="15sp" />
+            tools:text="Delivered between monday and thursday from 11am to 11 pm"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingBottom="4dp"
-            android:text="Delivery Time"
+            android:text="@string/delivery_time"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:fontFamily="@font/montserrat"/>
 
         <TextView
+            android:id="@+id/deliveryTimeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingBottom="16dp"
-            android:text="30-40 minutes"
+            tools:text="30-40 minutes"
             android:textSize="15sp" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="4dp"
+            android:text="@string/minimum_delivery_fee"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:fontFamily="@font/montserrat"/>
+
+        <TextView
+            android:id="@+id/minimumDeliveryFeeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            tools:text="5.00 $"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingBottom="4dp"
-            android:text="Minimum Delivery Fee"
+            android:text="@string/payment"
             android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:fontFamily="@font/montserrat"/>
 
         <TextView
+            android:id="@+id/paymentTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:paddingBottom="16dp"
-            android:text="5.00 $"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="4dp"
-            android:text="Payment"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:text="Online Credit/Bank Card, Cash, Ticket Restaurant Card, Sodexo"
-            android:textSize="15sp" />
+            tools:text="Online Credit/Bank Card, Cash, Ticket Restaurant Card, Sodexo"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat"/>
     </LinearLayout>
 </ScrollView>

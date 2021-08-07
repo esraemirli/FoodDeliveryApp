@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delivery_info">Delivery Info</string>
+    <string name="delivery_time">Delivery Time</string>
+    <string name="minimum_delivery_fee">Minimum Delivery Fee</string>
+    <string name="payment">Payment</string>
+    <string name="order_now_button">Order Now</string>
+</resources>

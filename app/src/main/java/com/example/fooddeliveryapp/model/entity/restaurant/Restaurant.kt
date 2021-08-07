@@ -5,7 +5,7 @@ import com.example.fooddeliveryapp.model.entity.Meal
 
 data class Restaurant(
     @SerializedName("_id")
-    val id: Int,
+    val id: String,
     @SerializedName("deliveryInfo")
     val deliveryInfo: String,
     @SerializedName("deliveryTime")
@@ -17,9 +17,9 @@ data class Restaurant(
     @SerializedName("district")
     val district: String,
     @SerializedName("meals")
-    val meals: List<Meal>,
+    val meals: ArrayList<Meal>,
     @SerializedName("minDeliveryFee")
-    val minimumDeliveryFee: Double,
+    val minimumDeliveryFee: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("paymentMethods")

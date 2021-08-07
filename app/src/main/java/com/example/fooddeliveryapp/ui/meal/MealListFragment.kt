@@ -5,60 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.databinding.FragmentMealsListBinding
 import com.example.fooddeliveryapp.model.entity.Meal
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class MealListFragment : Fragment(), IMealOnClick {
-    private lateinit var mealsListRecyclerView: RecyclerView
+@AndroidEntryPoint
+class MealListFragment(
+    private val mealList: ArrayList<Meal>
+) : Fragment(), IMealOnClick {
     private var adapter: MealsListAdapter = MealsListAdapter()
+    private lateinit var _binding: FragmentMealsListBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meals_list, container, false)
+    ): View {
+        _binding = FragmentMealsListBinding.inflate(inflater, container, false)
+        return _binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mealsListRecyclerView = view.findViewById(R.id.mealsListRecyclerView)
-        mealsListRecyclerView.layoutManager = LinearLayoutManager(context)
+            _binding.mealsListRecyclerView.layoutManager = LinearLayoutManager(context)
+        adapter.setMealList(mealList)
         adapter.addListener(this)
-        mealsListRecyclerView.adapter = adapter
-        setData()
+        _binding.mealsListRecyclerView.adapter = adapter
     }
 
-    private fun setData() {
-        val data = ArrayList<Meal>()
-        for (i in 0..10) {
-//            data.add(
-//                Meal(
-//                    "https://via.placeholder.com/150",
-//                    "Title - $i",
-//                    listOf(
-//                        Ingredient("Tomato", true),
-//                        Ingredient("Pepper",true),
-//                        Ingredient("Onion", true),
-//                    )
-//                )
-//            )
-        }
-        adapter.setMealList(data)
-    }
 
-    override fun onPause() {
-        super.onPause()
-        adapter.removeListeners()
-    }
 
     override fun onClick(meal: Meal) {
-        findNavController().navigate(R.id.action_restaurantDetailFragment_to_mealDetailsFragment)
+        TODO("Not yet implemented")
     }
+
 
 
 }
