@@ -7,13 +7,16 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.model.entity.restaurant.Restaurant
+
 
 class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.ViewHolder>() {
 
     private lateinit var restaurantList: List<Restaurant>
-    private var listenerI: IRestaurantOnClick? = null
+    private var listener: IRestaurantOnClick? = null
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val containerFrameLayout: FrameLayout = view.findViewById(R.id.containerFrameLayout)
@@ -21,14 +24,17 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
         private val locationTextView: TextView = view.findViewById(R.id.locationTextView)
         private val imageView: AppCompatImageView = view.findViewById(R.id.imageView)
 
-        fun bind(restaurant: Restaurant, listenerI: IRestaurantOnClick?) {
+        fun bind(restaurant: Restaurant, listener: IRestaurantOnClick?) {
             nameTextView.text = restaurant.name
             locationTextView.text = restaurant.district
-//            Glide.with(imageView.context)
-//                .load(item.image).into(imageView);
+
+            val options = RequestOptions().placeholder(R.drawable.no_data)
+            Glide.with(imageView.context)
+                .applyDefaultRequestOptions(options)
+                .load(restaurant.image).into(imageView)
 
             containerFrameLayout.setOnClickListener {
-                listenerI?.onClick(restaurant)
+                listener?.onClick(restaurant)
             }
         }
     }
@@ -45,7 +51,7 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = restaurantList[position]
-        holder.bind(item, listenerI)
+        holder.bind(item, listener)
     }
 
     override fun getItemCount(): Int = restaurantList.size
@@ -55,8 +61,8 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
         notifyDataSetChanged()
     }
 
-    fun addListener(listenerI: IRestaurantOnClick?) {
-        this.listenerI = listenerI
+    fun addListener(listener: IRestaurantOnClick?) {
+        this.listener = listener
     }
 
 }
