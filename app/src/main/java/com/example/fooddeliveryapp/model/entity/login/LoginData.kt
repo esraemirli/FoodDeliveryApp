@@ -1,8 +1,8 @@
-package com.example.fooddeliveryapp.model.entity.common
+package com.example.fooddeliveryapp.model.entity.login
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class LoginData(
     @SerializedName("email")
     val email: String,
     @SerializedName("name")

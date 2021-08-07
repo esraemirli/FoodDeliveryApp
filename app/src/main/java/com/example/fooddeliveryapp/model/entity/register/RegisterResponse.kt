@@ -1,12 +1,14 @@
-package com.example.fooddeliveryapp.model.entity.login
+package com.example.fooddeliveryapp.model.entity.register
+
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse(
+data class RegisterResponse(
     @SerializedName("data")
-    val loginData: LoginData,
+    val registerData: RegisterData,
     @SerializedName("success")
     val success: Boolean,
     @SerializedName("token")
     val token: String
 )
+

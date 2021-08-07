@@ -157,8 +157,8 @@
     <string name="order_image">Order Image</string>
     <string name="logo_image">Logo Image</string>
     <string name="fast_delivery">FAST DELIVERY</string>
-    <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign-up</string>
     <string name="enjoy_your_meal">ENJOY YOUR MEAL</string>
     <string name="enjoy_image">Enjoy Image</string>
+    <string name="name">Name</string>
 </resources>

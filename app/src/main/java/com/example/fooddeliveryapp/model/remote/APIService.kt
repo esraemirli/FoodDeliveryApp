@@ -2,6 +2,8 @@ package com.example.fooddeliveryapp.model.remote
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
 import com.example.fooddeliveryapp.model.entity.login.LoginResponse
+import com.example.fooddeliveryapp.model.entity.register.RegisterRequest
+import com.example.fooddeliveryapp.model.entity.register.RegisterResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantListResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantResponse
 import retrofit2.Response
@@ -23,6 +25,10 @@ interface APIService {
 
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+
+    @POST("auth/register")
+    suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapp.ui.splash
 
 import android.animation.Animator
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,12 @@ class SplashFragment : Fragment() {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
+                if(isOnboardingSeen()){
+                    findNavController().navigate(R.id.action_splashFragment_to_loginAndSignupFragment)
+                }else{
+                    findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
+                }
+
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -43,5 +49,10 @@ class SplashFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun isOnboardingSeen(): Boolean {
+        val sharedPref = requireActivity().getSharedPreferences("sharedPreferencesUtil", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("onboarding",false)
     }
 }
