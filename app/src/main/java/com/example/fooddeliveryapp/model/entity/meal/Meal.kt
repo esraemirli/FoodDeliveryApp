@@ -1,9 +1,10 @@
-package com.example.fooddeliveryapp.model.entity
+package com.example.fooddeliveryapp.model.entity.meal
 
 import com.google.gson.annotations.SerializedName
 
 data class Meal(
-
+    @SerializedName("_id")
+    val id: String,
     @SerializedName("description")
     val description: String,
     @SerializedName("image")

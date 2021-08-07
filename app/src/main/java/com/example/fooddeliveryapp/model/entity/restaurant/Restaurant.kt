@@ -1,7 +1,7 @@
 package com.example.fooddeliveryapp.model.entity.restaurant
 
 import com.google.gson.annotations.SerializedName
-import com.example.fooddeliveryapp.model.entity.Meal
+import com.example.fooddeliveryapp.model.entity.meal.Meal
 
 data class Restaurant(
     @SerializedName("_id")

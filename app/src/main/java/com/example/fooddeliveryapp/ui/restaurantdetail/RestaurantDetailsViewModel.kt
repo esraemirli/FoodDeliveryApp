@@ -12,7 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class RestaurantDetailsViewModel@Inject constructor(
+class RestaurantDetailsViewModel @Inject constructor(
     var savedStateHandle: SavedStateHandle,
     private var apiRepository: ApiRepository
 ): ViewModel() {

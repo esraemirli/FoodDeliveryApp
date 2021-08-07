@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.model.entity.Meal
+import com.example.fooddeliveryapp.model.entity.meal.Meal
 
 class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHolder>() {
-
+    private lateinit var _binding: MealsListAdapter
     private var mealList = ArrayList<Meal>()
     private var listener: IMealOnClick? = null
 

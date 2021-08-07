@@ -36,6 +36,7 @@
         android:id="@+id/mealDetailsFragment"
         android:name="com.example.fooddeliveryapp.ui.meal.MealDetailsFragment"
         android:label="MealDetailsFragment">
+        <argument android:name="mealId" />
     </fragment>
 
     <fragment

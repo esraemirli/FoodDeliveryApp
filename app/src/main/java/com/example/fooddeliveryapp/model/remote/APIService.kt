@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.model.remote
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
 import com.example.fooddeliveryapp.model.entity.login.LoginResponse
+import com.example.fooddeliveryapp.model.entity.meal.MealResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantListResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantResponse
 import retrofit2.Response
@@ -20,6 +21,10 @@ interface APIService {
 
     @GET("a/restaurant/{id}")
     suspend fun getRestaurantById(@Path("id") id: String): Response<RestaurantResponse>
+
+    @GET("a/meal/{id}")
+    suspend fun getMealById(@Path("id") id: String): Response<MealResponse>
+
 
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>

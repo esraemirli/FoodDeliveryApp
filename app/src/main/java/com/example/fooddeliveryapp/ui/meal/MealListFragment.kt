@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fooddeliveryapp.databinding.FragmentMealsListBinding
-import com.example.fooddeliveryapp.model.entity.Meal
+import com.example.fooddeliveryapp.model.entity.meal.Meal
+import com.example.fooddeliveryapp.ui.restaurantdetail.RestaurantDetailsFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -38,7 +40,8 @@ class MealListFragment(
 
 
     override fun onClick(meal: Meal) {
-        TODO("Not yet implemented")
+         val action = RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToMealDetailsFragment(meal.id)
+        findNavController().navigate(action)
     }
 
 

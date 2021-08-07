@@ -1,16 +1,19 @@
 package com.example.fooddeliveryapp.di
 
+import android.content.Context
 import com.example.fooddeliveryapp.BuildConfig
+import com.example.fooddeliveryapp.model.local.LocalDataSource
+import com.example.fooddeliveryapp.model.local.SharedPrefManager
 import com.example.fooddeliveryapp.model.remote.APIService
 import com.example.fooddeliveryapp.model.remote.AuthAPIService
 import com.example.fooddeliveryapp.model.remote.AuthRemoteDataSource
 import com.example.fooddeliveryapp.model.remote.RemoteDataSource
-import com.example.fooddeliveryapp.utils.SharedPreferencesUtil
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -72,11 +75,13 @@ class NetworkModule {
 
 
     @Provides
-    fun provideAuthInterceptorOkHttpClient(): AuthOkHttpClient {
+    fun provideAuthInterceptorOkHttpClient(
+        localDataSource: LocalDataSource
+    ): AuthOkHttpClient {
         return provideAuthOkHttpClient(OkHttpClient.Builder()
             .addInterceptor {
-                val token = SharedPreferencesUtil.getToken()
-                val request = it.request().newBuilder().addHeader("Authorization", token).build()
+                val token = localDataSource.getToken()
+                val request = it.request().newBuilder().addHeader("Authorization", token!!).build()
                 it.proceed(request)
             }
             .build())
@@ -86,6 +91,20 @@ class NetworkModule {
     fun provideGson(): Gson {
         return Gson()
     }
+
+//    @Provides
+//    fun provideLocalDataSource(
+//        sharedPrefManager: SharedPrefManager
+//    ): LocalDataSource{
+//        return LocalDataSource(sharedPrefManager)
+//    }
+//
+//    @Provides
+//    fun provideSharedPrefManager(
+//        @ApplicationContext context: Context
+//    ): SharedPrefManager{
+//        return SharedPrefManager(context)
+//    }
 
 
     @Provides
