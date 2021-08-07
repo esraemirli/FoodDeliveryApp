@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -54,7 +56,8 @@ class RestaurantListingFragment : Fragment() {
                     _binding.progressBar.gone()
                     response.data?.restaurantList?.let { restaurantList ->
                         showRestaurantList(restaurantList)
-                        setCuisineList(restaurantList.map { it.cuisine }.toMutableList())
+                        if(_binding.cuisineTypeLinearLayout.isEmpty())
+                            setCuisineList(restaurantList.map { it.cuisine }.toMutableList())
                     }
                 }
                 Resource.Status.ERROR -> showResponseError()
@@ -68,6 +71,7 @@ class RestaurantListingFragment : Fragment() {
     }
 
     private fun setCuisineList(list: MutableList<String>) {
+        _binding.cuisineTypeLinearLayout.removeAllViews()
         list.add(0, getString(R.string.all_restaurants))
         val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(0, 0, 80, 0)
@@ -122,7 +126,10 @@ class RestaurantListingFragment : Fragment() {
                 }
                 //make orange selected text
                 cuisine.value.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
-                sendCuisineRequest(cuisine.key)
+                if(cuisine.key == getString(R.string.all_restaurants))
+                    getRestaurants()
+                else
+                    sendCuisineRequest(cuisine.key)
             }
         }
     }
@@ -143,6 +150,8 @@ class RestaurantListingFragment : Fragment() {
     }
 
     private fun showRestaurantList(restaurantList: List<Restaurant>) {
+        if(restaurantList.isEmpty())
+            showResponseError()
         _binding.responseErrorLinearLayout.gone()
         _binding.restaurantListRecyclerView.isVisible = true
         setRestaurants(restaurantList)
