@@ -1,41 +1,39 @@
-package com.example.fooddeliveryapp.model.entity
-
 
 import com.google.gson.annotations.SerializedName
 
-data class Restaurant(
+data class Data(
     @SerializedName("address")
-    val address: String,
+    var address: String,
     @SerializedName("createdAt")
-    val createdAt: String,
+    var createdAt: String,
     @SerializedName("cuisine")
-    val cuisine: String,
+    var cuisine: String,
     @SerializedName("deliveryInfo")
-    val deliveryInfo: String,
+    var deliveryInfo: String,
     @SerializedName("deliveryTime")
-    val deliveryTime: String,
+    var deliveryTime: String,
     @SerializedName("district")
-    val district: String,
+    var district: String,
     @SerializedName("_id")
-    val id: String,
+    var id: String,
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    var imageUrl: String,
     @SerializedName("meals")
-    val meals: List<Any>,
+    var meals: List<Any>,
     @SerializedName("minDeliveryFee")
-    val minDeliveryFee: String,
+    var minDeliveryFee: String,
     @SerializedName("name")
-    val name: String,
+    var name: String,
     @SerializedName("paymentMethods")
-    val paymentMethods: String,
+    var paymentMethods: String,
     @SerializedName("phone")
-    val phone: String,
+    var phone: String,
     @SerializedName("slug")
-    val slug: String,
+    var slug: String,
     @SerializedName("user")
-    val user: String,
+    var user: String,
     @SerializedName("__v")
-    val v: Int,
+    var v: Int,
     @SerializedName("website")
-    val website: String
+    var website: String
 )

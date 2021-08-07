@@ -13,7 +13,7 @@ import com.example.fooddeliveryapp.model.entity.Restaurant
 class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.ViewHolder>() {
 
     private lateinit var restaurantList: List<Restaurant>
-    private var listener: RestaurantListingAdapterListener? = null
+    private var listenerI: IRestaurantOnClick? = null
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val containerFrameLayout: FrameLayout = view.findViewById(R.id.containerFrameLayout)
@@ -21,14 +21,14 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
         private val locationTextView: TextView = view.findViewById(R.id.locationTextView)
         private val imageView: AppCompatImageView = view.findViewById(R.id.imageView)
 
-        fun bind(restaurant: Restaurant, listener: RestaurantListingAdapterListener?) {
+        fun bind(restaurant: Restaurant, listenerI: IRestaurantOnClick?) {
             nameTextView.text = restaurant.name
             locationTextView.text = restaurant.district
 //            Glide.with(imageView.context)
 //                .load(item.image).into(imageView);
 
             containerFrameLayout.setOnClickListener {
-                listener?.onRestaurantClickListener(restaurant)
+                listenerI?.onClick(restaurant)
             }
         }
     }
@@ -45,7 +45,7 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = restaurantList[position]
-        holder.bind(item, listener)
+        holder.bind(item, listenerI)
     }
 
     override fun getItemCount(): Int = restaurantList.size
@@ -55,8 +55,8 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
         notifyDataSetChanged()
     }
 
-    fun addListener(listener: RestaurantListingAdapterListener?) {
-        this.listener = listener
+    fun addListener(listenerI: IRestaurantOnClick?) {
+        this.listenerI = listenerI
     }
 
 }

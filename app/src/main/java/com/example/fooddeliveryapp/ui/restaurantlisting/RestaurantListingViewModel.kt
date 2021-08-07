@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.fooddeliveryapp.model.ApiRepository
-import com.example.fooddeliveryapp.model.entity.Restaurant
+import com.example.fooddeliveryapp.model.entity.restaurantlisting.RestaurantResponse
 import com.example.fooddeliveryapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,8 +15,11 @@ class RestaurantListingViewModel @Inject constructor(
     private var apiRepository: ApiRepository
 ) : ViewModel() {
 
-    fun getResponse(): LiveData<Resource<List<Restaurant>>> =
-        apiRepository.getRestaurant()
+    fun getRestaurants(): LiveData<Resource<RestaurantResponse>> =
+        apiRepository.getRestaurants()
+
+    fun getRestaurantByCuisine(cuisine : String): LiveData<Resource<RestaurantResponse>> =
+        apiRepository.getRestaurantByCuisine(cuisine)
 
 
 }

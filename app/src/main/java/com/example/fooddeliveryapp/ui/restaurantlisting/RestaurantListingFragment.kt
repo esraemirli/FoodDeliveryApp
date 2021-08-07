@@ -2,32 +2,28 @@ package com.example.fooddeliveryapp.ui.restaurantlisting
 
 import android.app.ActionBar.*
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantListingBinding
 import com.example.fooddeliveryapp.model.entity.Restaurant
+import com.example.fooddeliveryapp.utils.Resource
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class RestaurantListingFragment : Fragment() {
-    private lateinit var binding: FragmentRestaurantListingBinding
+    private var binding: FragmentRestaurantListingBinding? = null
     private val viewModel: RestaurantListingViewModel by viewModels()
 
-    private lateinit var addRestaurant: AppCompatImageButton
-    private lateinit var restaurantListRecyclerView: RecyclerView
-    private lateinit var cuisineTypeLinearLayout: LinearLayout
     private var adapter = RestaurantListingAdapter()
     private var cuisineList: HashMap<String, MaterialButton> = hashMapOf()
 
@@ -36,41 +32,65 @@ class RestaurantListingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_restaurant_listing, container, false)
+        binding = FragmentRestaurantListingBinding.inflate(inflater, container,false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        restaurantListRecyclerView = view.findViewById(R.id.restaurantListRecyclerView)
-        cuisineTypeLinearLayout = view.findViewById(R.id.cuisineTypeLinearLayout)
-        addRestaurant = view.findViewById(R.id.addRestaurant)
-
-        restaurantListRecyclerView.layoutManager =
+        binding?.restaurantListRecyclerView?.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        initViews()
-        initObserver()
+        getRestaurants()
         addListener()
-        addCuisineTypes()
+    }
+
+    private fun getRestaurants() {
+        viewModel.getRestaurants().observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> {
+                    //TODO progress bar
+                    Log.v("RestaurantListing Load", response.message.toString())
+                }
+                Resource.Status.SUCCESS -> {
+                    response.data?.data?.let { restaurantList ->
+                        setRestaurants(restaurantList)
+                        setCuisineList(restaurantList.map { it.cuisine }.toList())
+                    }
+                }
+                else -> Log.v("RestaurantListing Fail", response.message.toString())
+            }
+        })
+    }
+
+    private fun setRestaurants(restaurantList: List<Restaurant>) {
+        adapter.setData(restaurantList)
+        binding?.restaurantListRecyclerView?.adapter = adapter
+    }
+
+    private fun setCuisineList(list: List<String>) {
+        val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        params.setMargins(0, 0, 80, 0)
+
+        list.forEachIndexed { index, item ->
+            val button = MaterialButton(requireContext(), null, R.attr.materialButtonOutlinedStyle)
+            button.text = item
+            button.layoutParams = params
+            button.isAllCaps = false
+            if(index == 0)
+               button.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
+            binding?.cuisineTypeLinearLayout?.addView(button)
+            cuisineList[item] = button
+        }
         addCuisineTypesListener()
     }
 
-    private fun initViews() {
-        viewModel.getResponse()
-    }
-
-    private fun initObserver() {
-//        viewModel.restaurantList.observe(viewLifecycleOwner, { restaurantList ->
-//            adapter.setData(restaurantList)
-//            restaurantListRecyclerView.adapter = adapter
-//        })
-    }
 
     private fun addListener() {
-        addRestaurant.setOnClickListener {
+        binding?.addRestaurant?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_restaurantAddFragment)
         }
-        adapter.addListener(object : RestaurantListingAdapterListener {
-            override fun onRestaurantClickListener(restaurant: Restaurant) {
+        adapter.addListener(object : IRestaurantOnClick {
+            override fun onClick(restaurant: Restaurant) {
                 //TODO bundle ile gönder..
                 findNavController().navigate(R.id.action_homeFragment_to_restaurantDetailFragment)
             }
@@ -78,9 +98,9 @@ class RestaurantListingFragment : Fragment() {
     }
 
     private fun addCuisineTypesListener() {
-        cuisineList.values.forEach { item ->
-            item.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
-            item.setOnClickListener {
+        cuisineList.forEach { item ->
+            item.value.setTextColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
+            item.value.setOnClickListener {
                 cuisineList.values.forEach { cuisine ->
                     cuisine.setTextColor(
                         ContextCompat.getColor(
@@ -89,24 +109,27 @@ class RestaurantListingFragment : Fragment() {
                         )
                     )
                 }
-                item.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
+                item.value.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
+                sendCuisineRequest(item.key)
             }
         }
     }
 
-    private fun addCuisineTypes() {
-        val list = listOf("Burger", "Pizza", "Tatlı", "İçecek", "Asya", "Uzak Doğu")
-        val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        params.setMargins(0, 0, 80, 0)
-
-        list.forEach { item ->
-            val button = MaterialButton(requireContext(), null, R.attr.materialButtonOutlinedStyle)
-            button.text = item
-            button.layoutParams = params
-            button.isAllCaps = false
-            cuisineTypeLinearLayout.addView(button)
-            cuisineList[item] = button
-        }
+    private fun sendCuisineRequest(cuisineName: String) {
+        viewModel.getRestaurantByCuisine(cuisineName).observe(viewLifecycleOwner,{ response ->
+            when (response.status) {
+                Resource.Status.LOADING -> {
+                    //TODO progress bar
+                    Log.v("RestaurantListing Load", response.message.toString())
+                }
+                Resource.Status.SUCCESS -> {
+                    response.data?.data?.let { restaurantList ->
+                        setRestaurants(restaurantList)
+                    }
+                }
+                else -> Log.v("RestaurantListing Fail", response.message.toString())
+            }
+        })
     }
 
 }

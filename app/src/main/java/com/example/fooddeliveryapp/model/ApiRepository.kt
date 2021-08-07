@@ -26,8 +26,13 @@ class ApiRepository @Inject constructor(
 //            remoteDataSource.postRegister(request = registerRequest)
 //        }
 
-    fun getRestaurant() =
+    fun getRestaurants() =
         performNetworkOperation {
             remoteDataSource.getRestaurants()
         }
+
+    fun getRestaurantByCuisine(cuisine : String) =
+        performNetworkOperation {
+        remoteDataSource.getRestaurantsByCuisine(cuisine)
+    }
 }

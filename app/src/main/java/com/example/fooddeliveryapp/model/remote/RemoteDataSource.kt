@@ -7,6 +7,7 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(private val apiService: APIService) : BaseDataSource() {
 
     suspend fun getRestaurants() = getResult { apiService.getRestaurants() }
+    suspend fun getRestaurantsByCuisine(cuisine : String) = getResult { apiService.getRestaurantsByCuisine(cuisine) }
 
     suspend fun postLogin(request: LoginRequest) = getResult {
         apiService.login(request)
