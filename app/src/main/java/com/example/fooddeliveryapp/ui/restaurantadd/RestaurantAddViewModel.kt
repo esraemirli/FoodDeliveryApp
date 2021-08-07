@@ -25,7 +25,7 @@ class RestaurantAddViewModel @Inject constructor(
         address: String,
         district: String,
         minDeliveryFee: String,
-        paymentMethods: MutableList<Any>,
+        paymentMethods: String,
         phone: String,
         website: String,
     ): LiveData<Resource<RestaurantAddResponse>> {

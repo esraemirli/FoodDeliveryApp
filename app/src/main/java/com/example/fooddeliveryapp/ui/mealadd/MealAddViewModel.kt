@@ -16,13 +16,14 @@ class MealAddViewModel @Inject constructor(
     private val apiRepository: ApiRepository
 ) : ViewModel() {
 
-    fun addMeal (
-        restaurantId : String,
-      name : String,
-      imageUrl : String,
-      price : String
-    ) : LiveData<Resource<MealAddResponse>> {
-        val request = MealAddRequest(name, imageUrl, price)
+    fun addMeal(
+        restaurantId: String,
+        name: String,
+        imageUrl: String,
+        price: String,
+        ingredients: List<String>
+    ): LiveData<Resource<MealAddResponse>> {
+        val request = MealAddRequest(name, imageUrl, price, ingredients)
         return apiRepository.postMeal(restaurantId, request)
     }
 

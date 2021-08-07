@@ -14,9 +14,11 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentMealAddBinding
 import com.example.fooddeliveryapp.model.entity.Ingredient
+import com.example.fooddeliveryapp.ui.restaurantadd.RestaurantAddFragment
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
@@ -26,15 +28,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MealAddFragment : Fragment() {
-
+    private val args : MealAddFragmentArgs by navArgs()
     private lateinit var _binding : FragmentMealAddBinding
     private val viewModel : MealAddViewModel by viewModels()
 
     private lateinit var ingredientsList: MutableList<Ingredient>
     private lateinit var ingredientAdapter: IngredientRecyclerViewAdapter
     private lateinit var layoutManager: FlexboxLayoutManager
-
-    private lateinit var restaurantID : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,8 +54,6 @@ class MealAddFragment : Fragment() {
             setHomeAsUpIndicator(R.drawable.ic_back)
             setDisplayHomeAsUpEnabled(true)
         }
-
-        // TODO : set restaurantID (From restaurant page)
 
         initializeRecyclerView()
         addListeners()
@@ -108,27 +106,30 @@ class MealAddFragment : Fragment() {
     }
 
     private fun addMeal() {
-        // TODO : Post Meal and return RestaurantDetail?
+        // TODO : return where :))))
 
+        val ingredients : MutableList<String> = mutableListOf()
         val name = _binding.mealNameEditText.editText?.text.toString()
         val price = _binding.mealPriceEditText.editText?.text.toString()
         val imageUrl = "Image URL :)"
-        //val imageUrl = _binding.addRestaurantImageView
 
-        Log.i(MealAddFragment::class.java.name, "Restaurant: \n" + name + "\n"
-                                                                    + imageUrl + "\n"
-                                                                    + price)
+        ingredientsList.forEach {
+            ingredients.add(it.ingredient)
+        }
 
-        viewModel.addMeal(restaurantID, name, imageUrl, price)
+        viewModel.addMeal(args.restaurantId, name, imageUrl, price, ingredients)
             .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
+                        Log.i(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.show()
                     }
                     Resource.Status.SUCCESS -> {
+                        Log.i(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
                     }
                     Resource.Status.ERROR -> {
+                        Log.e(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
                     }
                 }
