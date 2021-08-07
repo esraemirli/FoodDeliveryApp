@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background_color">
@@ -16,9 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:background="@null"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
+            android:background="@null"
             android:src="@drawable/ic_add" />
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif-black"
-            android:text="@string/restautant_listing_title"
+            android:text="@string/restaurant_listing_title"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -36,9 +37,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/search_bar"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/search_bar"
             app:cardCornerRadius="15dp">
 
             <LinearLayout
@@ -50,11 +51,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/search_view_text"
+                    android:hint="@string/search_view_text"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -80,11 +81,45 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/restaurantListRecyclerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/restaurantListRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/responseErrorLinearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:src="@drawable/response_not_found"
+                android:scaleType="centerCrop"
+                android:layout_width="250dp"
+                android:layout_height="200dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:text="@string/response_not_found" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
 
     </LinearLayout>
 

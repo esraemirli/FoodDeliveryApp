@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">FoodDeliveryApp</string>
-    <string name="restautant_listing_title">Delicious\nfood for you</string>
+
+    <!--Restaurant listing screen strings -->
+    <string name="restaurant_listing_title">Delicious\nfood for you</string>
     <string name="search_view_text">Search</string>
+    <string name="all_restaurants">All</string>
 
     <!--Add restaurant screen strings -->
     <string name="restaurant_title">Restaurant</string>
@@ -161,4 +164,5 @@
     <string name="sign_up">Sign-up</string>
     <string name="enjoy_your_meal">ENJOY YOUR MEAL</string>
     <string name="enjoy_image">Enjoy Image</string>
+    <string name="response_not_found">Ups!… No results found</string>
 </resources>
