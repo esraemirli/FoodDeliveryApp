@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.model
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddRequest
+import com.example.fooddeliveryapp.model.entity.register.RegisterRequest
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddRequest
 import com.example.fooddeliveryapp.model.local.LocalDataSource
 import com.example.fooddeliveryapp.model.remote.AuthRemoteDataSource
@@ -19,6 +20,15 @@ class ApiRepository @Inject constructor(
     fun login(request: LoginRequest) = performAuthTokenNetworkOperation(
         call = {
             remoteDataSource.postLogin(request)
+        },
+        saveToken = {
+            localDataSource.saveToken(it)
+        }
+    )
+
+    fun register(request: RegisterRequest) = performAuthTokenNetworkOperation(
+        call = {
+            remoteDataSource.postRegister(request)
         },
         saveToken = {
             localDataSource.saveToken(it)

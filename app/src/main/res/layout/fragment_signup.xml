@@ -5,7 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginEmailTextView"
+
+        android:id="@+id/registerNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
+            android:layout_marginHorizontal="50sp"
+            android:background="#E8E8E8"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:hint="@string/name"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/registerEmailTextView"
+        android:layout_below="@+id/registerNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -21,8 +42,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginPasswordTextView"
-        android:layout_below="@id/loginEmailTextView"
+        android:id="@+id/registerPasswordTextView"
+        android:layout_below="@+id/registerEmailTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:endIconMode="password_toggle"
@@ -39,32 +60,23 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
 
-        android:id="@+id/loginConfirmPasswordTextView"
-        android:layout_below="@id/loginPasswordTextView"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/registerAnimation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:endIconMode="password_toggle"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30sp"
-            android:layout_marginHorizontal="50sp"
-            android:background="#E8E8E8"
-            android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:hint="@string/confirm_password"
-
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_repeatCount="0" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="24sp"
         android:layout_marginHorizontal="50sp"

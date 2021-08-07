@@ -33,5 +33,13 @@ object SharedPreferencesModule {
         return sharedPreferences?.getString(key, defaultVal) ?: ""
     }
 
+    fun onboardingSeen(key: String, value: Boolean){
+        sharedPreferences?.let {
+            val editor = it.edit()
+            editor.putBoolean(key, value)
+            editor.apply()
+        }
+    }
+
 
 }
