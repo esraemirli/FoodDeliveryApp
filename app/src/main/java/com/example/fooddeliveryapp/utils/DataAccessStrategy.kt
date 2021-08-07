@@ -36,6 +36,9 @@ fun <T> performAuthTokenNetworkOperation(
             if (data is LoginResponse) {
                 saveToken(data.token)
             }
+            if(data is RegisterResponse){
+                saveToken(data.token)
+            }
             emit(Resource.success(data))
         } else if (networkCall.status == Resource.Status.ERROR) {
             emit(
@@ -47,26 +50,3 @@ fun <T> performAuthTokenNetworkOperation(
     }
 }
 
-//fun <T> performRegisterTokenNetworkOperation(
-//    call: suspend () -> Resource<T>,
-//    saveToken: (token: String) -> Unit,
-//): LiveData<Resource<T>> {
-//    return liveData(Dispatchers.IO) {
-//        emit(Resource.loading())
-//        val networkCall = call.invoke()
-//        if (networkCall.status == Resource.Status.SUCCESS) {
-//            val data = networkCall.data!!
-//
-//            if (data is RegisterResponse) {
-//                saveToken(data.token)
-//            }
-//            emit(Resource.success(data))
-//        } else if (networkCall.status == Resource.Status.ERROR) {
-//            emit(
-//                Resource.error(
-//                    "Error: ${networkCall.message}"
-//                )
-//            )
-//        }
-//    }
-//}
