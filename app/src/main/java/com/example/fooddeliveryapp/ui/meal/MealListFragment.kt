@@ -12,7 +12,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MealListFragment : Fragment(), IMealOnClick {
+class MealListFragment(
+    private val mealList: ArrayList<Meal>
+) : Fragment(), IMealOnClick {
     private var adapter: MealsListAdapter = MealsListAdapter()
     private lateinit var _binding: FragmentMealsListBinding
 
@@ -28,30 +30,16 @@ class MealListFragment : Fragment(), IMealOnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             _binding.mealsListRecyclerView.layoutManager = LinearLayoutManager(context)
+        adapter.setMealList(mealList)
         adapter.addListener(this)
         _binding.mealsListRecyclerView.adapter = adapter
-        setData()
     }
 
-    private fun setData() {
-//        val data = ArrayList<Meal>() //       for (i in 0..10) {
-//            data.add(
-//                Meal(
-//                    "https://via.placeholder.com/150",
-//                    "Title - $i",
-//                    listOf(
-//                        Ingredient("Tomato", true),
-//                        Ingredient("Pepper",true),
-//                        Ingredient("Onion", true),
-//                    )
-//                )
-//            )
-        }
+
 
     override fun onClick(meal: Meal) {
         TODO("Not yet implemented")
     }
-    //adapter.setMealList(data)
 
 
 

@@ -10,18 +10,23 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailBinding
+import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RestaurantDetailsFragment : Fragment() {
+    private val args: RestaurantDetailsFragmentArgs by navArgs()
     private lateinit var _binding: FragmentRestaurantDetailBinding
     private val viewModel: RestaurantDetailsViewModel by viewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,20 +39,47 @@ class RestaurantDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewPager()
+        initViews()
         initListener()
     }
 
+    private fun initViews() {
+        viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner,{
+                Log.v("Restaurant", it.data.toString())
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    _binding.progressBar.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    _binding.progressBar.gone()
+                    val adapter = RestaurantDetailViewPagerAdapter(requireActivity(),it.data!!.data)
+
+                    initViewPager(adapter)
+
+                    //_binding.homeTextView.text = "Count: ${it.data?.characters?.size}
+
+                }
+                Resource.Status.ERROR -> {
+                    _binding.progressBar.gone()
+                    //_binding.homeTextView.setTextColor(resources.getColor(R.color.red))
+                    //_binding.homeTextView.text = "Error: ${it?.message}"
+                }
+            }
+        })
+    }
+
     private fun initListener() {
+        _binding.backButton.setOnClickListener{
+
+        }
         _binding.addButton.setOnClickListener {
             findNavController().navigate(R.id.action_restaurantDetailFragment_to_foodAddFragment)
         }
     }
 
 
-    private fun initViewPager() {
-        val adapter = RestaurantDetailViewPagerAdapter(requireActivity())
-            _binding.restaurantDetailViewPager.adapter = adapter
+    private fun initViewPager(adapter: RestaurantDetailViewPagerAdapter) {
+        _binding.restaurantDetailViewPager.adapter = adapter
         TabLayoutMediator(_binding.restaurantDetailTabLayout, _binding.restaurantDetailViewPager) { tab, position ->
             if (position == 0) {
                 tab.text = "Details"

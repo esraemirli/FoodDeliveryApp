@@ -4,8 +4,8 @@ import com.example.fooddeliveryapp.model.entity.Meal
 import com.google.gson.annotations.SerializedName
 
 data class Restaurant(
-    @SerializedName("id")
-    val id: Int,
+    @SerializedName("_id")
+    val id: String,
     @SerializedName("deliveryInfo")
     val deliveryInfo: String,
     @SerializedName("deliveryTime")
@@ -17,9 +17,9 @@ data class Restaurant(
     @SerializedName("district")
     val district: String,
     @SerializedName("meals")
-    val meals: List<Meal>,
+    val meals: ArrayList<Meal>,
     @SerializedName("minimumDeliveryFee")
-    val minimumDeliveryFee: Double,
+    val minimumDeliveryFee: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("paymentMethods")

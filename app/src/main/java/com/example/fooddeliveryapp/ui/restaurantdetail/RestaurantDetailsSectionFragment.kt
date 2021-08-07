@@ -6,16 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.fooddeliveryapp.R
+import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailBinding
+import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailsSectionBinding
+import com.example.fooddeliveryapp.model.entity.restaurant.Restaurant
 
 
-class RestaurantDetailsSectionFragment : Fragment() {
+class RestaurantDetailsSectionFragment(var restaurant: Restaurant) : Fragment() {
+    private lateinit var _binding: FragmentRestaurantDetailsSectionBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_restaurant_details_section, container, false)
+    ): View {
+        _binding = FragmentRestaurantDetailsSectionBinding.inflate(inflater, container, false)
+        return _binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setData()
+    }
+
+    fun setData(){
+        _binding.deliveryInfoTextView.text = restaurant.deliveryInfo
+        _binding.deliveryTimeTextView.text = restaurant.deliveryTime
+        _binding.minimumDeliveryFeeTextView.text = restaurant.minimumDeliveryFee
+        _binding.paymentTextView.text = restaurant.paymentMethods
     }
 
 }

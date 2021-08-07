@@ -9,9 +9,9 @@ data class Meal(
     @SerializedName("image")
     val image: String,
     @SerializedName("ingredients")
-    val ingredients: List<Ingredient>,
+    val ingredients: List<String>,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")
-    val price: Double
+    val price: String
 )
