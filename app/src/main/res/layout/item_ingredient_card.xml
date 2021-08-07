@@ -4,11 +4,13 @@
     android:id="@+id/ingredientLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     app:cardCornerRadius="5dp">
 
     <TextView
         android:id="@+id/ingredientNameTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
 
 </androidx.cardview.widget.CardView>

@@ -26,7 +26,7 @@
             app:destination="@id/mealDetailsFragment" />
         <action
             android:id="@+id/action_restaurantDetailFragment_to_foodAddFragment"
-            app:destination="@id/foodAddFragment" />
+            app:destination="@id/mealAddFragment" />
         <argument
             android:name="restaurantId"
             app:argType="string" />
@@ -53,9 +53,13 @@
         android:label="RestaurantAddFragment" />
 
     <fragment
-        android:id="@+id/foodAddFragment"
+        android:id="@+id/mealAddFragment"
         android:name="com.example.fooddeliveryapp.ui.mealadd.MealAddFragment"
-        android:label="FoodAddFragment" />
+        android:label="MealAddFragment" >
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/settingFragment"

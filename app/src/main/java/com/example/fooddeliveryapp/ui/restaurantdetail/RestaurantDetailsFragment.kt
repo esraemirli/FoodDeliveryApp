@@ -73,7 +73,8 @@ class RestaurantDetailsFragment : Fragment() {
 
         }
         _binding.addButton.setOnClickListener {
-            findNavController().navigate(R.id.action_restaurantDetailFragment_to_foodAddFragment)
+            val action = RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToFoodAddFragment(args.restaurantId)
+            findNavController().navigate(action)
         }
     }
 

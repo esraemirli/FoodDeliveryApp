@@ -8,5 +8,7 @@ data class MealAddRequest(
     @SerializedName("imageUrl")
     val imageUrl: String,
     @SerializedName("price")
-    val price: String
+    val price: String,
+    @SerializedName("ingredients")
+    val ingredients: List<String>
 )

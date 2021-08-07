@@ -159,22 +159,11 @@ class RestaurantAddFragment : Fragment() {
         val address = _binding.restaurantAddressEditText.editText?.text.toString()
         val district = _binding.citySpinner.selectedItem.toString()
         val minDeliveryFee = _binding.restaurantDeliveryFeeEditText.text.toString()
-        val paymentMethods = _binding.multiSelectionSpinner.selectedItems
+        val paymentMethods = _binding.multiSelectionSpinner.selectedItems.joinToString("-")
         val phone = _binding.restaurantPhoneEditText.editText?.text.toString()
         val website = _binding.restaurantWebsiteEditText.editText?.text.toString()
         val imageUrl = "Image URL :)"
         //val imageUrl = _binding.addRestaurantImageView
-
-        Log.i(RestaurantAddFragment::class.java.name, "Restaurant: \n" + name + "\n"
-                                                                         + cuisine + "\n"
-                                                                         + deliveryInfo + "\n"
-                                                                         + deliveryTime + "\n"
-                                                                         + address + "\n"
-                                                                         + district + "\n"
-                                                                         + minDeliveryFee + "\n"
-                                                                         + paymentMethods + "\n"
-                                                                         + phone + "\n"
-                                                                         + website)
 
         viewModel.addRestaurant(name, cuisine,deliveryInfo, deliveryTime,
             imageUrl,address, district, minDeliveryFee, paymentMethods, phone, website)
@@ -185,11 +174,13 @@ class RestaurantAddFragment : Fragment() {
                     }
                     Resource.Status.SUCCESS -> {
                         _binding.progressBar.gone()
+                        Log.i(RestaurantAddFragment::class.java.name, "POST Restaurant Success")
                         //TODO : navigate to restaurant detail screen?
                     }
                     Resource.Status.ERROR -> {
                         _binding.progressBar.gone()
-                        //TODO : navigate where?
+                        Log.e(RestaurantAddFragment::class.java.name, "POST Restaurant ERROR!")
+                        //TODO : navigate where :)
                     }
                 }
             })
