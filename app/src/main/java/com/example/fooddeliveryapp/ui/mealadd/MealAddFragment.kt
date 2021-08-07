@@ -18,6 +18,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentMealAddBinding
 import com.example.fooddeliveryapp.model.entity.Ingredient
+import com.example.fooddeliveryapp.ui.restaurantadd.RestaurantAddFragment
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
@@ -120,15 +121,16 @@ class MealAddFragment : Fragment() {
             .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
+                        Log.i(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.show()
                     }
                     Resource.Status.SUCCESS -> {
+                        Log.i(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        Log.i(MealAddFragment::class.java.name, "POST Meal Success")
                     }
                     Resource.Status.ERROR -> {
+                        Log.e(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        Log.e(MealAddFragment::class.java.name, "POST Meal ERROR")
                     }
                 }
             })

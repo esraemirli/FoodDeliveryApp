@@ -100,15 +100,6 @@ class RestaurantAddFragment : Fragment() {
     private fun initializePaymentMethodsSpinner() {
        val paymentMethods = resources.getStringArray(R.array.RestaurantPaymentMethods).toList()
         _binding.multiSelectionSpinner.items = paymentMethods
-
-        _binding.multiSelectionSpinner.setOnItemSelectedListener(object : MultiSelectionSpinner.OnItemSelectedListener {
-            override fun onItemSelected(view: View, isSelected: Boolean, position: Int) {
-                Toast.makeText(activity, "Selected item : " + paymentMethods[position], Toast.LENGTH_SHORT).show()
-            }
-            override fun onSelectionCleared() {
-                Toast.makeText(activity, "Selection cleared!", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
     private fun addRestaurantImage() {
@@ -170,16 +161,17 @@ class RestaurantAddFragment : Fragment() {
             .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
+                        Log.i(RestaurantAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.show()
                     }
                     Resource.Status.SUCCESS -> {
+                        Log.i(RestaurantAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        Log.i(RestaurantAddFragment::class.java.name, "POST Restaurant Success")
                         //TODO : navigate to restaurant detail screen?
                     }
                     Resource.Status.ERROR -> {
+                        Log.e(RestaurantAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        Log.e(RestaurantAddFragment::class.java.name, "POST Restaurant ERROR!")
                         //TODO : navigate where :)
                     }
                 }
