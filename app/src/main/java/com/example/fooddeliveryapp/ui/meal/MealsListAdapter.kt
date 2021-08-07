@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.model.entity.meal.Meal
 
@@ -17,7 +19,8 @@ class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHold
 
     class MealsListViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         //TODO add image view dynamic url glide
-        val mealImageView: ImageView = view.findViewById(R.id.mealImageView)
+
+        private val mealImageView: ImageView = view.findViewById(R.id.mealImageView)
         private val mealTitleTextView: TextView = view.findViewById(R.id.mealTitleTextView)
         private val mealDescriptionTextView: TextView =
             view.findViewById(R.id.mealDescriptionTextView)
@@ -25,10 +28,14 @@ class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHold
         private val mealCardView: CardView = view.findViewById(R.id.mealCardView)
 
         fun setMeal(meal: Meal, listener: IMealOnClick?) {
-            // mealImageView.setImageURI(meal.imageUrl.toUri())
+
+            val options = RequestOptions().placeholder(R.drawable.no_data)
+            Glide.with(mealImageView.context)
+                .applyDefaultRequestOptions(options)
+                .load(meal.image).into(mealImageView)
             mealTitleTextView.text = meal.name
             mealDescriptionTextView.text = meal.description
-            mealPriceTextView.text = meal.price.toString() + " $"
+            mealPriceTextView.text = meal.price + " $"
             mealCardView.setOnClickListener {
                 listener?.onClick(meal)
             }
