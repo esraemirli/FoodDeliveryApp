@@ -56,9 +56,11 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
 
     override fun getItemCount(): Int = restaurantList.size
 
-    fun setData(restaurantList: List<Restaurant>) {
-        this.restaurantList = restaurantList
-        notifyDataSetChanged()
+    fun setData(restaurantList: List<Restaurant>?) {
+        restaurantList?.let {
+            this.restaurantList = restaurantList
+            notifyDataSetChanged()
+        }
     }
 
     fun addListener(listener: IRestaurantOnClick?) {
