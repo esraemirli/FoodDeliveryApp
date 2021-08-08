@@ -34,7 +34,8 @@ class RestaurantAddFragment : Fragment() {
 
     private lateinit var _binding : FragmentRestaurantAddBinding
     private val viewModel : RestaurantAddViewModel by viewModels()
-    private lateinit var imageUrl : String
+
+    private var selectedImage : Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -157,8 +158,8 @@ class RestaurantAddFragment : Fragment() {
         val website = _binding.restaurantWebsiteEditText.editText?.text.toString()
 
         viewModel.addRestaurant(name, cuisine,deliveryInfo, deliveryTime,
-            imageUrl,address, district, minDeliveryFee, paymentMethods, phone, website)
-            .observe(viewLifecycleOwner, {
+            selectedImage,address, district, minDeliveryFee, paymentMethods, phone, website)
+            ?.observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         Log.i(RestaurantAddFragment::class.java.name, it.message.toString())
@@ -182,14 +183,14 @@ class RestaurantAddFragment : Fragment() {
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val selectedImage: Uri = result.data?.data!!
+                selectedImage = result.data?.data!!
                 Glide.with(requireContext())
                     .load(selectedImage)
                     .fitCenter()
                     .into(_binding.addRestaurantImageView)
 
                 //TODO : If image couldn't uploaded??
-                imageUrl = viewModel.uploadImage(selectedImage)
+                //imageUrl = viewModel.uploadImage(selectedImage)
 
             }
         }
