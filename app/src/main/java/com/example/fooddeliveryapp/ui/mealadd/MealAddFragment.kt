@@ -14,16 +14,16 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentMealAddBinding
 import com.example.fooddeliveryapp.model.entity.Ingredient
-import com.example.fooddeliveryapp.ui.restaurantadd.RestaurantAddFragment
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
 import com.google.android.flexbox.*
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -103,11 +103,10 @@ class MealAddFragment : Fragment() {
     private fun addFoodIngredient() {
         ingredientsList.add(Ingredient(_binding.mealIngredientsEditText.text.toString(), true))
         ingredientAdapter.notifyDataSetChanged()
+        _binding.mealIngredientsEditText.text!!.clear()
     }
 
     private fun addMeal() {
-        // TODO : return where :))))
-
         val ingredients : MutableList<String> = mutableListOf()
         val name = _binding.mealNameEditText.editText?.text.toString()
         val price = _binding.mealPriceEditText.editText?.text.toString()
@@ -127,10 +126,13 @@ class MealAddFragment : Fragment() {
                     Resource.Status.SUCCESS -> {
                         Log.i(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
+                        val action = MealAddFragmentDirections.actionMealAddFragmentToRestaurantDetailFragment(it.data!!.message.restaurant)
+                        findNavController().navigate(action)
                     }
                     Resource.Status.ERROR -> {
                         Log.e(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
+                        // TODO : error response doesn't have data, restaurant will be null. Return home page?
                     }
                 }
             })
@@ -140,7 +142,7 @@ class MealAddFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImage: Uri = result.data?.data!!
-                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addMealImageView)
+                Glide.with(requireContext()).load(selectedImage).fitCenter().into(_binding.addMealImageView)
             }
         }
 }
