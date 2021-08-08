@@ -100,4 +100,7 @@ dependencies {
     //Multiselect Spinner
     implementation 'com.github.zeeshan5422:Material-MultiSelection-Spinner:1.0'
 
+    //JWT Decode
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
+
 }
