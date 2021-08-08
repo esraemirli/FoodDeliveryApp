@@ -56,7 +56,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/addMealImageView"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_food_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -76,7 +76,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mealNameEditText"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_food_price">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -99,7 +99,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mealPriceEditText"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_restaurant_address">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -121,7 +121,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mealDescriptionLayout"
-                app:layout_constraintWidth_percent="0.75">
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/mealIngredientsEditTextLayout"
@@ -161,7 +161,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mealIngredientsLayout"
-                app:layout_constraintWidth_percent="0.75" />
+                app:layout_constraintWidth_percent="0.9" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addMealButton"

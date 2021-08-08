@@ -165,4 +165,5 @@
     <string name="enjoy_image">Enjoy Image</string>
     <string name="response_not_found">Ups!… No results found</string>
     <string name="name">Name</string>
+    <string name="log_out">Log Out</string>
 </resources>

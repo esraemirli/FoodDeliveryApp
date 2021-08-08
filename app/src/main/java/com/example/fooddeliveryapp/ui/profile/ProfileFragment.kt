@@ -1,19 +1,29 @@
 package com.example.fooddeliveryapp.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentProfileBinding
+import com.example.fooddeliveryapp.ui.MainActivity
+import com.example.fooddeliveryapp.ui.order.OrderFragmentViewModel
 import com.example.fooddeliveryapp.ui.setting.SettingFragment
+import com.example.fooddeliveryapp.ui.splash.SplashActivity
+import com.example.fooddeliveryapp.utils.Resource
+import dagger.hilt.android.AndroidEntryPoint
+
 //import com.example.fooddeliveryapp.utils.SharedPreferencesModule
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private var binding: FragmentProfileBinding? = null
+    private val viewModel: ProfileFragmentViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +43,41 @@ class ProfileFragment : Fragment() {
         //SharedPreferencesModule.initSharedPreferences(requireActivity().baseContext)
         initViews()
         addListeners()
+        getProfile()
+    }
+
+    private fun getProfile() {
+        viewModel.getLogin().observe(viewLifecycleOwner,{response ->
+
+            when(response.status)
+            {
+                Resource.Status.LOADING ->
+                {
+
+                }
+                Resource.Status.SUCCESS ->
+                {
+                    response.data?.let {
+                        // TODO UI
+                    var profileEmail = it.loginData.email
+                    var profileName = it.loginData.name
+                    var profileRole = it.loginData.role
+                    }
+
+                }
+
+                Resource.Status.ERROR ->
+                {
+                    println("${response.message}")
+                }
+            }
+
+
+
+
+        })
+
+
     }
 
     private fun initViews() {
@@ -52,6 +97,12 @@ class ProfileFragment : Fragment() {
     private fun addListeners() {
         binding?.profileChange?.setOnClickListener {
             navigateToSetting()
+        }
+        binding?.logOutCardView?.setOnClickListener{
+            viewModel.logOut()
+            val intent = Intent(context, SplashActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
