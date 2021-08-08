@@ -51,7 +51,11 @@
     <fragment
         android:id="@+id/restaurantAddFragment"
         android:name="com.example.fooddeliveryapp.ui.restaurantadd.RestaurantAddFragment"
-        android:label="RestaurantAddFragment" />
+        android:label="RestaurantAddFragment" >
+        <action
+            android:id="@+id/action_restaurantAddFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/mealAddFragment"
@@ -60,6 +64,9 @@
         <argument
             android:name="restaurantId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_mealAddFragment_to_restaurantDetailFragment"
+            app:destination="@id/restaurantDetailFragment" />
     </fragment>
 
     <fragment

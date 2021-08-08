@@ -17,12 +17,13 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantAddBinding
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
-import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 import com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner
@@ -33,6 +34,7 @@ class RestaurantAddFragment : Fragment() {
 
     private lateinit var _binding : FragmentRestaurantAddBinding
     private val viewModel : RestaurantAddViewModel by viewModels()
+    private lateinit var imageUrl : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -153,8 +155,6 @@ class RestaurantAddFragment : Fragment() {
         val paymentMethods = _binding.multiSelectionSpinner.selectedItems.joinToString("-")
         val phone = _binding.restaurantPhoneEditText.editText?.text.toString()
         val website = _binding.restaurantWebsiteEditText.editText?.text.toString()
-        val imageUrl = "Image URL :)"
-        //val imageUrl = _binding.addRestaurantImageView
 
         viewModel.addRestaurant(name, cuisine,deliveryInfo, deliveryTime,
             imageUrl,address, district, minDeliveryFee, paymentMethods, phone, website)
@@ -167,12 +167,13 @@ class RestaurantAddFragment : Fragment() {
                     Resource.Status.SUCCESS -> {
                         Log.i(RestaurantAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        //TODO : navigate to restaurant detail screen?
+                        findNavController().navigate(R.id.action_restaurantAddFragment_to_homeFragment)
                     }
                     Resource.Status.ERROR -> {
                         Log.e(RestaurantAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        //TODO : navigate where :)
+                        Toast.makeText(context, "Operation Failed", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.action_restaurantAddFragment_to_homeFragment)
                     }
                 }
             })
@@ -182,7 +183,14 @@ class RestaurantAddFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val selectedImage: Uri = result.data?.data!!
-                Picasso.get().load(selectedImage).fit().centerCrop().into(_binding.addRestaurantImageView)
+                Glide.with(requireContext())
+                    .load(selectedImage)
+                    .fitCenter()
+                    .into(_binding.addRestaurantImageView)
+
+                //TODO : If image couldn't uploaded??
+                imageUrl = viewModel.uploadImage(selectedImage)
+
             }
         }
 
