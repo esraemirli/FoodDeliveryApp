@@ -74,5 +74,8 @@ class ApiRepository @Inject constructor(
             authRemoteDataSource.getLogin()
         }
 
+    fun logOut() {
+        localDataSource.saveToken("")
+    }
 
 }

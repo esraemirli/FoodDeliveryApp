@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/chevron_left_foreground"></ImageView>
+        app:srcCompat="@mipmap/chevron_left_foreground"/>
 
     <TextView
         android:id="@+id/myProfileTextView"
@@ -155,35 +155,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ProfileCardView"
         app:layout_constraintVertical_bias="0.244">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="315dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="17dp"
-            app:cardCornerRadius="15dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="230dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="26dp"
-                    android:text="Orders"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@mipmap/chevron_right_foreground"></ImageView>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="315dp"
@@ -275,7 +247,40 @@
                     android:layout_width="48dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@mipmap/chevron_right_foreground"></ImageView>
+                    app:srcCompat="@mipmap/chevron_right_foreground"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/logOutCardView"
+            android:layout_width="315dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="17dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="26dp"
+                    android:text="@string/log_out"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@mipmap/chevron_right_foreground"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
