@@ -13,4 +13,8 @@ class AuthRemoteDataSource @Inject constructor(private val authAPIService: AuthA
     suspend fun postMeal(restaurantId : String,request: MealAddRequest) = getResult {
         authAPIService.postMeal(restaurantId, request)
     }
+
+    suspend fun getOrders() = getResult { authAPIService.getOrders() }
+
+    suspend fun getLogin() = getResult { authAPIService.getLogin() }
 }
