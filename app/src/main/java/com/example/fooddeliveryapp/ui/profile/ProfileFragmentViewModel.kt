@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.fooddeliveryapp.model.ApiRepository
+import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.model.entity.login.LoginResponse
 import com.example.fooddeliveryapp.model.entity.order.OrderResponse
 import com.example.fooddeliveryapp.utils.Resource
@@ -17,6 +18,6 @@ class ProfileFragmentViewModel @Inject constructor(
     private val apiRepository: ApiRepository
 ) : ViewModel() {
 
-    fun getLogin(): LiveData<Resource<LoginResponse>> =
-        apiRepository.getLogin()
+    fun getUser(): LiveData<Resource<User>> =
+        apiRepository.getUser()
 }

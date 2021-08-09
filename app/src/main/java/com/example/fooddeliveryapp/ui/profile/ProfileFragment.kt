@@ -42,7 +42,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getProfile() {
-        viewModel.getLogin().observe(viewLifecycleOwner,{response ->
+        viewModel.getUser().observe(viewLifecycleOwner,{response ->
 
             when(response.status)
             {
@@ -54,9 +54,9 @@ class ProfileFragment : Fragment() {
                 {
                     response.data?.let {
                         // TODO UI
-                    var profileEmail = it.loginData.email
-                    var profileName = it.loginData.name
-                    var profileRole = it.loginData.role
+                    var profileEmail = it.email
+                    var profileName = it.name
+                    var profileRole = it.address
                     }
 
                 }
