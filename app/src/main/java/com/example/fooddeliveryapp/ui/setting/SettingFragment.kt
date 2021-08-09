@@ -4,85 +4,51 @@ package com.example.fooddeliveryapp.ui.setting
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
-import com.example.fooddeliveryapp.ui.profile.ProfileFragment
-//import com.example.fooddeliveryapp.utils.SharedPreferencesModule
-
+import com.example.fooddeliveryapp.model.entity.User
 
 class SettingFragment : Fragment() {
-    private var binding: FragmentSettingsBinding? = null
+    private lateinit var _binding: FragmentSettingsBinding
+    private val viewModel: SettingViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //SharedPreferencesModule.unRegister()
+    ): View {
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //SharedPreferencesModule.initSharedPreferences(requireActivity().baseContext)
-
         initViews()
         addListeners()
     }
 
 
     private fun initViews() {
-//        val name = SharedPreferencesModule.getString("Name")
-//        val mail = SharedPreferencesModule.getString("Mail")
-//        val phone = SharedPreferencesModule.getString("Phone")
-//        val address = SharedPreferencesModule.getString("Address")
-//
-//
-//        binding?.editNameEditText?.setText(name)
-//        binding?.editMailEditText?.setText(mail)
-//        binding?.editPhoneNumberEditText?.setText(phone)
-//        binding?.editAddressEditText?.setText(address)
-//
-//        println("Name = $name")
-//        println("Mail = $mail")
-//        println("Phone = $phone")
-//        println("Address = $address")
-//        avatarChange()
+        viewModel.getUser()?.observe(viewLifecycleOwner, { user ->
+            _binding.nameEditText.setText(user.get().name)
+            _binding.mailEditText.setText(user.get().email)
+            _binding.phoneNumberEditText.setText(user.get().phone)
+            _binding.addressEditText.setText(user.get().address)
+            //TODO avatar / payment method
+        })
     }
 
     private fun addListeners() {
-        //avatarChange()
-        binding?.settingsUpdateButton?.setOnClickListener {
-
-            val name = binding?.editNameEditText?.text.toString()
-            val mail = binding?.editMailEditText?.text.toString()
-            val phone = binding?.editPhoneNumberEditText?.text.toString()
-            val address = binding?.editAddressEditText?.text.toString()
-
-//            SharedPreferencesModule.saveString("Name", name)
-//            SharedPreferencesModule.saveString("Mail", mail)
-//            SharedPreferencesModule.saveString("Phone", phone)
-//            SharedPreferencesModule.saveString("Address", address)
-
-            navigateToProfile()
-        }
-        binding?.settingsAddImageView?.setOnClickListener {
+        _binding.avatarConstraintLayout.setOnClickListener {
+            //TODO radio group aç...
 
             val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
             val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
@@ -135,54 +101,58 @@ class SettingFragment : Fragment() {
             }
 
             builder.show()
-
         }
+        _binding.updateButton.setOnClickListener {
+            //TODO ...
+            val name = _binding.nameEditText.text.toString()
+            val mail = _binding.mailEditText.text.toString()
+            val phone = _binding.phoneNumberEditText.text.toString()
+            val address = _binding.addressEditText.text.toString()
 
-
+            val user = User(name,mail,address,phone,"",1)
+            viewModel.updateUser(user)?.observe(viewLifecycleOwner, { response ->
+                if(response.get())
+                    findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
+                else
+                    Log.v("Setting", "Sorun oluştu")
+            })
+        }
     }
 
-    private fun navigateToProfile() {
-//        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
-//        val fragment = ProfileFragment()
-//        ft.replace(R.id.nav_host_fragment_container, fragment, "ProfileFragment")
-//        ft.commit()
-        findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
-    }
-
-//    private fun avatarChange() {
+    private fun avatarChange() {
 //        when (SharedPreferencesModule.getString("Avatar")) {
 //            "1" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
 //            }
 //            "2" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_2_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_2_foreground)
 //            }
 //            "3" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_3_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_3_foreground)
 //            }
 //            "4" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_4_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_4_foreground)
 //            }
 //            "5" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_5_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_5_foreground)
 //            }
 //            "6" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_6_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_6_foreground)
 //            }
 //            "7" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_7_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_7_foreground)
 //            }
 //            "8" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_8_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_8_foreground)
 //            }
 //            "9" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_9_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_9_foreground)
 //            }
 //            else -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
+//                _binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
 //            }
 //        }
-//    }
+    }
 
 }
 

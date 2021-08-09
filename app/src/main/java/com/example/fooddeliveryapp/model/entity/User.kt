@@ -9,4 +9,10 @@ data class User(
     val email: String,
     @SerializedName("address")
     val address: String,
+    @SerializedName("phone")
+    val phone: String,
+    @SerializedName("avatar")
+    val avatar: String,
+    @SerializedName("paymentCard")
+    val paymentCard: Int,
 )
