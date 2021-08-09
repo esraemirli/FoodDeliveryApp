@@ -22,12 +22,10 @@ interface AuthAPIService {
     @POST("a/restaurant/{restaurantId}/meal")
     suspend fun postMeal(@Path("restaurantId") restaurantId : String, @Body request: MealAddRequest) : Response<MealAddResponse>
 
+    @POST("a/order")
+    suspend fun postOrder(@Body request: OrderAddRequest) : Response<OrderAddResponse>
+
     @GET("a/order")
     suspend fun getOrders() : Response<OrderResponse>
 
-    @GET("auth/User")
-    suspend fun getUser(): Response<User>
-
-    @POST("a/order")
-    suspend fun postOrder(@Body request: OrderAddRequest) : Response<OrderAddResponse>
 }

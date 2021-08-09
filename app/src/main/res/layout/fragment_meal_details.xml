@@ -47,30 +47,46 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/ingredient1LinearLayout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ingredientsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintTop_toBottomOf="@id/mealNameTextView">
-
-        <CheckBox
-            android:id="@+id/ingredient1CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+        app:layout_constraintTop_toBottomOf="@id/mealNameTextView"
+        app:layout_constraintBottom_toTopOf="@id/totalLinearLayout"/>
+    <LinearLayout
+        android:id="@+id/totalLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/orderButton"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
         <TextView
-            android:id="@+id/ingredient1TextView"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            tools:text="Pepper"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:fontFamily="@font/montserrat"/>
+            android:text="@string/total"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="10 $"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/orange"
+
+            />
     </LinearLayout>
 
     <Button
+        android:id="@+id/orderButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -82,7 +98,8 @@
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

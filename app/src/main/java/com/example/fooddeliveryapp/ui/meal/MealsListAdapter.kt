@@ -56,7 +56,7 @@ class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHold
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealsListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.meal_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_meal, parent, false)
         return MealsListViewHolder(view)
     }
 

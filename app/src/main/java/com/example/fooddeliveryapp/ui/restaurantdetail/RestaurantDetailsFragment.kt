@@ -29,6 +29,7 @@ class RestaurantDetailsFragment : Fragment() {
     private val args: RestaurantDetailsFragmentArgs by navArgs()
     private lateinit var _binding: FragmentRestaurantDetailBinding
     private val viewModel: RestaurantDetailsViewModel by viewModels()
+    private var selectedTab: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +48,6 @@ class RestaurantDetailsFragment : Fragment() {
 
     private fun initViews() {
         viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner,{
-                Log.v("Restaurant", it.data.toString())
             when (it.status) {
                 Resource.Status.LOADING -> {
                     _binding.progressBar.show()
@@ -79,32 +79,26 @@ class RestaurantDetailsFragment : Fragment() {
 
     private fun initListener() {
         _binding.backButton.setOnClickListener{
-
+            findNavController().popBackStack()
         }
         _binding.addButton.setOnClickListener {
             val action = RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToFoodAddFragment(args.restaurantId)
             findNavController().navigate(action)
         }
-    }
-
-
-    private fun initViewPager(adapter: RestaurantDetailViewPagerAdapter) {
-        _binding.restaurantDetailViewPager.adapter = adapter
-        TabLayoutMediator(_binding.restaurantDetailTabLayout, _binding.restaurantDetailViewPager) { tab, position ->
-            if (position == 0) {
-                tab.text = "Details"
-            }
-            if (position == 1) {
-                tab.text = "Menu"
-            }
-        }.attach()
-
         _binding.restaurantDetailTabLayout.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                //TODO Bug! When back button pressed image visibility is gone but in screen it is not gone
-                if (tab?.position == 0) changeImageVisibility(true)
-                if (tab?.position == 1) changeImageVisibility(false)
+
+                if (tab?.position == 0) {
+                    changeImageVisibility(true)
+                    selectedTab = 0
+                }
+                if (tab?.position == 1) {
+                    changeImageVisibility(false)
+                    selectedTab = 1
+                }
+                Log.v("SelectedListener",_binding.restaurantDetailTabLayout.selectedTabPosition.toString())
+                Log.e("Visibility", _binding.restaurantImageView.visibility.toString())
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -117,6 +111,31 @@ class RestaurantDetailsFragment : Fragment() {
 
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.v("Resume",_binding.restaurantDetailTabLayout.selectedTabPosition.toString())
+
+        if (selectedTab == 0) changeImageVisibility(true)
+        else if(selectedTab == 1) changeImageVisibility(false)
+        else changeImageVisibility(true)
+    }
+
+
+    private fun initViewPager(adapter: RestaurantDetailViewPagerAdapter) {
+        _binding.restaurantDetailViewPager.adapter = adapter
+        TabLayoutMediator(_binding.restaurantDetailTabLayout, _binding.restaurantDetailViewPager) { tab, position ->
+            if (position == 0) {
+                tab.text = "Details"
+
+            }
+            if (position == 1) {
+                tab.text = "Menu"
+
+            }
+        }.attach()
+
     }
 
     private fun changeImageVisibility(visible: Boolean) {

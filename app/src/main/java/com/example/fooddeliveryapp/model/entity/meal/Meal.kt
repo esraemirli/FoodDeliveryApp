@@ -10,7 +10,7 @@ data class Meal(
     @SerializedName("imageUrl")
     val image: String,
     @SerializedName("ingredients")
-    val ingredients: List<String>,
+    val ingredients: ArrayList<String>,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")
