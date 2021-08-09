@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.fooddeliveryapp.model.ApiRepository
-import com.example.fooddeliveryapp.model.entity.User
+import com.example.fooddeliveryapp.model.entity.profile.UserResponse
 import com.example.fooddeliveryapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -19,6 +19,6 @@ class ProfileFragmentViewModel @Inject constructor(
         apiRepository.logOut()
     }
 
-    fun getUser(): LiveData<Resource<User>> =
-        apiRepository.getUser()
+    fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
+
 }

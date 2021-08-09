@@ -167,4 +167,9 @@
     <string name="name">Name</string>
     <string name="log_out">Log Out</string>
     <string name="total">Total:</string>
+    <string name="settings_title">Settings</string>
+    <string name="information_title">Information</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="update">Update</string>
+    <string name="save">Save</string>
 </resources>

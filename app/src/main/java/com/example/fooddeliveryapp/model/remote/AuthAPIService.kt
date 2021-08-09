@@ -6,13 +6,12 @@ import com.example.fooddeliveryapp.model.entity.mealadd.MealAddResponse
 import com.example.fooddeliveryapp.model.entity.order.OrderAddRequest
 import com.example.fooddeliveryapp.model.entity.order.OrderAddResponse
 import com.example.fooddeliveryapp.model.entity.order.OrderResponse
+import com.example.fooddeliveryapp.model.entity.profile.UserRequest
+import com.example.fooddeliveryapp.model.entity.profile.UserResponse
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddRequest
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AuthAPIService {
 
@@ -31,7 +30,10 @@ interface AuthAPIService {
     @GET("a/order")
     suspend fun getOrders(): Response<OrderResponse>
 
-    @GET("a/user")
-    suspend fun getUser(): Response<User>
+    @PUT("auth/updateDetails")
+    suspend fun updateUser(@Body request : UserRequest) : Response<User>
+
+    @GET("auth/profile")
+    suspend fun getUser() : Response<UserResponse>
 
 }

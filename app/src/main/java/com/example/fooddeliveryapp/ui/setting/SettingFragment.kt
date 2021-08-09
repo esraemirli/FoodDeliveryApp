@@ -1,6 +1,5 @@
 package com.example.fooddeliveryapp.ui.setting
 
-
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,180 +7,133 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
+import com.example.fooddeliveryapp.model.entity.User
+import com.example.fooddeliveryapp.model.entity.profile.UserRequest
+import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
+import dagger.hilt.android.AndroidEntryPoint
 
-//import com.example.fooddeliveryapp.utils.SharedPreferencesModule
-
-
+@AndroidEntryPoint
 class SettingFragment : Fragment() {
-    private var binding: FragmentSettingsBinding? = null
+    private lateinit var _binding: FragmentSettingsBinding
+    private val viewModel: SettingViewModel by viewModels()
+    private var imageUrl: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding?.root
+    ): View {
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return _binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //SharedPreferencesModule.unRegister()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //SharedPreferencesModule.initSharedPreferences(requireActivity().baseContext)
-
         initViews()
         addListeners()
     }
 
-
     private fun initViews() {
-//        val name = SharedPreferencesModule.getString("Name")
-//        val mail = SharedPreferencesModule.getString("Mail")
-//        val phone = SharedPreferencesModule.getString("Phone")
-//        val address = SharedPreferencesModule.getString("Address")
-//
-//
-//        binding?.editNameEditText?.setText(name)
-//        binding?.editMailEditText?.setText(mail)
-//        binding?.editPhoneNumberEditText?.setText(phone)
-//        binding?.editAddressEditText?.setText(address)
-//
-//        println("Name = $name")
-//        println("Mail = $mail")
-//        println("Phone = $phone")
-//        println("Address = $address")
-//        avatarChange()
+        viewModel.getUser().observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> {
+                    _binding.progressBar.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    setField(response.data?.user)
+                    isSettingVisible(true)
+                }
+                Resource.Status.ERROR -> {
+                    isSettingVisible(false)
+                }
+            }
+        })
+    }
+
+    private fun setField(user: User?) {
+        _binding.nameEditText.setText(user?.name)
+        _binding.mailEditText.setText(user?.email)
+        _binding.addressEditText.setText(user?.address)
+        imageUrl = user?.profileImage
+
+        val options = RequestOptions().placeholder(R.drawable.no_data)
+        Glide.with(_binding.avatarImageView.context)
+            .applyDefaultRequestOptions(options)
+            .load(imageUrl).into(_binding.avatarImageView)
     }
 
     private fun addListeners() {
-        //avatarChange()
-        binding?.settingsUpdateButton?.setOnClickListener {
-
-            val name = binding?.editNameEditText?.text.toString()
-            val mail = binding?.editMailEditText?.text.toString()
-            val phone = binding?.editPhoneNumberEditText?.text.toString()
-            val address = binding?.editAddressEditText?.text.toString()
-
-//            SharedPreferencesModule.saveString("Name", name)
-//            SharedPreferencesModule.saveString("Mail", mail)
-//            SharedPreferencesModule.saveString("Phone", phone)
-//            SharedPreferencesModule.saveString("Address", address)
-
-            navigateToProfile()
-        }
-        binding?.settingsAddImageView?.setOnClickListener {
-
-            val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
-            val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
-            //var avatarStatus: String = SharedPreferencesModule.getString("Avatar")
-            val builder = AlertDialog.Builder(it.context)
-            builder.setView(design)
-
-//            radioGroup.setOnCheckedChangeListener { _, _ ->
-//                when (radioGroup.checkedRadioButtonId) {
-//                    R.id.avatarRadioButton1 -> {
-//                        avatarStatus = "1"
-//                    }
-//                    R.id.avatarRadioButton2 -> {
-//                        avatarStatus = "2"
-//                    }
-//                    R.id.avatarRadioButton3 -> {
-//                        avatarStatus = "3"
-//                    }
-//                    R.id.avatarRadioButton4 -> {
-//                        avatarStatus = "4"
-//                    }
-//                    R.id.avatarRadioButton5 -> {
-//                        avatarStatus = "5"
-//                    }
-//                    R.id.avatarRadioButton6 -> {
-//                        avatarStatus = "6"
-//                    }
-//                    R.id.avatarRadioButton7 -> {
-//                        avatarStatus = "7"
-//                    }
-//                    R.id.avatarRadioButton8 -> {
-//                        avatarStatus = "8"
-//                    }
-//                    R.id.avatarRadioButton9 -> {
-//                        avatarStatus = "9"
-//                    }
-//                    else -> {
-//                        println("-1")
-//                    }
-//
-//                }
-//            }
-
-            builder.setPositiveButton("Save") { _: DialogInterface, _: Int ->
-
-//                SharedPreferencesModule.saveString("Avatar", avatarStatus)
-//                avatarChange()
-            }
-            builder.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
-            }
-
-            builder.show()
-
-        }
-
-
+        _binding.avatarConstraintLayout.setOnClickListener { changeAvatar(it) }
+        _binding.updateButton.setOnClickListener { updateUser() }
     }
 
-    private fun navigateToProfile() {
-//        val ft: FragmentTransaction = childFragmentManager.beginTransaction()
-//        val fragment = ProfileFragment()
-//        ft.replace(R.id.nav_host_fragment_container, fragment, "ProfileFragment")
-//        ft.commit()
-        findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
+    private fun changeAvatar(view: View) {
+        val design: View = layoutInflater.inflate(R.layout.item_avatar_select, null)
+        val radioGroup: RadioGroup = design.findViewById(R.id.avatarRadioGroup)
+        val builder = AlertDialog.Builder(view.context)
+        builder.setView(design)
+
+        radioGroup.check(viewModel.getAvatarId(imageUrl!!))
+        radioGroup.setOnCheckedChangeListener { _, _ ->
+            imageUrl = viewModel.getImageUrl(radioGroup.checkedRadioButtonId)
+        }
+        builder.setPositiveButton(getString(R.string.save)) { _: DialogInterface, _: Int ->
+            val options = RequestOptions().placeholder(R.drawable.no_data)
+            Glide.with(_binding.avatarImageView.context)
+                .applyDefaultRequestOptions(options)
+                .load(imageUrl).into(_binding.avatarImageView)
+        }
+        builder.show()
     }
 
-//    private fun avatarChange() {
-//        when (SharedPreferencesModule.getString("Avatar")) {
-//            "1" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
-//            }
-//            "2" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_2_foreground)
-//            }
-//            "3" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_3_foreground)
-//            }
-//            "4" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_4_foreground)
-//            }
-//            "5" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_5_foreground)
-//            }
-//            "6" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_6_foreground)
-//            }
-//            "7" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_7_foreground)
-//            }
-//            "8" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_8_foreground)
-//            }
-//            "9" -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_9_foreground)
-//            }
-//            else -> {
-//                binding?.settingsAvatarImageView?.setImageResource(R.mipmap.avatar_1_foreground)
-//            }
-//        }
-//    }
+    //TODO phone(String) ve paymentMethod(Int) servise eklenecek..
+    private fun updateUser() {
+        val name = _binding.nameEditText.text.toString()
+        val mail = _binding.mailEditText.text.toString()
+        val address = _binding.addressEditText.text.toString()
+
+        val user = UserRequest(mail, name, address, imageUrl)
+        viewModel.updateUser(user).observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> {
+                    _binding.progressBar.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
+                    isSettingVisible(true)
+                }
+                Resource.Status.ERROR -> {
+                    isSettingVisible(false)
+                    Toast.makeText(context, "Operation Failed", Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
+
+    private fun isSettingVisible(isVisible: Boolean) {
+        _binding.progressBar.gone()
+        _binding.container.isVisible = isVisible
+        if (isVisible.not()) {
+            AlertDialog.Builder(context)
+                .setTitle("Error")
+                .setMessage("There is a problem")
+                .setPositiveButton("Cancel") { _, _ ->
+                    //TODO geri dön
+                }.show()
+        }
+    }
 
 }
 

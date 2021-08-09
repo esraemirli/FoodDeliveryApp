@@ -1,253 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Settings"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Information"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/settingsAvatarImageView"
-                android:layout_width="91dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/avatar_1_foreground"></ImageView>
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/settingsAddImageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginBottom="68dp"
-                app:layout_constraintBottom_toBottomOf="@+id/settingsAvatarImageView"
-                app:layout_constraintStart_toStartOf="@+id/settingsAvatarImageView"
-                app:srcCompat="@mipmap/edit_image_foreground"></ImageView>
-
-            <EditText
-                android:id="@+id/editNameEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:text="Marvis Ighedosa"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <EditText
-                android:id="@+id/editMailEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1"
-                android:text="Dosamarvis@gmail.com"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
-                app:layout_constraintTop_toBottomOf="@+id/editNameEditText" />
-
-            <EditText
-                android:id="@+id/editPhoneNumberEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1"
-                android:text="+234 9011039271"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
-                app:layout_constraintTop_toBottomOf="@+id/editMailEditText" />
-
-            <EditText
-                android:id="@+id/editAddressEditText"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1"
-                android:text="No 15 uti street off ovie palace road effurun delta state"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/settingsAvatarImageView"
-                app:layout_constraintTop_toBottomOf="@+id/editPhoneNumberEditText" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/text3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="Payment Method"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text3">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioGroup
-                android:id="@+id/paymentRadioGroup"
-                android:layout_width="83dp"
-                android:layout_height="193dp"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <RadioButton
-                    android:id="@+id/cartRadio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Card"></RadioButton>
-
-                <RadioButton
-                    android:id="@+id/bankAccountRadio"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Bank \naccount"></RadioButton>
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/settings_title"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
 
-                <RadioButton
-                    android:id="@+id/paypalRadio"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="@string/information_title"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/themeSwitchButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:text="Dark Theme">
+
+                    </androidx.appcompat.widget.SwitchCompat>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/infoTitleTextView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/avatarConstraintLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/avatarImageView"
+                                android:layout_width="91dp"
+                                android:layout_height="100dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="60dp"
+                                android:layout_marginBottom="68dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
+                                app:layout_constraintStart_toStartOf="@+id/avatarImageView"
+                                app:srcCompat="@mipmap/edit_image_foreground" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/nameEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Marvis Ighedosa" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/mailEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
+                            app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+                            tools:text="Dosamarvis@gmail.com" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/phoneNumberEditText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
+                            app:layout_constraintTop_toBottomOf="@+id/mailEditText"
+                            tools:text="+234 9011039271" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/addressEditText"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
+                            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"
+                            tools:text="No 15 uti street off ovie palace road effurun delta state" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentMethodTitle">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RadioGroup
+                            android:id="@+id/paymentRadioGroup"
+                            android:layout_width="83dp"
+                            android:layout_height="193dp"
+                            android:layout_marginStart="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <RadioButton
+                                android:id="@+id/cartRadio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Card" />
+
+                            <RadioButton
+                                android:id="@+id/bankAccountRadio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="Bank \naccount" />
+
+                            <RadioButton
+                                android:id="@+id/paypalRadio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="Paypal" />
+                        </RadioGroup>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/bankCardImageView"
+                            android:layout_width="59dp"
+                            android:layout_height="54dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toEndOf="@+id/paymentRadioGroup"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/bank_card_foreground" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/creditCardImageView"
+                            android:layout_width="62dp"
+                            android:layout_height="38dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintStart_toEndOf="@+id/paymentRadioGroup"
+                            app:layout_constraintTop_toBottomOf="@+id/bankCardImageView"
+                            app:srcCompat="@mipmap/credit_card_foreground" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/paypalCardImageView"
+                            android:layout_width="62dp"
+                            android:layout_height="38dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="30dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/paymentRadioGroup"
+                            app:layout_constraintTop_toBottomOf="@+id/creditCardImageView"
+                            app:srcCompat="@mipmap/credit_card_foreground" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/updateButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Paypal"></RadioButton>
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/profile_button_background"
+                    android:text="@string/update"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
 
-            </RadioGroup>
+    </androidx.core.widget.NestedScrollView>
 
-            <ImageView
-                android:id="@+id/bankCardImageView"
-                android:layout_width="59dp"
-                android:layout_height="54dp"
-                android:layout_margin="10dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/paymentRadioGroup"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/bank_card_foreground"></ImageView>
-
-            <ImageView
-                android:id="@+id/creditCardImageView"
-                android:layout_width="62dp"
-                android:layout_height="38dp"
-                android:layout_margin="10dp"
-
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toEndOf="@+id/paymentRadioGroup"
-                app:layout_constraintTop_toBottomOf="@+id/bankCardImageView"
-                app:srcCompat="@mipmap/credit_card_foreground"></ImageView>
-
-            <ImageView
-                android:id="@+id/paypalCardImageView"
-                android:layout_width="62dp"
-                android:layout_height="38dp"
-                android:layout_margin="10dp"
-
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/paymentRadioGroup"
-                app:layout_constraintTop_toBottomOf="@+id/creditCardImageView"
-                app:srcCompat="@mipmap/credit_card_foreground"></ImageView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/settingsUpdateButton"
-        android:layout_width="314dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@drawable/profile_button_background"
-        android:text="Update"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"></androidx.appcompat.widget.AppCompatButton>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/themeSwitchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Dark Theme"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView">
-
-    </androidx.appcompat.widget.SwitchCompat>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
