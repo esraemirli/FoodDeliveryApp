@@ -1,7 +1,6 @@
 package com.example.fooddeliveryapp.model.remote
 
-import com.example.fooddeliveryapp.model.entity.login.LoginRequest
-import com.example.fooddeliveryapp.model.entity.login.LoginResponse
+import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddRequest
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddResponse
 import com.example.fooddeliveryapp.model.entity.order.OrderResponse
@@ -24,6 +23,6 @@ interface AuthAPIService {
     @GET("a/order")
     suspend fun getOrders() : Response<OrderResponse>
 
-    @GET("auth/login")
-    suspend fun getLogin(): Response<LoginResponse>
+    @GET("auth/User")
+    suspend fun getUser(): Response<User>
 }

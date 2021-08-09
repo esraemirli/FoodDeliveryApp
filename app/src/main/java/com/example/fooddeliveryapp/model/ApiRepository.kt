@@ -69,9 +69,9 @@ class ApiRepository @Inject constructor(
         performNetworkOperation {
             authRemoteDataSource.getOrders()
         }
-    fun getLogin() =
+    fun getUser() =
         performNetworkOperation {
-            authRemoteDataSource.getLogin()
+            authRemoteDataSource.getUser()
         }
 
     fun logOut() {
