@@ -159,7 +159,7 @@ class RestaurantAddFragment : Fragment() {
 
         viewModel.addRestaurant(name, cuisine,deliveryInfo, deliveryTime,
             selectedImage,address, district, minDeliveryFee, paymentMethods, phone, website)
-            ?.observe(viewLifecycleOwner, {
+            .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         Log.i(RestaurantAddFragment::class.java.name, it.message.toString())
