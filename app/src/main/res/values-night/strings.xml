@@ -5,4 +5,5 @@
     <string name="minimum_delivery_fee">Minimum Delivery Fee</string>
     <string name="payment">Payment</string>
     <string name="order_now_button">Order Now</string>
+    <string name="log_out">Log Out</string>
 </resources>

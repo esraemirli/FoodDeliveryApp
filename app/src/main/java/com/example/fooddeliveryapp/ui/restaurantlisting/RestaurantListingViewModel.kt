@@ -21,7 +21,6 @@ class RestaurantListingViewModel @Inject constructor(
     fun getRestaurants(): LiveData<Resource<RestaurantListResponse>> =
         apiRepository.getRestaurants()
 
-
     fun getRestaurantByCuisine(cuisine: String): LiveData<Resource<RestaurantListResponse>> =
         apiRepository.getRestaurantByCuisine(cuisine)
 

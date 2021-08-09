@@ -5,6 +5,7 @@ import com.example.fooddeliveryapp.model.entity.login.LoginResponse
 import com.example.fooddeliveryapp.model.entity.register.RegisterRequest
 import com.example.fooddeliveryapp.model.entity.register.RegisterResponse
 import com.example.fooddeliveryapp.model.entity.meal.MealResponse
+import com.example.fooddeliveryapp.model.entity.profile.UserResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantListResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantResponse
 import retrofit2.Response
@@ -27,13 +28,10 @@ interface APIService {
     @GET("a/meal/{id}")
     suspend fun getMealById(@Path("id") id: String): Response<MealResponse>
 
-
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
     @POST("auth/register")
     suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
-
-
 
 }

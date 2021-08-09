@@ -56,7 +56,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/addRestaurantImageView"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_restaurant_name">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -76,7 +76,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantNameEditText"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_restaurant_phone">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -97,7 +97,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantPhoneEditText"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_restaurant_website">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -119,7 +119,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantWebsiteEditText"
-                app:layout_constraintWidth_percent="0.75">
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/restaurantOpenHourLayout"
@@ -172,7 +172,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantOpenHoursLayout"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_restaurant_address">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -190,18 +190,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:weightSum="4"
+                android:weightSum="5"
                 app:boxBackgroundColor="@color/gray_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantAddressEditText"
-                app:layout_constraintWidth_percent="0.75">
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/restaurantCityTextLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:hint="@string/restaurant_city"
                     app:boxBackgroundColor="@color/gray_light">
 
@@ -220,6 +220,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="3"
                     android:gravity="center"
+                    android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/restaurantAddressEditText" />
@@ -236,7 +237,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantCityLayout"
-                app:layout_constraintWidth_percent="0.75">
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/restaurantCuisineTextLayout"
@@ -279,7 +280,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantCuisineLayout"
-                app:layout_constraintWidth_percent="0.75">
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/restaurantDeliveryTimeLayout"
@@ -333,7 +334,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantDeliveryLayout"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.9"
                 app:startIconDrawable="@drawable/ic_delivery_info">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -354,7 +355,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/restaurantDeliveryInfoEditText"
-                app:layout_constraintWidth_percent="0.75">
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner
                     android:id="@+id/multi_SelectionSpinner"

@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.model
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddRequest
+import com.example.fooddeliveryapp.model.entity.profile.UserRequest
 import com.example.fooddeliveryapp.model.entity.register.RegisterRequest
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddRequest
 import com.example.fooddeliveryapp.model.local.LocalDataSource
@@ -35,6 +36,14 @@ class ApiRepository @Inject constructor(
         }
     )
 
+    fun getUser() = performNetworkOperation {
+        authRemoteDataSource.getUser()
+    }
+
+    fun updateUser(user : UserRequest) = performNetworkOperation {
+        authRemoteDataSource.updateUser(request = user)
+    }
+
     fun getRestaurants() =
         performNetworkOperation {
             remoteDataSource.getRestaurants()
@@ -64,6 +73,18 @@ class ApiRepository @Inject constructor(
     fun getRestaurantByCuisine(cuisine : String) =
         performNetworkOperation {
         remoteDataSource.getRestaurantsByCuisine(cuisine)
+    }
+    fun getOrder() =
+        performNetworkOperation {
+            authRemoteDataSource.getOrders()
+        }
+    fun getLogin() =
+        performNetworkOperation {
+            authRemoteDataSource.getLogin()
+        }
+
+    fun logOut() {
+        localDataSource.saveToken("")
     }
 
 

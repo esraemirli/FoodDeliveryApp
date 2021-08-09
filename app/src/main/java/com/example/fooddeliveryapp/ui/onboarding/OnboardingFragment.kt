@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentOnboardingBinding
+import com.example.fooddeliveryapp.model.local.SharedPrefManager
 
 class OnboardingFragment : Fragment() {
     private lateinit var binding: FragmentOnboardingBinding
@@ -47,7 +48,7 @@ class OnboardingFragment : Fragment() {
                     binding.prevButton.visibility = View.VISIBLE
                     binding.nextButton.text = resources.getText(R.string.finish)
                     binding.nextButton.setOnClickListener {
-                       // SharedPreferencesModule.onboardingSeen("onboarding",true)
+                        SharedPrefManager(requireContext()).setOnboardingSeen()
                         findNavController().navigate(R.id.action_onboardingFragment_to_loginAndSignupFragment)
 
                     }

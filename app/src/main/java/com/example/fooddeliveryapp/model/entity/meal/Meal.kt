@@ -7,7 +7,7 @@ data class Meal(
     val id: String,
     @SerializedName("description")
     val description: String,
-    @SerializedName("image")
+    @SerializedName("imageUrl")
     val image: String,
     @SerializedName("ingredients")
     val ingredients: List<String>,

@@ -12,7 +12,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.model.entity.restaurant.Restaurant
 
-
 class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.ViewHolder>() {
 
     private lateinit var restaurantList: List<Restaurant>
