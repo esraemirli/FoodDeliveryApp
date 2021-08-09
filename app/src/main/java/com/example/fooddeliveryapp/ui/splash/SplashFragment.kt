@@ -39,6 +39,7 @@ class SplashFragment : Fragment() {
 
             override fun onAnimationEnd(animation: Animator?) {
                 val token = getToken()
+
                 //val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDY2YTlmNDgxYmQwMzA0MDY4ZTkxNiIsIm5hbWUiOiJUdW5haGFuIEF5ZMSxbm_En2x1IiwiaWF0IjoxNTAwMDAwMDAwLCJleHAiOjE2MDAwMDAwMDB9.xvxeo__9q4Q1WlOEhz2eIER4CL934zJ4jWKY98NrJ68"
                 if (!isOnboardingSeen()) {
                     findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)

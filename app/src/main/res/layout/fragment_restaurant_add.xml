@@ -36,8 +36,8 @@
 
             <ImageView
                 android:id="@+id/addRestaurantImageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:src="@drawable/ic_add_logo"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -40,7 +40,6 @@ class MealDetailsFragment : Fragment() {
     }
 
     private fun initViews() {
-        Log.e("Meal Id", args.mealId)
         viewModel.getMealDetails(args.mealId).observe(viewLifecycleOwner,{
             when (it.status) {
                 Resource.Status.LOADING -> {

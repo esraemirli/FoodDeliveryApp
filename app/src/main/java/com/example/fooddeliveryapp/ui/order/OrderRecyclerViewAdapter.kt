@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.model.entity.Order
+import com.example.fooddeliveryapp.model.entity.order.Order
 
 class OrderRecyclerViewAdapter  : RecyclerView.Adapter<OrderRecyclerViewAdapter.ListViewHolder>() {
     var list = ArrayList<Order>()

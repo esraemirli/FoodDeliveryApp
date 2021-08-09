@@ -1,8 +1,6 @@
 package com.example.fooddeliveryapp.ui.restaurantadd
 
-import android.app.Activity
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -24,18 +20,16 @@ import com.example.fooddeliveryapp.databinding.FragmentRestaurantAddBinding
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import com.zeeshan.material.multiselectionspinner.MultiSelectionSpinner
-import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RestaurantAddFragment : Fragment() {
 
-    private lateinit var _binding : FragmentRestaurantAddBinding
-    private val viewModel : RestaurantAddViewModel by viewModels()
+    private lateinit var _binding: FragmentRestaurantAddBinding
+    private val viewModel: RestaurantAddViewModel by viewModels()
 
-    private var selectedImage : Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +49,9 @@ class RestaurantAddFragment : Fragment() {
             setHomeAsUpIndicator(R.drawable.ic_back)
             setDisplayHomeAsUpEnabled(true)
         }
-
+        Glide.with(requireContext())
+            .load("https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp-fe5bf.appspot.com/o/images%2FRestaurant2.jpg?alt=media&token=3d28246b-52b4-4030-80bf-84799080fdf7")
+            .into(_binding.addRestaurantImageView)
         addListeners()
         initializeCitySpinner()
         initializeCuisineSpinner()
@@ -63,9 +59,7 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun addListeners() {
-        _binding.addRestaurantImageView.setOnClickListener {
-            addRestaurantImage()
-        }
+
 
         _binding.restaurantOpenHourEditText.setOnClickListener {
             setRestaurantOpenHour()
@@ -101,14 +95,8 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun initializePaymentMethodsSpinner() {
-       val paymentMethods = resources.getStringArray(R.array.RestaurantPaymentMethods).toList()
+        val paymentMethods = resources.getStringArray(R.array.RestaurantPaymentMethods).toList()
         _binding.multiSelectionSpinner.items = paymentMethods
-    }
-
-    private fun addRestaurantImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startForResult.launch(intent)
     }
 
     private fun setRestaurantOpenHour() {
@@ -116,7 +104,11 @@ class RestaurantAddFragment : Fragment() {
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
-            _binding.restaurantOpenHourEditText.setText(SimpleDateFormat("HH:mm", Locale.US).format(cal.time))
+            _binding.restaurantOpenHourEditText.setText(
+                SimpleDateFormat("HH:mm", Locale.US).format(
+                    cal.time
+                )
+            )
         }
         TimePickerDialog(
             activity,
@@ -133,7 +125,12 @@ class RestaurantAddFragment : Fragment() {
         val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
-            _binding.restaurantCloseHourEditText.setText(SimpleDateFormat("HH:mm", Locale.US).format(cal.time))
+            _binding.restaurantCloseHourEditText.setText(
+                SimpleDateFormat(
+                    "HH:mm",
+                    Locale.US
+                ).format(cal.time)
+            )
         }
         TimePickerDialog(
             activity,
@@ -145,7 +142,7 @@ class RestaurantAddFragment : Fragment() {
         ).show()
     }
 
-    private fun addRestaurant(){
+    private fun addRestaurant() {
         val name = _binding.restaurantNameEditText.editText?.text.toString()
         val cuisine = _binding.cuisineSpinner.selectedItem.toString()
         val deliveryInfo = _binding.restaurantDeliveryInfoEditText.editText?.text.toString()
@@ -157,9 +154,21 @@ class RestaurantAddFragment : Fragment() {
         val phone = _binding.restaurantPhoneEditText.editText?.text.toString()
         val website = _binding.restaurantWebsiteEditText.editText?.text.toString()
 
-        viewModel.addRestaurant(name, cuisine,deliveryInfo, deliveryTime,
-            selectedImage,address, district, minDeliveryFee, paymentMethods, phone, website)
-            ?.observe(viewLifecycleOwner, {
+
+        viewModel.addRestaurant(
+            name,
+            cuisine,
+            deliveryInfo,
+            deliveryTime,
+            "https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp-fe5bf.appspot.com/o/images%2FRestaurant2.jpg?alt=media&token=3d28246b-52b4-4030-80bf-84799080fdf7",
+            address,
+            district,
+            minDeliveryFee,
+            paymentMethods,
+            phone,
+            website
+        )
+            .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
                         Log.i(RestaurantAddFragment::class.java.name, it.message.toString())
@@ -180,30 +189,7 @@ class RestaurantAddFragment : Fragment() {
             })
     }
 
-    private val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                selectedImage = result.data?.data!!
-                Glide.with(requireContext())
-                    .load(selectedImage)
-                    .fitCenter()
-                    .into(_binding.addRestaurantImageView)
-
-                //TODO : If image couldn't uploaded??
-                //imageUrl = viewModel.uploadImage(selectedImage)
-
-            }
-        }
-
-    /*
-    //TODO : Boşluğa tıklandığında klavyeyi saklamak için
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        if (currentFocus != null) {
-            val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(this.currentFocus!!.windowToken, 0)
-        }
-        return super.dispatchTouchEvent(ev)
-    }
-    */
 
 }
+
+

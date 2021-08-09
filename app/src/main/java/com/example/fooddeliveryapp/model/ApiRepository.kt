@@ -64,18 +64,19 @@ class ApiRepository @Inject constructor(
 
     fun getRestaurantByCuisine(cuisine: String) =
         performNetworkOperation {
-        remoteDataSource.getRestaurantsByCuisine(cuisine)
-    }
+            remoteDataSource.getRestaurantsByCuisine(cuisine)
+        }
+
     fun getOrder() =
         performNetworkOperation {
             authRemoteDataSource.getOrders()
         }
+
     fun getUser() =
         performNetworkOperation {
             authRemoteDataSource.getUser()
         }
-            remoteDataSource.getRestaurantsByCuisine(cuisine)
-        }
+
 
     fun postOrder(orderAddRequest: OrderAddRequest) =
         performNetworkOperation {

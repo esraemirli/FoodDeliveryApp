@@ -1,15 +1,10 @@
 package com.example.fooddeliveryapp.ui.mealadd
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -28,9 +23,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MealAddFragment : Fragment() {
-    private val args : MealAddFragmentArgs by navArgs()
-    private lateinit var _binding : FragmentMealAddBinding
-    private val viewModel : MealAddViewModel by viewModels()
+    private val args: MealAddFragmentArgs by navArgs()
+    private lateinit var _binding: FragmentMealAddBinding
+    private val viewModel: MealAddViewModel by viewModels()
 
     private lateinit var ingredientsList: MutableList<Ingredient>
     private lateinit var ingredientAdapter: IngredientRecyclerViewAdapter
@@ -54,7 +49,9 @@ class MealAddFragment : Fragment() {
             setHomeAsUpIndicator(R.drawable.ic_back)
             setDisplayHomeAsUpEnabled(true)
         }
-
+        Glide.with(requireContext())
+            .load("https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp-fe5bf.appspot.com/o/images%2Fpizza.jpg?alt=media&token=7ffc6831-d9ae-4e9a-96a9-7898bc546878")
+            .into(_binding.addMealImageView)
         initializeRecyclerView()
         addListeners()
     }
@@ -80,10 +77,8 @@ class MealAddFragment : Fragment() {
         _binding.recyclerView.adapter = ingredientAdapter
     }
 
-    private fun addListeners(){
-        _binding.addMealImageView.setOnClickListener {
-            addFoodLogo()
-        }
+    private fun addListeners() {
+
 
         _binding.addMealIngredientLogo.setOnClickListener {
             addFoodIngredient()
@@ -94,11 +89,6 @@ class MealAddFragment : Fragment() {
         }
     }
 
-    private fun addFoodLogo() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startForResult.launch(intent)
-    }
 
     private fun addFoodIngredient() {
         ingredientsList.add(Ingredient(_binding.mealIngredientsEditText.text.toString(), true))
@@ -107,16 +97,21 @@ class MealAddFragment : Fragment() {
     }
 
     private fun addMeal() {
-        val ingredients : MutableList<String> = mutableListOf()
+        val ingredients: MutableList<String> = mutableListOf()
         val name = _binding.mealNameEditText.editText?.text.toString()
         val price = _binding.mealPriceEditText.editText?.text.toString()
-        val imageUrl = "Image URL :)"
 
         ingredientsList.forEach {
             ingredients.add(it.ingredient)
         }
 
-        viewModel.addMeal(args.restaurantId, name, imageUrl, price, ingredients)
+        viewModel.addMeal(
+            args.restaurantId,
+            name,
+            "https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp-fe5bf.appspot.com/o/images%2Fpizza.jpg?alt=media&token=7ffc6831-d9ae-4e9a-96a9-7898bc546878",
+            price,
+            ingredients
+        )
             .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
@@ -126,7 +121,10 @@ class MealAddFragment : Fragment() {
                     Resource.Status.SUCCESS -> {
                         Log.i(MealAddFragment::class.java.name, it.message.toString())
                         _binding.progressBar.gone()
-                        val action = MealAddFragmentDirections.actionMealAddFragmentToRestaurantDetailFragment(it.data!!.message.restaurant)
+                        val action =
+                            MealAddFragmentDirections.actionMealAddFragmentToRestaurantDetailFragment(
+                                it.data!!.message.restaurant
+                            )
                         findNavController().navigate(action)
                     }
                     Resource.Status.ERROR -> {
@@ -138,11 +136,5 @@ class MealAddFragment : Fragment() {
             })
     }
 
-    private val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val selectedImage: Uri = result.data?.data!!
-                Glide.with(requireContext()).load(selectedImage).fitCenter().into(_binding.addMealImageView)
-            }
-        }
+
 }
