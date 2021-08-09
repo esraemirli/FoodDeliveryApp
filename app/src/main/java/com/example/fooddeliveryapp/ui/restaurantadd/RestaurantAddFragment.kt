@@ -142,6 +142,9 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun addRestaurant() {
+        if(checkEmptyTextFields())
+            return
+
         val name = _binding.restaurantNameEditText.editText?.text.toString()
         val cuisine = _binding.cuisineSpinner.selectedItem.toString()
         val deliveryInfo = _binding.restaurantDeliveryInfoEditText.editText?.text.toString()
@@ -152,7 +155,6 @@ class RestaurantAddFragment : Fragment() {
         val paymentMethods = _binding.multiSelectionSpinner.selectedItems.joinToString("-")
         val phone = _binding.restaurantPhoneEditText.editText?.text.toString()
         val website = _binding.restaurantWebsiteEditText.editText?.text.toString()
-
 
         viewModel.addRestaurant(
             name,
@@ -188,7 +190,77 @@ class RestaurantAddFragment : Fragment() {
             })
     }
 
+    private fun checkEmptyTextFields() : Boolean {
 
+        if(_binding.restaurantNameEditText.editText?.text.isNullOrEmpty()){
+            _binding.restaurantNameEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.restaurantNameEditText.error = null
+        }
+
+        if(_binding.restaurantPhoneEditText.editText?.text.isNullOrEmpty()){
+            _binding.restaurantPhoneEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.restaurantPhoneEditText.error = null
+        }
+
+        if(_binding.restaurantWebsiteEditText.editText?.text.isNullOrEmpty()){
+            _binding.restaurantWebsiteEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.restaurantWebsiteEditText.error = null
+        }
+
+        if(_binding.restaurantOpenHourEditText.text.isNullOrEmpty()){
+            _binding.restaurantOpenHourLayout.error = ""
+            return true
+        } else {
+            _binding.restaurantOpenHourLayout.error = null
+        }
+
+        if(_binding.restaurantCloseHourEditText.text.isNullOrEmpty()){
+            _binding.restaurantCloseHourLayout.error = ""
+            return true
+        } else {
+            _binding.restaurantCloseHourLayout.error = null
+        }
+
+        if(_binding.restaurantAddressEditText.editText?.text.isNullOrEmpty()){
+            _binding.restaurantAddressEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.restaurantAddressEditText.error = null
+        }
+
+        if(_binding.restaurantDeliveryTimeLayout.editText?.text.isNullOrEmpty()){
+            _binding.restaurantDeliveryTimeLayout.error = ""
+            return true
+        } else {
+            _binding.restaurantDeliveryTimeLayout.error = null
+        }
+
+        if(_binding.restaurantDeliveryFeeLayout.editText?.text.isNullOrEmpty()){
+            _binding.restaurantDeliveryFeeLayout.error = ""
+            return true
+        } else {
+            _binding.restaurantDeliveryFeeLayout.error = null
+        }
+
+        if(_binding.restaurantDeliveryInfoEditText.editText?.text.isNullOrEmpty()){
+            _binding.restaurantDeliveryInfoEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.restaurantDeliveryInfoEditText.error = null
+        }
+
+        if(_binding.multiSelectionSpinner.selectedItems.size <= 0){
+            return true
+        }
+
+        return false
+    }
 }
 
 

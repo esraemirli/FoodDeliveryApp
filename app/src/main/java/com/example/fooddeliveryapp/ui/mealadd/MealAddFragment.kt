@@ -97,6 +97,9 @@ class MealAddFragment : Fragment() {
     }
 
     private fun addMeal() {
+        if(checkEmptyTextFields())
+            return
+
         val ingredients: MutableList<String> = mutableListOf()
         val name = _binding.mealNameEditText.editText?.text.toString()
         val price = _binding.mealPriceEditText.editText?.text.toString()
@@ -136,5 +139,34 @@ class MealAddFragment : Fragment() {
             })
     }
 
+    private fun checkEmptyTextFields() : Boolean {
+
+        if(_binding.mealNameEditText.editText?.text.isNullOrEmpty()){
+            _binding.mealNameEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.mealNameEditText.error = null
+        }
+
+        if(_binding.mealPriceEditText.editText?.text.isNullOrEmpty()){
+            _binding.mealPriceEditText.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.mealPriceEditText.error = null
+        }
+
+        if(_binding.mealDescriptionLayout.editText?.text.isNullOrEmpty()){
+            _binding.mealDescriptionLayout.error = "This can't be empty!"
+            return true
+        } else {
+            _binding.mealDescriptionLayout.error = null
+        }
+
+        if(ingredientsList.size <= 0){
+            return true
+        }
+
+        return false
+    }
 
 }
