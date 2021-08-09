@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailBinding
 import com.example.fooddeliveryapp.utils.Resource
@@ -51,8 +53,15 @@ class RestaurantDetailsFragment : Fragment() {
                     _binding.progressBar.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    val restaurant = it.data!!.data
                     _binding.progressBar.gone()
-                    val adapter = RestaurantDetailViewPagerAdapter(requireActivity(),it.data!!.data)
+                    val options = RequestOptions().placeholder(R.drawable.no_data)
+                    Glide.with(_binding.restaurantImageView.context)
+                        .applyDefaultRequestOptions(options)
+                        .load(restaurant.image).into(_binding.restaurantImageView)
+
+
+                    val adapter = RestaurantDetailViewPagerAdapter(requireActivity(),restaurant)
 
                     initViewPager(adapter)
 

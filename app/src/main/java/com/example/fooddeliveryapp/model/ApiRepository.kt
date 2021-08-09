@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.model
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddRequest
+import com.example.fooddeliveryapp.model.entity.order.OrderAddRequest
 import com.example.fooddeliveryapp.model.entity.register.RegisterRequest
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddRequest
 import com.example.fooddeliveryapp.model.local.LocalDataSource
@@ -50,18 +51,18 @@ class ApiRepository @Inject constructor(
             authRemoteDataSource.postRestaurant(request = restaurantAddRequest)
         }
 
-    fun getMealById(id: String)=
+    fun getMealById(id: String) =
         performNetworkOperation {
-        remoteDataSource.getMealById(id)
-    }
+            remoteDataSource.getMealById(id)
+        }
 
 
-    fun postMeal(restaurantId : String, mealAddRequest: MealAddRequest) =
+    fun postMeal(restaurantId: String, mealAddRequest: MealAddRequest) =
         performNetworkOperation {
             authRemoteDataSource.postMeal(restaurantId, request = mealAddRequest)
         }
 
-    fun getRestaurantByCuisine(cuisine : String) =
+    fun getRestaurantByCuisine(cuisine: String) =
         performNetworkOperation {
         remoteDataSource.getRestaurantsByCuisine(cuisine)
     }
@@ -72,6 +73,13 @@ class ApiRepository @Inject constructor(
     fun getUser() =
         performNetworkOperation {
             authRemoteDataSource.getUser()
+        }
+            remoteDataSource.getRestaurantsByCuisine(cuisine)
+        }
+
+    fun postOrder(orderAddRequest: OrderAddRequest) =
+        performNetworkOperation {
+            authRemoteDataSource.postOrder(orderAddRequest)
         }
 
     fun logOut() {

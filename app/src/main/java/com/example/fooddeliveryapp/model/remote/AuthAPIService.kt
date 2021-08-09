@@ -3,6 +3,8 @@ package com.example.fooddeliveryapp.model.remote
 import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddRequest
 import com.example.fooddeliveryapp.model.entity.mealadd.MealAddResponse
+import com.example.fooddeliveryapp.model.entity.order.OrderAddResponse
+import com.example.fooddeliveryapp.model.entity.order.OrderAddRequest
 import com.example.fooddeliveryapp.model.entity.order.OrderResponse
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddRequest
 import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddResponse
@@ -25,4 +27,7 @@ interface AuthAPIService {
 
     @GET("auth/User")
     suspend fun getUser(): Response<User>
+
+    @POST("a/order")
+    suspend fun postOrder(@Body request: OrderAddRequest) : Response<OrderAddResponse>
 }
