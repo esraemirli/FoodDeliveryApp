@@ -6,12 +6,13 @@ import com.example.fooddeliveryapp.model.entity.restaurantadd.RestaurantAddReque
 import com.example.fooddeliveryapp.utils.BaseDataSource
 import javax.inject.Inject
 
-class AuthRemoteDataSource @Inject constructor(private val authAPIService: AuthAPIService) : BaseDataSource() {
+class AuthRemoteDataSource @Inject constructor(private val authAPIService: AuthAPIService) :
+    BaseDataSource() {
     suspend fun postRestaurant(request: RestaurantAddRequest) = getResult {
         authAPIService.postRestaurant(request)
     }
 
-    suspend fun postMeal(restaurantId : String,request: MealAddRequest) = getResult {
+    suspend fun postMeal(restaurantId: String, request: MealAddRequest) = getResult {
         authAPIService.postMeal(restaurantId, request)
     }
 

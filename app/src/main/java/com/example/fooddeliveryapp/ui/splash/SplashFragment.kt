@@ -3,7 +3,6 @@ package com.example.fooddeliveryapp.ui.splash
 import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,6 @@ import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSplashBinding
 import com.example.fooddeliveryapp.model.local.SharedPrefManager
 import com.example.fooddeliveryapp.ui.MainActivity
-import java.time.Instant.now
-import java.util.*
 
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding

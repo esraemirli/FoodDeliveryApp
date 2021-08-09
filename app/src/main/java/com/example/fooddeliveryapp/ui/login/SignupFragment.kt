@@ -50,7 +50,7 @@ class SignupFragment : Fragment() {
 
             viewModel.register(name, email, password)
                 .observe(viewLifecycleOwner, Observer {
-                    when(it.status){
+                    when (it.status) {
                         Resource.Status.LOADING -> {
                             //_binding.progressBar.show()
                         }
@@ -59,9 +59,10 @@ class SignupFragment : Fragment() {
 
                             _binding.registerAnimation.setAnimation(R.raw.success)
                             _binding.registerAnimation.playAnimation()
-                            _binding.registerAnimation.addAnimatorListener(object: Animator.AnimatorListener{
+                            _binding.registerAnimation.addAnimatorListener(object :
+                                Animator.AnimatorListener {
                                 override fun onAnimationStart(animation: Animator?) {
-                                    Log.v("Animation","Started")
+                                    Log.v("Animation", "Started")
                                 }
 
                                 override fun onAnimationEnd(animation: Animator?) {
@@ -71,11 +72,11 @@ class SignupFragment : Fragment() {
                                 }
 
                                 override fun onAnimationCancel(animation: Animator?) {
-                                    Log.v("Animation","Canceled")
+                                    Log.v("Animation", "Canceled")
                                 }
 
                                 override fun onAnimationRepeat(animation: Animator?) {
-                                    Log.v("Animation","Repeated")
+                                    Log.v("Animation", "Repeated")
                                 }
 
                             })
@@ -85,9 +86,10 @@ class SignupFragment : Fragment() {
                             //_binding.progressBar.gone()
                             _binding.registerAnimation.setAnimation(R.raw.fail)
                             _binding.registerAnimation.playAnimation()
-                            _binding.registerAnimation.addAnimatorListener(object: Animator.AnimatorListener{
+                            _binding.registerAnimation.addAnimatorListener(object :
+                                Animator.AnimatorListener {
                                 override fun onAnimationStart(animation: Animator?) {
-                                    Log.v("Animation","Started")
+                                    Log.v("Animation", "Started")
                                 }
 
                                 override fun onAnimationEnd(animation: Animator?) {
@@ -104,11 +106,11 @@ class SignupFragment : Fragment() {
                                 }
 
                                 override fun onAnimationCancel(animation: Animator?) {
-                                    Log.v("Animation","Canceled")
+                                    Log.v("Animation", "Canceled")
                                 }
 
                                 override fun onAnimationRepeat(animation: Animator?) {
-                                    Log.v("Animation","Repeated")
+                                    Log.v("Animation", "Repeated")
                                 }
 
                             })

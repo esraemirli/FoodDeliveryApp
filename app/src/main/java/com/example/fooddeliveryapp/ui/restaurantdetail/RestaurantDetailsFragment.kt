@@ -5,14 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
@@ -47,7 +43,7 @@ class RestaurantDetailsFragment : Fragment() {
     }
 
     private fun initViews() {
-        viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner,{
+        viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     _binding.progressBar.show()
@@ -61,7 +57,7 @@ class RestaurantDetailsFragment : Fragment() {
                         .load(restaurant.image).into(_binding.restaurantImageView)
 
 
-                    val adapter = RestaurantDetailViewPagerAdapter(requireActivity(),restaurant)
+                    val adapter = RestaurantDetailViewPagerAdapter(requireActivity(), restaurant)
 
                     initViewPager(adapter)
 
@@ -78,11 +74,14 @@ class RestaurantDetailsFragment : Fragment() {
     }
 
     private fun initListener() {
-        _binding.backButton.setOnClickListener{
+        _binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
         _binding.addButton.setOnClickListener {
-            val action = RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToFoodAddFragment(args.restaurantId)
+            val action =
+                RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToFoodAddFragment(
+                    args.restaurantId
+                )
             findNavController().navigate(action)
         }
         _binding.restaurantDetailTabLayout.addOnTabSelectedListener(object :
@@ -97,7 +96,10 @@ class RestaurantDetailsFragment : Fragment() {
                     changeImageVisibility(false)
                     selectedTab = 1
                 }
-                Log.v("SelectedListener",_binding.restaurantDetailTabLayout.selectedTabPosition.toString())
+                Log.v(
+                    "SelectedListener",
+                    _binding.restaurantDetailTabLayout.selectedTabPosition.toString()
+                )
                 Log.e("Visibility", _binding.restaurantImageView.visibility.toString())
             }
 
@@ -115,17 +117,20 @@ class RestaurantDetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.v("Resume",_binding.restaurantDetailTabLayout.selectedTabPosition.toString())
+        Log.v("Resume", _binding.restaurantDetailTabLayout.selectedTabPosition.toString())
 
         if (selectedTab == 0) changeImageVisibility(true)
-        else if(selectedTab == 1) changeImageVisibility(false)
+        else if (selectedTab == 1) changeImageVisibility(false)
         else changeImageVisibility(true)
     }
 
 
     private fun initViewPager(adapter: RestaurantDetailViewPagerAdapter) {
         _binding.restaurantDetailViewPager.adapter = adapter
-        TabLayoutMediator(_binding.restaurantDetailTabLayout, _binding.restaurantDetailViewPager) { tab, position ->
+        TabLayoutMediator(
+            _binding.restaurantDetailTabLayout,
+            _binding.restaurantDetailViewPager
+        ) { tab, position ->
             if (position == 0) {
                 tab.text = "Details"
 

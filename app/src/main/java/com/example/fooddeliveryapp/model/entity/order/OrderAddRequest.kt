@@ -1,7 +1,6 @@
 package com.example.fooddeliveryapp.model.entity.order
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 data class OrderAddRequest(
     @SerializedName("restaurantName")

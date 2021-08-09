@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.fooddeliveryapp.R
-import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailBinding
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantDetailsSectionBinding
 import com.example.fooddeliveryapp.model.entity.restaurant.Restaurant
 
@@ -27,7 +25,7 @@ class RestaurantDetailsSectionFragment(var restaurant: Restaurant) : Fragment() 
         setData()
     }
 
-    fun setData(){
+    fun setData() {
         _binding.deliveryInfoTextView.text = restaurant.deliveryInfo
         _binding.deliveryTimeTextView.text = restaurant.deliveryTime
         _binding.minimumDeliveryFeeTextView.text = restaurant.minimumDeliveryFee

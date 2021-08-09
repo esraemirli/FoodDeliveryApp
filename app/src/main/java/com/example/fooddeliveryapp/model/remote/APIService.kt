@@ -2,16 +2,15 @@ package com.example.fooddeliveryapp.model.remote
 
 import com.example.fooddeliveryapp.model.entity.login.LoginRequest
 import com.example.fooddeliveryapp.model.entity.login.LoginResponse
+import com.example.fooddeliveryapp.model.entity.meal.MealResponse
 import com.example.fooddeliveryapp.model.entity.register.RegisterRequest
 import com.example.fooddeliveryapp.model.entity.register.RegisterResponse
-import com.example.fooddeliveryapp.model.entity.meal.MealResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantListResponse
 import com.example.fooddeliveryapp.model.entity.restaurant.RestaurantResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 import retrofit2.http.Path
 
 interface APIService {
@@ -19,7 +18,7 @@ interface APIService {
     suspend fun getRestaurants(): Response<RestaurantListResponse>
 
     @GET("a/restaurant/cuisine/{cuisineName}")
-    suspend fun getRestaurantsByCuisine(@Path("cuisineName") cuisine : String): Response<RestaurantListResponse>
+    suspend fun getRestaurantsByCuisine(@Path("cuisineName") cuisine: String): Response<RestaurantListResponse>
 
     @GET("a/restaurant/{id}")
     suspend fun getRestaurantById(@Path("id") id: String): Response<RestaurantResponse>
@@ -32,7 +31,6 @@ interface APIService {
 
     @POST("auth/register")
     suspend fun register(@Body request: RegisterRequest): Response<RegisterResponse>
-
 
 
 }

@@ -6,14 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentProfileBinding
-import com.example.fooddeliveryapp.ui.MainActivity
-import com.example.fooddeliveryapp.ui.order.OrderFragmentViewModel
-import com.example.fooddeliveryapp.ui.setting.SettingFragment
 import com.example.fooddeliveryapp.ui.splash.SplashActivity
 import com.example.fooddeliveryapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,32 +43,26 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getProfile() {
-        viewModel.getUser().observe(viewLifecycleOwner,{response ->
+        viewModel.getUser().observe(viewLifecycleOwner, { response ->
 
-            when(response.status)
-            {
-                Resource.Status.LOADING ->
-                {
+            when (response.status) {
+                Resource.Status.LOADING -> {
 
                 }
-                Resource.Status.SUCCESS ->
-                {
+                Resource.Status.SUCCESS -> {
                     response.data?.let {
                         // TODO UI
-                    var profileEmail = it.email
-                    var profileName = it.name
-                    var profileRole = it.address
+                        var profileEmail = it.email
+                        var profileName = it.name
+                        var profileRole = it.address
                     }
 
                 }
 
-                Resource.Status.ERROR ->
-                {
+                Resource.Status.ERROR -> {
                     println("${response.message}")
                 }
             }
-
-
 
 
         })
@@ -98,7 +88,7 @@ class ProfileFragment : Fragment() {
         binding?.profileChange?.setOnClickListener {
             navigateToSetting()
         }
-        binding?.logOutCardView?.setOnClickListener{
+        binding?.logOutCardView?.setOnClickListener {
             viewModel.logOut()
             val intent = Intent(context, SplashActivity::class.java)
             startActivity(intent)

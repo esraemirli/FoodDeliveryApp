@@ -18,6 +18,7 @@ class ProfileFragmentViewModel @Inject constructor(
     fun logOut() {
         apiRepository.logOut()
     }
+
     fun getUser(): LiveData<Resource<User>> =
         apiRepository.getUser()
 }

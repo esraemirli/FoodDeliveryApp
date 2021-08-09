@@ -36,7 +36,7 @@ fun <T> performAuthTokenNetworkOperation(
             if (data is LoginResponse) {
                 saveToken(data.token)
             }
-            if(data is RegisterResponse){
+            if (data is RegisterResponse) {
                 saveToken(data.token)
             }
             emit(Resource.success(data))

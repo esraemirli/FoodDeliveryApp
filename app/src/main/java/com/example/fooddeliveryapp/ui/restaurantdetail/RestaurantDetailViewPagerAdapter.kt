@@ -8,7 +8,7 @@ import com.example.fooddeliveryapp.ui.meal.MealListFragment
 
 private const val FRAGMENT_COUNT = 2
 
-class RestaurantDetailViewPagerAdapter(fragment: FragmentActivity,val restaurant: Restaurant) :
+class RestaurantDetailViewPagerAdapter(fragment: FragmentActivity, val restaurant: Restaurant) :
     FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = FRAGMENT_COUNT
 

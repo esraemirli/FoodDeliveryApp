@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.model.entity.order.Order
 
-class OrderRecyclerViewAdapter  : RecyclerView.Adapter<OrderRecyclerViewAdapter.ListViewHolder>() {
+class OrderRecyclerViewAdapter : RecyclerView.Adapter<OrderRecyclerViewAdapter.ListViewHolder>() {
     var list = ArrayList<Order>()
-    class  ListViewHolder(view: View) : RecyclerView.ViewHolder(view)
-    {
-        fun bind(){}
+
+    class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bind() {}
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_myorders,parent,false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_myorders, parent, false)
         return ListViewHolder(view)
     }
 
@@ -24,7 +25,7 @@ class OrderRecyclerViewAdapter  : RecyclerView.Adapter<OrderRecyclerViewAdapter.
         holder.bind()
     }
 
-    fun setOrderData(list: ArrayList<Order>){
+    fun setOrderData(list: ArrayList<Order>) {
         this.list = list
         notifyDataSetChanged()
     }

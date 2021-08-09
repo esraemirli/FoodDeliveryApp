@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OrderFragment : Fragment() {
-    private var binding: FragmentOrderBinding?  = null
+    private var binding: FragmentOrderBinding? = null
     private val viewModel: OrderFragmentViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +22,7 @@ class OrderFragment : Fragment() {
         binding = FragmentOrderBinding.inflate(inflater, container, false)
         return binding?.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
@@ -35,23 +36,21 @@ class OrderFragment : Fragment() {
     private fun getOrders() {
         viewModel.getOrders().observe(viewLifecycleOwner, { response ->
 
-            when(response.status)
-            {
-                Resource.Status.LOADING ->
-                {
+            when (response.status) {
+                Resource.Status.LOADING -> {
 
                 }
-                Resource.Status.SUCCESS ->
-                {
+                Resource.Status.SUCCESS -> {
                     response.data?.orderList?.let {
                         // TODO RecyclerView
                     }
 
                 }
 
-                Resource.Status.ERROR ->
-                {
+                Resource.Status.ERROR -> {
                     println("${response.message}")
                 }
-            }})}
+            }
+        })
+    }
 }

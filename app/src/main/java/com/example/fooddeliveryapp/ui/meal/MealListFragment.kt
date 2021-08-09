@@ -31,19 +31,20 @@ class MealListFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            _binding.mealsListRecyclerView.layoutManager = LinearLayoutManager(context)
+        _binding.mealsListRecyclerView.layoutManager = LinearLayoutManager(context)
         adapter.setMealList(mealList)
         adapter.addListener(this)
         _binding.mealsListRecyclerView.adapter = adapter
     }
 
 
-
     override fun onClick(meal: Meal) {
-         val action = RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToMealDetailsFragment(meal.id)
+        val action =
+            RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToMealDetailsFragment(
+                meal.id
+            )
         findNavController().navigate(action)
     }
-
 
 
 }

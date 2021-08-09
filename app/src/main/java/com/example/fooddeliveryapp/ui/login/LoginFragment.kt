@@ -11,8 +11,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentLoginBinding
 import com.example.fooddeliveryapp.ui.MainActivity
 import com.example.fooddeliveryapp.utils.Resource
@@ -53,23 +51,24 @@ class LoginFragment : Fragment() {
                             _binding.forgotPasswordTextView.visibility = View.GONE
                             _binding.loginButton.visibility = View.GONE
                             _binding.loginAnimation.visibility = View.VISIBLE
-                            _binding.loginAnimation.addAnimatorListener(object: Animator.AnimatorListener{
+                            _binding.loginAnimation.addAnimatorListener(object :
+                                Animator.AnimatorListener {
                                 override fun onAnimationStart(animation: Animator?) {
-                                    Log.v("Animation","Started")
+                                    Log.v("Animation", "Started")
                                 }
 
                                 override fun onAnimationEnd(animation: Animator?) {
-                                    val intent = Intent(context,MainActivity::class.java)
+                                    val intent = Intent(context, MainActivity::class.java)
                                     startActivity(intent)
                                     requireActivity().finish()
                                 }
 
                                 override fun onAnimationCancel(animation: Animator?) {
-                                    Log.v("Animation","Canceled")
+                                    Log.v("Animation", "Canceled")
                                 }
 
                                 override fun onAnimationRepeat(animation: Animator?) {
-                                    Log.v("Animation","Repeated")
+                                    Log.v("Animation", "Repeated")
                                 }
 
                             })

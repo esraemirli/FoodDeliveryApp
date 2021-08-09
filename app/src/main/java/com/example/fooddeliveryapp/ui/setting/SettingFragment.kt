@@ -9,11 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
-import com.example.fooddeliveryapp.ui.profile.ProfileFragment
+
 //import com.example.fooddeliveryapp.utils.SharedPreferencesModule
 
 
