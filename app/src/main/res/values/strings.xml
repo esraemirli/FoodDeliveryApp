@@ -125,9 +125,9 @@
     </string-array>
 
     <string-array name="RestaurantPaymentMethods">
-        <item>Online Kredi/Banka Kartı</item>
-        <item>Kredi Kartı</item>
-        <item>Nakit</item>
+        <item>Online Credit/Bank Card</item>
+        <item>Credit Card</item>
+        <item>Cash</item>
         <item>Ticket Restaurant</item>
         <item>Sodexo Restaurant Pass</item>
         <item>Multinet</item>
@@ -135,19 +135,19 @@
     </string-array>
 
     <string-array name="Cuisines">
-        <item>Deniz Ürünleri</item>
+        <item>Seafood</item>
         <item>Burger</item>
-        <item>Döner</item>
-        <item>Dünya Yemekleri</item>
-        <item>Ev Yemekleri</item>
-        <item>Kahvaltı</item>
-        <item>Kebap</item>
-        <item>Köfte</item>
-        <item>Makarna-Salata</item>
-        <item>Pastane-Fırın</item>
+        <item>Doner</item>
+        <item>Worldwide</item>
+        <item>Homemade</item>
+        <item>Breakfast</item>
+        <item>Kebab</item>
+        <item>Meatball</item>
+        <item>Pasta - Salad</item>
+        <item>Bakery</item>
         <item>Pizza</item>
-        <item>Tatlı</item>
-        <item>Uzak Doğu</item>
+        <item>Dessert</item>
+        <item>Eastern Kitchen</item>
     </string-array>
 
     <!--Splash and login-signup screens strings -->
@@ -191,7 +191,7 @@
     <string name="card">Card</string>
     <string name="bank_naccount">Bank \naccount</string>
     <string name="paypal">Paypal</string>
-    <string name="reorder_button">Tekrarla</string>
-    <string name="detail">Detay</string>
+    <string name="reorder_button">Repeat</string>
+    <string name="detail">Details</string>
 
 </resources>
