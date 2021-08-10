@@ -119,7 +119,6 @@ class SettingFragment : Fragment() {
                 }
                 Resource.Status.ERROR -> {
                     isSettingVisible(false)
-                    Toast.makeText(context, "Operation Failed", Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -133,7 +132,7 @@ class SettingFragment : Fragment() {
                 .setTitle("Error")
                 .setMessage("There is a problem")
                 .setPositiveButton("Cancel") { _, _ ->
-                    //TODO geri dön
+                    findNavController().popBackStack()
                 }.show()
         }
     }
