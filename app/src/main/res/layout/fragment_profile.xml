@@ -81,7 +81,7 @@
                     android:id="@+id/profilePhotoImageView"
                     android:layout_width="91dp"
                     android:layout_height="100dp"
-                    app:srcCompat="@mipmap/avatar_1_foreground"></ImageView>
+                    app:srcCompat="@drawable/no_data" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Marvis Ighedosa"
+                    tools:text="Marvis Ighedosa"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
                 <TextView
@@ -105,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dosamarvis@gmail.com"
+                    tools:text="Dosamarvis@gmail.com"
                     android:textSize="15sp" />
 
                 <View
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="+234 9011039271"
+                    tools:text="+234 9011039271"
                     android:textSize="15sp" />
 
                 <View
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="11dp"
                     android:layout_weight="1"
-                    android:text="No 15 uti street off ovie palace road effurun delta state"
+                    tools:text="No 15 uti street off ovie palace road effurun delta state"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
@@ -183,7 +183,7 @@
                     android:layout_width="48dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@mipmap/chevron_right_foreground"></ImageView>
+                    app:srcCompat="@mipmap/chevron_right_foreground" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
