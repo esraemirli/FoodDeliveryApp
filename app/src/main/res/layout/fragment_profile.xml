@@ -81,7 +81,7 @@
                         android:id="@+id/profilePhotoImageView"
                         android:layout_width="91dp"
                         android:layout_height="100dp"
-                        app:srcCompat="@drawable/no_data" />
+                        app:srcCompat="@mipmap/no_data" />
                 </LinearLayout>
 
                 <LinearLayout

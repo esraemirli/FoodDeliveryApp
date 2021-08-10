@@ -28,7 +28,7 @@ class RestaurantListingAdapter : RecyclerView.Adapter<RestaurantListingAdapter.V
             nameTextView.text = restaurant.name
             locationTextView.text = restaurant.district
 
-            val options = RequestOptions().placeholder(R.drawable.no_data)
+            val options = RequestOptions().placeholder(R.mipmap.no_data)
             Glide.with(imageView.context)
                 .applyDefaultRequestOptions(options)
                 .load(restaurant.image).into(imageView)

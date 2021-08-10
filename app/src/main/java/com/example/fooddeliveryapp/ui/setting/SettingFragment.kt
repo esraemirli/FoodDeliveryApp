@@ -69,7 +69,7 @@ class SettingFragment : Fragment() {
         _binding.phoneNumberEditText.setText(user?.phone)
         imageUrl = user?.profileImage
 
-        val options = RequestOptions().placeholder(R.drawable.no_data)
+        val options = RequestOptions().placeholder(R.mipmap.no_data)
         Glide.with(_binding.avatarImageView.context)
             .applyDefaultRequestOptions(options)
             .load(imageUrl).into(_binding.avatarImageView)
@@ -92,7 +92,7 @@ class SettingFragment : Fragment() {
             imageUrl = viewModel.getImageUrl(radioGroup.checkedRadioButtonId)
         }
         builder.setPositiveButton(getString(R.string.save)) { _: DialogInterface, _: Int ->
-            val options = RequestOptions().placeholder(R.drawable.no_data)
+            val options = RequestOptions().placeholder(R.mipmap.no_data)
             Glide.with(_binding.avatarImageView.context)
                 .applyDefaultRequestOptions(options)
                 .load(imageUrl).into(_binding.avatarImageView)

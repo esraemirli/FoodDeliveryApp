@@ -89,7 +89,7 @@ class ProfileFragment : Fragment() {
         _binding.phoneNumberTextView.text = user?.phone
         _binding.addressTextView.text = user?.address
 
-        val options = RequestOptions().placeholder(R.drawable.no_data)
+        val options = RequestOptions().placeholder(R.mipmap.no_data)
         Glide.with(_binding.profilePhotoImageView.context)
             .applyDefaultRequestOptions(options)
             .load(user?.profileImage).into(_binding.profilePhotoImageView)

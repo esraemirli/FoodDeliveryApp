@@ -35,7 +35,7 @@
         android:background="@null"
         android:contentDescription="Meal Image"
         android:scaleType="centerCrop"
-        android:src="@drawable/no_data"
+        android:src="@mipmap/no_data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton"

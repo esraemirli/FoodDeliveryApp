@@ -37,7 +37,7 @@
         android:contentDescription="Restaurant Image"
         android:scaleType="centerCrop"
         android:paddingVertical="16dp"
-        android:src="@drawable/no_data"
+        android:src="@mipmap/no_data"
         android:background="@null"
         app:shapeAppearanceOverlay="@style/CircularImageView"
         app:layout_constraintEnd_toEndOf="parent"
