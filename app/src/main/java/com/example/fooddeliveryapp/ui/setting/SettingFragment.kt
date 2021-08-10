@@ -2,7 +2,6 @@ package com.example.fooddeliveryapp.ui.setting
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,6 @@ import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.model.entity.profile.UserRequest
-import com.example.fooddeliveryapp.model.local.SharedPrefManager
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
@@ -80,6 +78,7 @@ class SettingFragment : Fragment() {
     private fun addListeners() {
         _binding.avatarConstraintLayout.setOnClickListener { changeAvatar(it) }
         _binding.updateButton.setOnClickListener { updateUser() }
+        _binding.backImageView.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun changeAvatar(view: View) {

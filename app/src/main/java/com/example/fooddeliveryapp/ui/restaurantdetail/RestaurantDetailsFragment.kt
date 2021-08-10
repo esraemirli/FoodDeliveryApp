@@ -55,7 +55,7 @@ class RestaurantDetailsFragment : Fragment() {
                     Glide.with(_binding.restaurantImageView.context)
                         .applyDefaultRequestOptions(options)
                         .load(restaurant.image).into(_binding.restaurantImageView)
-
+                    _binding.restaurantNameTextView.text = restaurant.name
                     val adapter = RestaurantDetailViewPagerAdapter(requireActivity(), restaurant)
 
                     initViewPager(adapter)

@@ -172,4 +172,19 @@
     <string name="payment_method">Payment Method</string>
     <string name="update">Update</string>
     <string name="save">Save</string>
+    <string name="last_orders_title">Last Orders</string>
+    <string name="my_profile_title">My profile</string>
+    <string name="help">Help</string>
+    <string name="faq">Faq</string>
+    <string name="pending_reviews">Pending reviews</string>
+    <string name="personal_details">Personal details</string>
+    <string name="change">change</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="hint_update_name">Add your name</string>
+    <string name="hint_update_mail">Add your mail</string>
+    <string name="hint_update_phone">Add your phone</string>
+    <string name="hint_update_address">Add your address</string>
+    <string name="card">Card</string>
+    <string name="bank_naccount">Bank \naccount</string>
+    <string name="paypal">Paypal</string>
 </resources>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="16dp"
+    android:background="@color/app_background_color"
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
@@ -17,20 +18,36 @@
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="16dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/settings_title"
-                    android:textColor="@color/black"
-                    android:textSize="25sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/backImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/ic_back"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_title"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -46,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.1"
-                        android:text="Dark Theme">
+                        android:text="@string/dark_theme">
 
                     </androidx.appcompat.widget.SwitchCompat>
                 </LinearLayout>
@@ -54,10 +71,10 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:layout_marginTop="10dp"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="10dp"
+                    android:layout_marginHorizontal="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +121,7 @@
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
-                            android:hint="Add your name"
+                            android:hint="@string/hint_update_name"
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
@@ -116,7 +133,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="6dp"
-                            android:hint="Add your mail"
+                            android:hint="@string/hint_update_mail"
                             android:layout_weight="1"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
@@ -128,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="6dp"
-                            android:hint="Add your phone"
+                            android:hint="@string/hint_update_phone"
                             android:inputType="phone"
                             android:layout_weight="1"
                             android:textSize="15sp"
@@ -141,9 +158,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="6dp"
-                            android:hint="Add your address"
+                            android:hint="@string/hint_update_address"
                             android:layout_weight="1"
                             android:textSize="15sp"
+
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
                             app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,24 +170,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/payment_method"
+                    android:layout_marginHorizontal="24dp"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                    android:textSize="20sp"/>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_margin="10dp"
                     android:layout_marginTop="10dp"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/paymentMethodTitle">
+                    android:layout_marginHorizontal="24dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -177,8 +190,8 @@
 
                         <RadioGroup
                             android:id="@+id/paymentRadioGroup"
-                            android:layout_width="83dp"
-                            android:layout_height="193dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -189,21 +202,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="Card" />
+                                android:text="@string/card" />
 
                             <RadioButton
                                 android:id="@+id/bankAccountRadio"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
-                                android:text="Bank \naccount" />
+                                android:text="@string/bank_naccount" />
 
                             <RadioButton
                                 android:id="@+id/paypalRadio"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
-                                android:text="Paypal" />
+                                android:text="@string/paypal" />
                         </RadioGroup>
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -250,6 +263,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/profile_button_background"
                     android:text="@string/update"
+                    android:layout_marginHorizontal="30sp"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
