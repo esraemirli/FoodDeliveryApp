@@ -38,6 +38,12 @@
         android:label="MealDetailsFragment">
         <argument android:name="mealId"
             app:argType="string" />
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_mealDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment

@@ -15,7 +15,7 @@ class RestaurantDetailViewPagerAdapter(fragment: FragmentActivity, val restauran
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> RestaurantDetailsSectionFragment(restaurant)
-            1 -> MealListFragment(restaurant.meals)
+            1 -> MealListFragment(restaurant)
             else -> RestaurantDetailsSectionFragment(restaurant)
         }
     }

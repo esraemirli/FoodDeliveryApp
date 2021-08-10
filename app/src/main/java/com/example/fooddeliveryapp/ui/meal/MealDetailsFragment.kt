@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentMealDetailsBinding
+import com.example.fooddeliveryapp.model.entity.order.OrderAddRequest
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
@@ -73,8 +74,8 @@ class MealDetailsFragment : Fragment() {
         })
     }
 
-    private fun setLoading(isLoading: Boolean){
-        if(isLoading){
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
             _binding.progressBar.show()
             _binding.backButton.gone()
             _binding.mealImageView.gone()
@@ -82,7 +83,7 @@ class MealDetailsFragment : Fragment() {
             _binding.mealNameTextView.gone()
             _binding.totalLinearLayout.gone()
 
-        }else{
+        } else {
             _binding.progressBar.gone()
             _binding.backButton.show()
             _binding.mealImageView.show()
@@ -95,6 +96,29 @@ class MealDetailsFragment : Fragment() {
     private fun initListener() {
         _binding.backButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        _binding.orderButton.setOnClickListener {
+            val orderAddRequest = OrderAddRequest(args.restaurantId, args.mealId)
+            viewModel.postOrder(orderAddRequest).observe(viewLifecycleOwner, {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        Log.e("Loading", "loading")
+                        setLoading(true)
+                        _binding.ingredientsRecyclerView.gone()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        setLoading(false)
+                        _binding.ingredientsRecyclerView.show()
+                        findNavController().navigate(MealDetailsFragmentDirections.actionMealDetailsFragmentToHomeFragment())
+
+                    }
+                    Resource.Status.ERROR -> {
+                        setLoading(false)
+                        _binding.ingredientsRecyclerView.show()
+                    }
+                }
+            })
         }
 
     }
