@@ -135,6 +135,8 @@ class RestaurantListingFragment : Fragment() {
                 }
                 //make orange selected text
                 cuisine.value.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange))
+                _binding.searchView.queryHint = "Search in ${cuisine.key}"
+                _binding.searchView.onActionViewCollapsed()
                 if (cuisine.key == getString(R.string.all_restaurants))
                     getRestaurants()
                 else

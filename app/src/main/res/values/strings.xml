@@ -3,7 +3,7 @@
 
     <!--Restaurant listing screen strings -->
     <string name="restaurant_listing_title">Delicious\nfood for you</string>
-    <string name="search_view_text">Search</string>
+    <string name="search_view_text">Search in All</string>
     <string name="all_restaurants">All</string>
 
     <!--Add restaurant screen strings -->
