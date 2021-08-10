@@ -22,6 +22,7 @@ class OrderRecyclerViewAdapter :
             view.findViewById(R.id.ordersItemRestaurantNameTextView)
         private var orderDate: TextView = view.findViewById(R.id.ordersItemDateTextView)
         private var orderMealName: TextView = view.findViewById(R.id.ordersItemFoodNameTextView)
+        private var orderPrice: TextView = view.findViewById(R.id.orderPriceTextView)
 
         @SuppressLint("SimpleDateFormat")
         fun setItem(order: Order) {
@@ -31,6 +32,7 @@ class OrderRecyclerViewAdapter :
             orderRestaurantName.text = order.restaurant.name
             orderMealName.text = order.meal.name
             orderDate.text = SimpleDateFormat("dd/MM/yyyy").format(order.createdDate).toString()
+            orderPrice.text = order.meal.price.toString()
         }
     }
 

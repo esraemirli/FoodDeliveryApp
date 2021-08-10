@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.ui.meal
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +15,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentMealDetailsBinding
+import com.example.fooddeliveryapp.model.entity.order.OrderAddRequest
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,11 +50,12 @@ class MealDetailsFragment : Fragment() {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     Log.e("Loading", "loading")
-                    // _binding.progressBar.show()
+                    setLoading(true)
                 }
                 Resource.Status.SUCCESS -> {
-                    _binding.progressBar.gone()
+                    setLoading(false)
                     val meal = it.data!!.data
+                    viewModel.meal = meal
                     val options = RequestOptions().placeholder(R.mipmap.no_data)
                     Glide.with(_binding.mealImageView.context)
                         .applyDefaultRequestOptions(options)
@@ -66,16 +70,68 @@ class MealDetailsFragment : Fragment() {
 
                 }
                 Resource.Status.ERROR -> {
-                    Log.e("Error", "error")
-                    //_binding.progressBar.gone()
+                    setLoading(false)
                 }
             }
         })
     }
 
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            _binding.progressBar.show()
+            _binding.backButton.gone()
+            _binding.mealImageView.gone()
+            _binding.orderButton.gone()
+            _binding.mealNameTextView.gone()
+            _binding.totalLinearLayout.gone()
+
+        } else {
+            _binding.progressBar.gone()
+            _binding.backButton.show()
+            _binding.mealImageView.show()
+            _binding.orderButton.show()
+            _binding.mealNameTextView.show()
+            _binding.totalLinearLayout.show()
+        }
+    }
+
     private fun initListener() {
         _binding.backButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        _binding.shareButton.setOnClickListener{
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "${args.restaurantName} \n ${viewModel.meal?.name}")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
+        _binding.orderButton.setOnClickListener {
+            val orderAddRequest = OrderAddRequest(args.restaurantId, args.mealId)
+            viewModel.postOrder(orderAddRequest).observe(viewLifecycleOwner, {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        Log.e("Loading", "loading")
+                        setLoading(true)
+                        _binding.ingredientsRecyclerView.gone()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        setLoading(false)
+                        _binding.ingredientsRecyclerView.show()
+                        findNavController().navigate(MealDetailsFragmentDirections.actionMealDetailsFragmentToHomeFragment())
+
+                    }
+                    Resource.Status.ERROR -> {
+                        setLoading(false)
+                        _binding.ingredientsRecyclerView.show()
+                    }
+                }
+            })
         }
 
     }

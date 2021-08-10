@@ -64,10 +64,10 @@
             android:id="@+id/mealPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:textSize="15sp"
             android:textColor="#FA4A0C"
             android:text="$ 6"
-            app:layout_constraintLeft_toRightOf="@id/mealDetailLinearLayout"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
