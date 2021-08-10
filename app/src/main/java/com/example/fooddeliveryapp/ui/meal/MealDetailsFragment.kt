@@ -51,7 +51,7 @@ class MealDetailsFragment : Fragment() {
                 Resource.Status.SUCCESS -> {
                     //_binding.progressBar.gone()
                     val meal = it.data!!.data
-                    val options = RequestOptions().placeholder(R.drawable.no_data)
+                    val options = RequestOptions().placeholder(R.mipmap.no_data)
                     Glide.with(_binding.mealImageView.context)
                         .applyDefaultRequestOptions(options)
                         .load(meal.image).into(_binding.mealImageView)

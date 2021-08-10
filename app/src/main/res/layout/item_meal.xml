@@ -22,7 +22,7 @@
             android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:layout_margin="8dp"
-            android:src="@drawable/no_data"
+            android:src="@mipmap/no_data"
             android:contentDescription="Meal Image"
             android:background="@null"
             app:shapeAppearanceOverlay="@style/CircularImageView"

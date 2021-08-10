@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentRestaurantAddBinding
 import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.afterTextChanged
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +59,11 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun addListeners() {
-
+        _binding.restaurantNameEditText.editText?.afterTextChanged(_binding.restaurantNameEditText)
+        _binding.restaurantPhoneEditText.editText?.afterTextChanged(_binding.restaurantPhoneEditText)
+        _binding.restaurantWebsiteEditText.editText?.afterTextChanged(_binding.restaurantWebsiteEditText)
+        _binding.restaurantAddressEditText.editText?.afterTextChanged(_binding.restaurantAddressEditText)
+        _binding.restaurantDeliveryInfoEditText.editText?.afterTextChanged(_binding.restaurantDeliveryInfoEditText)
 
         _binding.restaurantOpenHourEditText.setOnClickListener {
             setRestaurantOpenHour()
@@ -142,7 +147,7 @@ class RestaurantAddFragment : Fragment() {
     }
 
     private fun addRestaurant() {
-        if(checkEmptyTextFields())
+        if(hasEmptyFields())
             return
 
         val name = _binding.restaurantNameEditText.editText?.text.toString()
@@ -190,8 +195,7 @@ class RestaurantAddFragment : Fragment() {
             })
     }
 
-    private fun checkEmptyTextFields() : Boolean {
-
+    private fun hasEmptyFields() : Boolean{
         if(_binding.restaurantNameEditText.editText?.text.isNullOrEmpty()){
             _binding.restaurantNameEditText.error = "This can't be empty!"
             return true
@@ -214,17 +218,19 @@ class RestaurantAddFragment : Fragment() {
         }
 
         if(_binding.restaurantOpenHourEditText.text.isNullOrEmpty()){
-            _binding.restaurantOpenHourLayout.error = ""
+            _binding.errorTextView.visibility = View.VISIBLE
+            _binding.errorTextView.text = getString(R.string.restaurant_open_hour_error)
             return true
         } else {
-            _binding.restaurantOpenHourLayout.error = null
+            _binding.errorTextView.visibility = View.GONE
         }
 
         if(_binding.restaurantCloseHourEditText.text.isNullOrEmpty()){
-            _binding.restaurantCloseHourLayout.error = ""
+            _binding.errorTextView.visibility = View.VISIBLE
+            _binding.errorTextView.text = getString(R.string.restaurant_close_hour_error)
             return true
         } else {
-            _binding.restaurantCloseHourLayout.error = null
+            _binding.errorTextView.visibility = View.GONE
         }
 
         if(_binding.restaurantAddressEditText.editText?.text.isNullOrEmpty()){
@@ -235,14 +241,14 @@ class RestaurantAddFragment : Fragment() {
         }
 
         if(_binding.restaurantDeliveryTimeLayout.editText?.text.isNullOrEmpty()){
-            _binding.restaurantDeliveryTimeLayout.error = ""
+            _binding.restaurantDeliveryTimeLayout.error = "Empty!"
             return true
         } else {
             _binding.restaurantDeliveryTimeLayout.error = null
         }
 
         if(_binding.restaurantDeliveryFeeLayout.editText?.text.isNullOrEmpty()){
-            _binding.restaurantDeliveryFeeLayout.error = ""
+            _binding.restaurantDeliveryFeeLayout.error = "Empty!"
             return true
         } else {
             _binding.restaurantDeliveryFeeLayout.error = null
@@ -255,8 +261,12 @@ class RestaurantAddFragment : Fragment() {
             _binding.restaurantDeliveryInfoEditText.error = null
         }
 
-        if(_binding.multiSelectionSpinner.selectedItems.size <= 0){
+        if(_binding.multiSelectionSpinner.selectedItems == null || _binding.multiSelectionSpinner.selectedItems.size <= 0){
+            _binding.errorTextView.visibility = View.VISIBLE
+            _binding.errorTextView.text = getString(R.string.restaurant_payment_methods_error)
             return true
+        } else {
+            _binding.errorTextView.visibility = View.GONE
         }
 
         return false

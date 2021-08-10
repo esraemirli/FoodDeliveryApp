@@ -29,7 +29,7 @@ class MealsListAdapter : RecyclerView.Adapter<MealsListAdapter.MealsListViewHold
 
         fun setMeal(meal: Meal, listener: IMealOnClick?) {
 
-            val options = RequestOptions().placeholder(R.drawable.no_data)
+            val options = RequestOptions().placeholder(R.mipmap.no_data)
             Glide.with(mealImageView.context)
                 .applyDefaultRequestOptions(options)
                 .load(meal.image).into(mealImageView)

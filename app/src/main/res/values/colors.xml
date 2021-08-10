@@ -16,5 +16,6 @@
     <!-- Add restaurant screen colors-->
     <color name="gray_light">#F5F5F8</color>
     <color name="gray">#808080</color>
+    <color name="red">#B71C1C</color>
 
 </resources>
