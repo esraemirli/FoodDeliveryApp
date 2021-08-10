@@ -29,6 +29,11 @@
     </style>
 
 
+    <style name="Theme.MainPage" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimaryVariant">@color/orange</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
 
 
     <!-- Transparent actionbar style -->
