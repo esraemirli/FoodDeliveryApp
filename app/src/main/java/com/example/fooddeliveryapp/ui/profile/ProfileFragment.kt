@@ -59,6 +59,7 @@ class ProfileFragment : Fragment() {
     private fun setField(user: User?) {
         _binding.nameTextView.text = user?.name
         _binding.mailTextView.text = user?.email
+        _binding.phoneNumberTextView.text = user?.phone
         _binding.addressTextView.text = user?.address
 
         val options = RequestOptions().placeholder(R.drawable.no_data)

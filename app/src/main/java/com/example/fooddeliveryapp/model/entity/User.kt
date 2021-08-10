@@ -23,6 +23,8 @@ data class User(
     val orders: List<Any>,
     @SerializedName("place")
     val address: String,
+    @SerializedName("phone")
+    val phone: String,
     @SerializedName("profile_image")
     val profileImage: String,
     @SerializedName("resetPasswordExpire")

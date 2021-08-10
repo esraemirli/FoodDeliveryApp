@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.ui.setting
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.model.entity.profile.UserRequest
+import com.example.fooddeliveryapp.model.local.SharedPrefManager
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
@@ -66,6 +68,7 @@ class SettingFragment : Fragment() {
         _binding.nameEditText.setText(user?.name)
         _binding.mailEditText.setText(user?.email)
         _binding.addressEditText.setText(user?.address)
+        _binding.phoneNumberEditText.setText(user?.phone)
         imageUrl = user?.profileImage
 
         val options = RequestOptions().placeholder(R.drawable.no_data)
@@ -102,9 +105,10 @@ class SettingFragment : Fragment() {
     private fun updateUser() {
         val name = _binding.nameEditText.text.toString()
         val mail = _binding.mailEditText.text.toString()
+        val phone = _binding.phoneNumberEditText.text.toString()
         val address = _binding.addressEditText.text.toString()
 
-        val user = UserRequest(mail, name, address, imageUrl)
+        val user = UserRequest(mail, name, address, phone, imageUrl)
         viewModel.updateUser(user).observe(viewLifecycleOwner, { response ->
             when (response.status) {
                 Resource.Status.LOADING -> {

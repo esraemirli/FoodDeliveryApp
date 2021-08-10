@@ -9,6 +9,8 @@ data class UserRequest (
     val name: String,
     @SerializedName("place")
     val address: String,
+    @SerializedName("phone")
+    val phone: String,
     @SerializedName("profile_image")
     val profileImage: String? = null
 )

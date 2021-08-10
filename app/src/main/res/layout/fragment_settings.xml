@@ -104,11 +104,11 @@
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="16dp"
                             android:layout_weight="1"
+                            android:hint="Add your name"
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="Marvis Ighedosa" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/mailEditText"
@@ -116,11 +116,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="6dp"
+                            android:hint="Add your mail"
                             android:layout_weight="1"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
-                            app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-                            tools:text="Dosamarvis@gmail.com" />
+                            app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/phoneNumberEditText"
@@ -128,11 +128,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="6dp"
+                            android:hint="Add your phone"
+                            android:inputType="phone"
                             android:layout_weight="1"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
-                            app:layout_constraintTop_toBottomOf="@+id/mailEditText"
-                            tools:text="+234 9011039271" />
+                            app:layout_constraintTop_toBottomOf="@+id/mailEditText" />
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/addressEditText"
@@ -140,11 +141,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
                             android:layout_marginTop="6dp"
+                            android:hint="Add your address"
                             android:layout_weight="1"
                             android:textSize="15sp"
                             app:layout_constraintStart_toEndOf="@+id/avatarConstraintLayout"
-                            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"
-                            tools:text="No 15 uti street off ovie palace road effurun delta state" />
+                            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
