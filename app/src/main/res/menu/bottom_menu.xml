@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_profile" />
 
     <item
-        android:id="@+id/lastOrderFragment"
+        android:id="@+id/orderFragment"
         android:title=""
         android:icon="@drawable/ic_last_order" />
 </menu>

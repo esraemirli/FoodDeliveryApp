@@ -1,12 +1,15 @@
 package com.example.fooddeliveryapp.ui.order
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fooddeliveryapp.databinding.FragmentOrderBinding
+import com.example.fooddeliveryapp.ui.restaurantdetail.RestaurantDetailViewPagerAdapter
 import com.example.fooddeliveryapp.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OrderFragment : Fragment() {
     private var binding: FragmentOrderBinding? = null
     private val viewModel: OrderFragmentViewModel by viewModels()
+    val adapter = OrderRecyclerViewAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,13 +46,16 @@ class OrderFragment : Fragment() {
                 }
                 Resource.Status.SUCCESS -> {
                     response.data?.orderList?.let {
-                        // TODO RecyclerView
+                        binding?.orderRecyclerView?.layoutManager = LinearLayoutManager(context)
+                        binding?.orderRecyclerView?.adapter = adapter
+                        adapter.setOrderList(it)
                     }
 
                 }
 
                 Resource.Status.ERROR -> {
                     println("${response.message}")
+                    Log.v("order",response.toString())
                 }
             }
         })

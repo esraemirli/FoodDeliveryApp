@@ -22,7 +22,7 @@
             android:text="Ali Usta'nın Yeri"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/ordersCreditCardImageView"
+            app:layout_constraintStart_toEndOf="@+id/ordersImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:background="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.589"
-            app:layout_constraintStart_toEndOf="@+id/ordersCreditCardImageView"
+            app:layout_constraintStart_toEndOf="@+id/ordersImageView"
             app:layout_constraintTop_toBottomOf="@+id/ordersItemDateTextView" />
 
         <TextView
@@ -77,7 +77,7 @@
             android:layout_marginTop="7dp"
             android:background="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ordersCreditCardImageView"
+            app:layout_constraintStart_toEndOf="@+id/ordersImageView"
             app:layout_constraintTop_toBottomOf="@+id/ordersItemFoodNameTextView" />
 
 
@@ -109,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <ImageView
-            android:id="@+id/ordersCreditCardImageView"
+            android:id="@+id/ordersImageView"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"

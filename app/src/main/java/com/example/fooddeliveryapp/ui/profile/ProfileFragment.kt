@@ -16,6 +16,8 @@ import com.example.fooddeliveryapp.databinding.FragmentProfileBinding
 import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.ui.splash.SplashActivity
 import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +35,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding.profileProgressBar.show()
         addListeners()
         getProfile()
     }
@@ -42,18 +45,42 @@ class ProfileFragment : Fragment() {
 
             when (response.status) {
                 Resource.Status.LOADING -> {
-                    //_binding.progressBar.show()
+                    setLoading(true)
+
                 }
                 Resource.Status.SUCCESS -> {
+                    setLoading(false)
                     setField(response.data?.user)
-                    //_binding.progressBar.gone()
+
                 }
                 Resource.Status.ERROR -> {
-                    //_binding.progressBar.gone()
+                    setLoading(false)
                     Toast.makeText(context, "Operation Failed", Toast.LENGTH_LONG).show()
                 }
             }
         })
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        if(isLoading)
+        {
+            _binding.profileProgressBar.show()
+            _binding.myProfileTextView.gone()
+            _binding.profileChange.gone()
+            _binding.personalDetailsTextView.gone()
+            _binding.ProfileCardView.gone()
+            _binding.linearLayout2.gone()
+        }
+        else{
+            _binding.profileProgressBar.gone()
+            _binding.myProfileTextView.show()
+            _binding.profileChange.show()
+            _binding.personalDetailsTextView.show()
+            _binding.ProfileCardView.show()
+            _binding.linearLayout2.show()
+        }
+
+
     }
 
     private fun setField(user: User?) {
@@ -79,5 +106,7 @@ class ProfileFragment : Fragment() {
             requireActivity().finish()
         }
     }
+
+
 
 }
