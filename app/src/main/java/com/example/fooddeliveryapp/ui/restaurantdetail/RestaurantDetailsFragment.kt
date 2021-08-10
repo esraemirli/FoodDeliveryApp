@@ -46,28 +46,24 @@ class RestaurantDetailsFragment : Fragment() {
         viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    _binding.progressBar.show()
+                    setLoading(true)
                 }
                 Resource.Status.SUCCESS -> {
+                    setLoading(false)
                     val restaurant = it.data!!.data
-                    _binding.progressBar.gone()
                     val options = RequestOptions().placeholder(R.drawable.no_data)
                     Glide.with(_binding.restaurantImageView.context)
                         .applyDefaultRequestOptions(options)
                         .load(restaurant.image).into(_binding.restaurantImageView)
 
-
                     val adapter = RestaurantDetailViewPagerAdapter(requireActivity(), restaurant)
 
                     initViewPager(adapter)
 
-                    //_binding.homeTextView.text = "Count: ${it.data?.characters?.size}
 
                 }
                 Resource.Status.ERROR -> {
-                    _binding.progressBar.gone()
-                    //_binding.homeTextView.setTextColor(resources.getColor(R.color.red))
-                    //_binding.homeTextView.text = "Error: ${it?.message}"
+                    setLoading(false)
                 }
             }
         })
@@ -141,6 +137,21 @@ class RestaurantDetailsFragment : Fragment() {
             }
         }.attach()
 
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        if (isLoading) {
+            _binding.progressBar.show()
+            _binding.restaurantImageView.gone()
+            _binding.backButton.gone()
+            _binding.addButton.gone()
+        } else {
+            _binding.progressBar.gone()
+            _binding.restaurantImageView.show()
+            _binding.backButton.show()
+            _binding.addButton.show()
+
+        }
     }
 
     private fun changeImageVisibility(visible: Boolean) {

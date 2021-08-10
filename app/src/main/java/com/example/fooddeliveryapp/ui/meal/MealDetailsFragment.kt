@@ -15,6 +15,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentMealDetailsBinding
 import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,10 +48,10 @@ class MealDetailsFragment : Fragment() {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     Log.e("Loading", "loading")
-                    // _binding.progressBar.show()
+                    setLoading(true)
                 }
                 Resource.Status.SUCCESS -> {
-                    //_binding.progressBar.gone()
+                    setLoading(false)
                     val meal = it.data!!.data
                     val options = RequestOptions().placeholder(R.drawable.no_data)
                     Glide.with(_binding.mealImageView.context)
@@ -65,11 +67,29 @@ class MealDetailsFragment : Fragment() {
 
                 }
                 Resource.Status.ERROR -> {
-                    Log.e("Error", "error")
-                    //_binding.progressBar.gone()
+                    setLoading(false)
                 }
             }
         })
+    }
+
+    private fun setLoading(isLoading: Boolean){
+        if(isLoading){
+            _binding.progressBar.show()
+            _binding.backButton.gone()
+            _binding.mealImageView.gone()
+            _binding.orderButton.gone()
+            _binding.mealNameTextView.gone()
+            _binding.totalLinearLayout.gone()
+
+        }else{
+            _binding.progressBar.gone()
+            _binding.backButton.show()
+            _binding.mealImageView.show()
+            _binding.orderButton.show()
+            _binding.mealNameTextView.show()
+            _binding.totalLinearLayout.show()
+        }
     }
 
     private fun initListener() {
