@@ -9,13 +9,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fooddeliveryapp.databinding.FragmentMealsListBinding
 import com.example.fooddeliveryapp.model.entity.meal.Meal
+import com.example.fooddeliveryapp.model.entity.restaurant.Restaurant
 import com.example.fooddeliveryapp.ui.restaurantdetail.RestaurantDetailsFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class MealListFragment(
-    private val mealList: ArrayList<Meal>
+    private val restaurant: Restaurant
 ) : Fragment(), IMealOnClick {
     private var adapter: MealsListAdapter = MealsListAdapter()
     private lateinit var _binding: FragmentMealsListBinding
@@ -32,7 +33,7 @@ class MealListFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding.mealsListRecyclerView.layoutManager = LinearLayoutManager(context)
-        adapter.setMealList(mealList)
+        adapter.setMealList(restaurant.meals)
         adapter.addListener(this)
         _binding.mealsListRecyclerView.adapter = adapter
     }
@@ -41,7 +42,9 @@ class MealListFragment(
     override fun onClick(meal: Meal) {
         val action =
             RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToMealDetailsFragment(
-                meal.id
+                meal.id,
+                restaurant.id,
+                restaurant.name
             )
         findNavController().navigate(action)
     }

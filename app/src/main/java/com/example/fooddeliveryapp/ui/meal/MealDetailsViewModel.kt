@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.fooddeliveryapp.model.ApiRepository
+import com.example.fooddeliveryapp.model.entity.meal.Meal
 import com.example.fooddeliveryapp.model.entity.meal.MealResponse
 import com.example.fooddeliveryapp.model.entity.order.OrderAddRequest
 import com.example.fooddeliveryapp.model.entity.order.OrderAddResponse
@@ -16,8 +17,11 @@ class MealDetailsViewModel @Inject constructor(
     var savedStateHandle: SavedStateHandle,
     private var apiRepository: ApiRepository
 ) : ViewModel() {
+    var meal: Meal? = null
 
-    fun getMealDetails(id: String): LiveData<Resource<MealResponse>> = apiRepository.getMealById(id)
+    fun getMealDetails(id: String): LiveData<Resource<MealResponse>> {
+        return apiRepository.getMealById(id)
+    }
 
     fun postOrder(orderAddRequest: OrderAddRequest): LiveData<Resource<OrderAddResponse>> =
         apiRepository.postOrder(orderAddRequest)
