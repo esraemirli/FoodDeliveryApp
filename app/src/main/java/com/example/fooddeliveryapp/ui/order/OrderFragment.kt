@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fooddeliveryapp.databinding.FragmentOrderBinding
 import com.example.fooddeliveryapp.ui.restaurantdetail.RestaurantDetailViewPagerAdapter
 import com.example.fooddeliveryapp.utils.Resource
+import com.example.fooddeliveryapp.utils.gone
+import com.example.fooddeliveryapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,13 +44,14 @@ class OrderFragment : Fragment() {
 
             when (response.status) {
                 Resource.Status.LOADING -> {
-
+                    setLoading(true)
                 }
                 Resource.Status.SUCCESS -> {
                     response.data?.orderList?.let {
                         binding?.orderRecyclerView?.layoutManager = LinearLayoutManager(context)
                         binding?.orderRecyclerView?.adapter = adapter
                         adapter.setOrderList(it)
+                        setLoading(false)
                     }
 
                 }
@@ -56,8 +59,22 @@ class OrderFragment : Fragment() {
                 Resource.Status.ERROR -> {
                     println("${response.message}")
                     Log.v("order",response.toString())
+                    setLoading(false)
                 }
             }
         })
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        if(isLoading)
+        {
+            binding?.orderProgressBar?.show()
+            binding?.orderRecyclerView?.gone()
+        }
+        else
+        {
+            binding?.orderProgressBar?.gone()
+            binding?.orderRecyclerView?.show()
+        }
     }
 }
