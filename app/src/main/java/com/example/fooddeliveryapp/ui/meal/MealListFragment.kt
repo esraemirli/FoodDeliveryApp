@@ -43,7 +43,8 @@ class MealListFragment(
         val action =
             RestaurantDetailsFragmentDirections.actionRestaurantDetailFragmentToMealDetailsFragment(
                 meal.id,
-                restaurant.id
+                restaurant.id,
+                restaurant.name
             )
         findNavController().navigate(action)
     }

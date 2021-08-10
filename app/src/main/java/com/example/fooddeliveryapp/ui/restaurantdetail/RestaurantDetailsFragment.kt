@@ -115,9 +115,11 @@ class RestaurantDetailsFragment : Fragment() {
         super.onResume()
         Log.v("Resume", _binding.restaurantDetailTabLayout.selectedTabPosition.toString())
 
-        if (selectedTab == 0) changeImageVisibility(true)
-        else if (selectedTab == 1) changeImageVisibility(false)
-        else changeImageVisibility(true)
+        when (selectedTab) {
+            0 -> changeImageVisibility(true)
+            1 -> changeImageVisibility(false)
+            else -> changeImageVisibility(true)
+        }
     }
 
 

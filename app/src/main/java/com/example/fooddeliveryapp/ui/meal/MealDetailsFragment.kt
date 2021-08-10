@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapp.ui.meal
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -54,6 +55,7 @@ class MealDetailsFragment : Fragment() {
                 Resource.Status.SUCCESS -> {
                     setLoading(false)
                     val meal = it.data!!.data
+                    viewModel.meal = meal
                     val options = RequestOptions().placeholder(R.drawable.no_data)
                     Glide.with(_binding.mealImageView.context)
                         .applyDefaultRequestOptions(options)
@@ -96,6 +98,17 @@ class MealDetailsFragment : Fragment() {
     private fun initListener() {
         _binding.backButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        _binding.shareButton.setOnClickListener{
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "${args.restaurantName} \n ${viewModel.meal?.name}")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
         }
 
         _binding.orderButton.setOnClickListener {

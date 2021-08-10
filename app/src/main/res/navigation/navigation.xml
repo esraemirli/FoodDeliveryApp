@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_mealDetailsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="restaurantName"
+            app:argType="string" />
     </fragment>
 
     <fragment
