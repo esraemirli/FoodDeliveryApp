@@ -96,7 +96,6 @@ class MealDetailsFragment : Fragment() {
     }
 
     private fun initListener() {
-        //s
         _binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
