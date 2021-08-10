@@ -2,6 +2,7 @@ package com.example.fooddeliveryapp.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,18 @@ class ProfileFragment : Fragment() {
         return _binding.root
     }
 
+    companion object {
+        fun getImageResource(image : String?) : Int {
+            val resource = try {
+               image?.toInt()
+            } catch (e : Exception) {
+                Log.v("Profile Avatar", e.message.toString())
+                R.mipmap.no_data
+            }
+            return resource ?: R.mipmap.no_data
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding.profileProgressBar.show()
@@ -40,16 +53,13 @@ class ProfileFragment : Fragment() {
 
     private fun getProfile() {
         viewModel.getUser().observe(viewLifecycleOwner, { response ->
-
             when (response.status) {
                 Resource.Status.LOADING -> {
                     setLoading(true)
-
                 }
                 Resource.Status.SUCCESS -> {
                     setLoading(false)
                     setField(response.data?.user)
-
                 }
                 Resource.Status.ERROR -> {
                     setLoading(false)
@@ -84,8 +94,7 @@ class ProfileFragment : Fragment() {
         _binding.mailTextView.text = user?.email
         _binding.phoneNumberTextView.text = user?.phone
         _binding.addressTextView.text = user?.address
-        val image = user?.profileImage?.toInt() ?: R.mipmap.avatar_1_foreground
-        _binding.profilePhotoImageView.setImageResource(image)
+        _binding.profilePhotoImageView.setImageResource(getImageResource(user?.profileImage))
     }
 
     private fun addListeners() {

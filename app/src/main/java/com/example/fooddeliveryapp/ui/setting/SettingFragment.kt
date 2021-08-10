@@ -15,6 +15,7 @@ import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.example.fooddeliveryapp.model.entity.User
 import com.example.fooddeliveryapp.model.entity.profile.UserRequest
+import com.example.fooddeliveryapp.ui.profile.ProfileFragment
 import com.example.fooddeliveryapp.utils.Resource
 import com.example.fooddeliveryapp.utils.gone
 import com.example.fooddeliveryapp.utils.show
@@ -64,8 +65,8 @@ class SettingFragment : Fragment() {
         _binding.mailEditText.setText(user?.email)
         _binding.addressEditText.setText(user?.address)
         _binding.phoneNumberEditText.setText(user?.phone)
-        image = user?.profileImage?.toInt() ?: R.mipmap.avatar_1_foreground
-        _binding.avatarImageView.setImageResource(image)
+        user?.paymentMethod?.let { _binding.paymentRadioGroup.check(it) }
+        _binding.avatarImageView.setImageResource(ProfileFragment.getImageResource(user?.profileImage))
     }
 
     private fun addListeners() {
