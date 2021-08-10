@@ -9,8 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentProfileBinding
 import com.example.fooddeliveryapp.model.entity.User
@@ -79,8 +77,6 @@ class ProfileFragment : Fragment() {
             _binding.ProfileCardView.show()
             _binding.linearLayout2.show()
         }
-
-
     }
 
     private fun setField(user: User?) {
@@ -88,11 +84,8 @@ class ProfileFragment : Fragment() {
         _binding.mailTextView.text = user?.email
         _binding.phoneNumberTextView.text = user?.phone
         _binding.addressTextView.text = user?.address
-
-        val options = RequestOptions().placeholder(R.mipmap.no_data)
-        Glide.with(_binding.profilePhotoImageView.context)
-            .applyDefaultRequestOptions(options)
-            .load(user?.profileImage).into(_binding.profilePhotoImageView)
+        val image = user?.profileImage?.toInt() ?: R.mipmap.avatar_1_foreground
+        _binding.profilePhotoImageView.setImageResource(image)
     }
 
     private fun addListeners() {

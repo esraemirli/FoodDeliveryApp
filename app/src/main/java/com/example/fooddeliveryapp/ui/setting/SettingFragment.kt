@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.fooddeliveryapp.R
 import com.example.fooddeliveryapp.databinding.FragmentSettingsBinding
 import com.example.fooddeliveryapp.model.entity.User
@@ -27,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SettingFragment : Fragment() {
     private lateinit var _binding: FragmentSettingsBinding
     private val viewModel: SettingViewModel by viewModels()
-    private var imageUrl: String? = null
+    private var image: Int = R.mipmap.no_data
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,12 +64,8 @@ class SettingFragment : Fragment() {
         _binding.mailEditText.setText(user?.email)
         _binding.addressEditText.setText(user?.address)
         _binding.phoneNumberEditText.setText(user?.phone)
-        imageUrl = user?.profileImage
-
-        val options = RequestOptions().placeholder(R.mipmap.no_data)
-        Glide.with(_binding.avatarImageView.context)
-            .applyDefaultRequestOptions(options)
-            .load(imageUrl).into(_binding.avatarImageView)
+        image = user?.profileImage?.toInt() ?: R.mipmap.avatar_1_foreground
+        _binding.avatarImageView.setImageResource(image)
     }
 
     private fun addListeners() {
@@ -87,27 +80,25 @@ class SettingFragment : Fragment() {
         val builder = AlertDialog.Builder(view.context)
         builder.setView(design)
 
-        radioGroup.check(viewModel.getAvatarId(imageUrl!!))
+        val selectedId = getRadioButtonId(image)
+        radioGroup.check(selectedId)
         radioGroup.setOnCheckedChangeListener { _, _ ->
-            imageUrl = viewModel.getImageUrl(radioGroup.checkedRadioButtonId)
+            image = getImageView(radioGroup.checkedRadioButtonId)
         }
         builder.setPositiveButton(getString(R.string.save)) { _: DialogInterface, _: Int ->
-            val options = RequestOptions().placeholder(R.mipmap.no_data)
-            Glide.with(_binding.avatarImageView.context)
-                .applyDefaultRequestOptions(options)
-                .load(imageUrl).into(_binding.avatarImageView)
+            _binding.avatarImageView.setImageResource(image)
         }
         builder.show()
     }
 
-    //TODO phone(String) ve paymentMethod(Int) servise eklenecek..
     private fun updateUser() {
         val name = _binding.nameEditText.text.toString()
         val mail = _binding.mailEditText.text.toString()
         val phone = _binding.phoneNumberEditText.text.toString()
         val address = _binding.addressEditText.text.toString()
+        val paymentMethod = _binding.paymentRadioGroup.checkedRadioButtonId
 
-        val user = UserRequest(mail, name, address, phone, imageUrl)
+        val user = UserRequest(mail, name, address, phone, image.toString(), paymentMethod)
         viewModel.updateUser(user).observe(viewLifecycleOwner, { response ->
             when (response.status) {
                 Resource.Status.LOADING -> {
@@ -136,6 +127,38 @@ class SettingFragment : Fragment() {
                 }.show()
         }
     }
+
+
+    private fun getImageView(id: Int): Int {
+        return when (id) {
+            R.id.avatarRadioButton1 -> R.mipmap.avatar_1_foreground
+            R.id.avatarRadioButton2 -> R.mipmap.avatar_2_foreground
+            R.id.avatarRadioButton3 -> R.mipmap.avatar_3_foreground
+            R.id.avatarRadioButton4 -> R.mipmap.avatar_4_foreground
+            R.id.avatarRadioButton5 -> R.mipmap.avatar_5_foreground
+            R.id.avatarRadioButton6 -> R.mipmap.avatar_6_foreground
+            R.id.avatarRadioButton7 -> R.mipmap.avatar_7_foreground
+            R.id.avatarRadioButton8 -> R.mipmap.avatar_8_foreground
+            R.id.avatarRadioButton9 -> R.mipmap.avatar_9_foreground
+            else -> R.mipmap.no_data
+        }
+    }
+
+    private fun getRadioButtonId(image: Int): Int {
+        return when (image) {
+            R.mipmap.avatar_1_foreground -> R.id.avatarRadioButton1
+            R.mipmap.avatar_2_foreground -> R.id.avatarRadioButton2
+            R.mipmap.avatar_3_foreground -> R.id.avatarRadioButton3
+            R.mipmap.avatar_4_foreground -> R.id.avatarRadioButton4
+            R.mipmap.avatar_5_foreground -> R.id.avatarRadioButton5
+            R.mipmap.avatar_6_foreground -> R.id.avatarRadioButton6
+            R.mipmap.avatar_7_foreground -> R.id.avatarRadioButton7
+            R.mipmap.avatar_8_foreground -> R.id.avatarRadioButton8
+            R.mipmap.avatar_9_foreground -> R.id.avatarRadioButton9
+            else -> 0
+        }
+    }
+
 
 }
 

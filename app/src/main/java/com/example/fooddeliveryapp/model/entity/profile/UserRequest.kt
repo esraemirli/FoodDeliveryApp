@@ -12,5 +12,7 @@ data class UserRequest (
     @SerializedName("phone")
     val phone: String,
     @SerializedName("profile_image")
-    val profileImage: String? = null
+    val profileImage: String? = null,
+    @SerializedName("paymentMethod")
+    val paymentMethod: Int
 )

@@ -36,5 +36,7 @@ data class User(
     @SerializedName("__v")
     val v: Int,
     @SerializedName("website")
-    val website: String
+    val website: String,
+    @SerializedName("paymentMethod")
+    val paymentMethod: Int
 )

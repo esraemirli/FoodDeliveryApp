@@ -17,24 +17,9 @@ class SettingViewModel @Inject constructor(
     private var apiRepository: ApiRepository
 ) : ViewModel() {
 
-    companion object {
-        private const val IMG_URL_START =
-            "https://firebasestorage.googleapis.com/v0/b/fooddeliveryapp-fe5bf.appspot.com/o/avatars%2F"
-        private const val IMG_URL_END = ".png?alt=media&token=08d1ac8b-a039-4335-85f9-9805f993bf71"
-    }
-
     fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
 
     fun updateUser(userRequest: UserRequest): LiveData<Resource<User>> =
         apiRepository.updateUser(userRequest)
-
-    fun getAvatarId(url: String): Int {
-        val result = url.substringAfter(IMG_URL_START).substringBefore(IMG_URL_END)
-        return result.toInt()
-    }
-
-    fun getImageUrl(id: Int): String {
-        return "$IMG_URL_START${id}$IMG_URL_END"
-    }
 
 }

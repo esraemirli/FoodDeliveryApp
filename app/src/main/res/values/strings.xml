@@ -193,5 +193,6 @@
     <string name="paypal">Paypal</string>
     <string name="reorder_button">Repeat</string>
     <string name="detail">Details</string>
+    <string name="choose_avatar">Choose Avatar</string>
 
 </resources>
