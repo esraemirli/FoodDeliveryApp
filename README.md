@@ -36,4 +36,4 @@ Demo food delivery application developed at Kodluyoruz Yemeksepeti Android Bootc
 - [Kaan Girçek](https://github.com/kngrck)
 - [Efecan Bayat](https://github.com/efecanbayat)
 - [İrem Doğan](https://github.com/iiremdogan)
-- [Furkan Ak](https://github.com/furkanakak)
+- [Furkan Akalın](https://github.com/furkanakak)
