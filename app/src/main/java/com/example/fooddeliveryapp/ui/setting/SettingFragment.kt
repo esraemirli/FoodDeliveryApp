@@ -66,6 +66,8 @@ class SettingFragment : Fragment() {
         _binding.addressEditText.setText(user?.address)
         _binding.phoneNumberEditText.setText(user?.phone)
         user?.paymentMethod?.let { _binding.paymentRadioGroup.check(it) }
+
+        image = ProfileFragment.getImageResource(user?.profileImage)
         _binding.avatarImageView.setImageResource(ProfileFragment.getImageResource(user?.profileImage))
     }
 
