@@ -33,15 +33,15 @@ class ProfileFragment : Fragment() {
     }
 
     companion object {
-        fun getImageResource(image : String?) : Int {
-            val resource = try {
-               image?.toInt()
-            } catch (e : Exception) {
-                Log.v("Profile Avatar", e.message.toString())
-                R.mipmap.no_data
+            fun getImageResource(image : String?) : Int {
+                val resource = try {
+                    image?.toInt()
+                } catch (e : Exception) {
+                    Log.v("Profile Avatar", e.message.toString())
+                    R.mipmap.no_data
+                }
+                return resource ?: R.mipmap.no_data
             }
-            return resource ?: R.mipmap.no_data
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
